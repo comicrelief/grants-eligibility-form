@@ -1,9 +1,31 @@
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/core";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/colours";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/lists";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/grid";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/typography/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/buttons/buttons";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
+
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/fonts";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/typography";
+
 .App {
   text-align: center;
+  @include container();
+  padding: 60px 0;
+
+  .title {
+    @include span(10);
+    @include push(1);
+    margin-bottom: 25px;
+  }
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite 1s linear;
   height: 80px;
 }
 
@@ -25,4 +47,8 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+form {
+  @include span(12);
 }
