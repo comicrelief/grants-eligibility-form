@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
  */
 class Question extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   /**
    * Render the form
    * @return {XML}
@@ -18,5 +22,13 @@ class Question extends Component {
     );
   }
 }
+
+Question.propTypes = {
+  currentQuestion: PropTypes.number,
+};
+
+Question.defaultProps = {
+  currentQuestion: 0,
+};
 
 export default Question;

@@ -49,6 +49,7 @@
   to { transform: rotate(360deg); }
 }
 
-form {
+form, .content {
   @include span(12);
+  //@include push(1);
 }

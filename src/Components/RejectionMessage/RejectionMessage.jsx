@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
  */
 class RejectionMessage extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   /**
    * Render the form
    * @return {XML}
@@ -16,5 +20,13 @@ class RejectionMessage extends Component {
     );
   }
 }
+
+RejectionMessage.propTypes = {
+  currentQuestion: PropTypes.number,
+};
+
+RejectionMessage.defaultProps = {
+  currentQuestion: 0,
+};
 
 export default RejectionMessage;

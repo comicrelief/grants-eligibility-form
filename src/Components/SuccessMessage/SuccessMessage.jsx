@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 /**
  * IntroMessage class
  */
-class RejectionMessage extends Component {
+class SuccessMessage extends Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   /**
    * Render the form
@@ -17,4 +21,12 @@ class RejectionMessage extends Component {
   }
 }
 
-export default RejectionMessage;
+SuccessMessage.propTypes = {
+  currentQuestion: PropTypes.number,
+};
+
+SuccessMessage.defaultProps = {
+  currentQuestion: 0,
+};
+
+export default SuccessMessage;
