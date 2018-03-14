@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 class IntroMessage extends Component {
 
   /**
-   * Render the form
+   * Render the IntroMessage
    * @return {XML}
    */
   render() {
