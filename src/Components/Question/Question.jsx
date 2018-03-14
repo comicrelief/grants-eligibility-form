@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import Parser from 'html-react-parser';
 
@@ -10,41 +10,74 @@ class Question extends Component {
 
  static defaultProps = {
     questions: [
-      { copy: "<p>Q1 copy</p>", options: "<a class='btn btn--red'>Q1 btn</a><a class='btn btn--red'>Q1 btn2</a>" },
-      { copy: "<p>Q2 copy</p>", options: "<a class='btn btn--red'>Q2 btn</a><a class='btn btn--red'>Q2 btn2</a>" },
-      { copy: "<p>Q3 copy</p>", options: "<a class='btn btn--red'>Q3 btn</a><a class='btn btn--red'>Q3 btn2</a>" },
-      { copy: "<p>Q4 copy</p>", options: "<a class='btn btn--red'>Q4 btn</a><a class='btn btn--red'>Q4 btn2</a>" },
-      { copy: "<p>Q5 copy</p>", options: "<a class='btn btn--red'>Q5 btn</a><a class='btn btn--red'>Q5 btn2</a>" },
-      { copy: "<p>Q6 copy</p>", options: "<a class='btn btn--red'>Q6 btn</a><a class='btn btn--red'>Q6 btn2</a>" },
-      { copy: "<p>Q7 copy</p>", options: "<a class='btn btn--red'>Q7 btn</a><a class='btn btn--red'>Q7 btn2</a>" },
-      { copy: "<p>Q8 copy</p>", options: "<a class='btn btn--red'>Q8 btn</a><a class='btn btn--red'>Q8 btn2</a>" },
-      { copy: "<p>Q9 copy</p>", options: "<a class='btn btn--red'>Q9 btn</a><a class='btn btn--red'>Q9 btn2</a>" },
+      {
+        copy: "<p> 1: What type of organisation? </p>",
+        buttons: [
+          { text: "q1: ineligible", link: "/NOPE" },
+          { text: "next question", link: "/question/2" }
+        ]
+      },
+            {
+        copy: "<p>Question 2</p>",
+        buttons: [
+          { text: "q2: ineligible", link: "/rejection" },
+          { text: "next question", link: "/question/3" }
+        ]
+      },
+            {
+        copy: "<p>Question 3</p>",
+        buttons: [
+          { text: "q3: ineligible", link: "/rejection" },
+          { text: "next question", link: "/question/4" }
+        ]
+      },
     ]
   };
+
+  /**
+   * Render the user choices for this specific questions
+   * @return {XML}
+   */
+  renderButtons() {
+
+    // Access our zero-indexed (hence -1) question array
+    let currentButtons = this.props.questions[this.props.current_question-1]['buttons'];
+
+    return (
+      <p>
+        {currentButtons.map(function(thisOption,index){
+          return ( <a key={index} className='btn btn--red' href={thisOption.link} onClick={ this.props.nextQuestion } > {thisOption.text} </a> )
+        }.bind(this))}
+      </p>
+    );
+  }
+
+  testo(){
+    console.log("testo!");
+  }
 
   /**
    * Render the Question
    * @return {XML}
    */
   render() {
-
-    let currentCopy = this.props.questions[0]['copy'];
-    let currentOptions = this.props.questions[0]['options'];
-
+    // Cache the current copy and user options from our zero-indexed array
+    let currentCopy = this.props.questions[this.props.current_question-1]['copy'];
     return (
         <div>
           {Parser( currentCopy )}
-          {Parser( currentOptions )}
+          { this.renderButtons() }
         </div>
     );
   }
 }
 
 /* Define proptypes */
-Question.PropTypes = {
-  questions: PropTypes.arrayOf(PropTypes.shape({
-    copy: PropTypes.string.isRequired,
-    options: PropTypes.string.isRequired,
+Question.propTypes = {
+  nextQuestion: propTypes.func.isRequired,
+  questions: propTypes.arrayOf(propTypes.shape({
+    copy: propTypes.string.isRequired,
+    buttons: propTypes.array.isRequired,
   })).isRequired,};
 
 export default Question;

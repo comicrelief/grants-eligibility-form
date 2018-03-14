@@ -4,9 +4,7 @@ import IntroMessage from './Components/IntroMessage/IntroMessage';
 import RejectionMessage from './Components/RejectionMessage/RejectionMessage';
 import SuccessMessage from './Components/SuccessMessage/SuccessMessage';
 import Question from './Components/Question/Question';
-
-
-import PropTypes from 'prop-types'; // ES6
+import propTypes from 'prop-types';
 //import Validation from 'react-validation';
 import './App.scss';
 
@@ -30,14 +28,25 @@ class App extends Component {
         <div className="App">
           <div className="content">
             <Route exact path="/" render={() => <IntroMessage {...this.state} /> } />
-            <Route path="/question/:question_number" render={ () => <Question {...this.state} /> } />
-            <Route path="/rejection" render={ () => <IntroMessage {...this.state} /> } />
+            <Route path="/question/:question_number" render={ ()=> <Question {...this.state} nextQuestion={function(e){ this.nextQuestion(e);}.bind(this)}/> } />
+            <Route path="/rejection" render={ () => <RejectionMessage  {...this.state} /> } />
             <Route path="/success" render={ () => <SuccessMessage {...this.state} /> } />
           </div>
         </div>
       </Router>
     )
   }
+
+  nextQuestion (e) {
+    console.log("next question!", e);
+
+    let currentQuestion = this.state.current_question;
+    currentQuestion++;
+
+    this.setState({
+      current_question: currentQuestion
+    });
+  };
 }
 
 export default App;
