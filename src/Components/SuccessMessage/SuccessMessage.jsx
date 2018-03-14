@@ -6,12 +6,8 @@ import PropTypes from 'prop-types';
  */
 class SuccessMessage extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   /**
-   * Render the form
+   * Render the SuccessMessage
    * @return {XML}
    */
   render() {
@@ -20,13 +16,5 @@ class SuccessMessage extends Component {
     );
   }
 }
-
-SuccessMessage.propTypes = {
-  currentQuestion: PropTypes.number,
-};
-
-SuccessMessage.defaultProps = {
-  currentQuestion: 0,
-};
 
 export default SuccessMessage;
