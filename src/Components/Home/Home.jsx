@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
 /**
- * IntroMessage class
+ * Home class
  */
-class IntroMessage extends Component {
+class Home extends Component {
 
   /**
-   * Render the IntroMessage
+   * Render the Home
    * @return {XML}
    */
   render() {
@@ -20,4 +20,14 @@ class IntroMessage extends Component {
   }
 }
 
-export default IntroMessage;
+Home.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func,
+  }),
+};
+
+Home.defaultProps = {
+  history: { push: null },
+};
+
+export default Home;

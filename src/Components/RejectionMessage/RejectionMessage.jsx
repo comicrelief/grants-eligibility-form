@@ -17,4 +17,14 @@ class RejectionMessage extends Component {
   }
 }
 
+RejectionMessage.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func,
+  }),
+};
+
+RejectionMessage.defaultProps = {
+  history: { push: null },
+};
+
 export default RejectionMessage;

@@ -17,4 +17,14 @@ class SuccessMessage extends Component {
   }
 }
 
+SuccessMessage.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func,
+  }),
+};
+
+SuccessMessage.defaultProps = {
+  history: { push: null },
+};
+
 export default SuccessMessage;

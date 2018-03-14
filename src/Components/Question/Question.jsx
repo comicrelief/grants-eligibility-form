@@ -13,22 +13,22 @@ class Question extends Component {
       {
         copy: "<p> 1: What type of organisation? </p>",
         buttons: [
-          { text: "q1: ineligible", link: "/NOPE" },
-          { text: "next question", link: "/question/2" }
+          { text: "q1: ineligible"},
+          { text: "next question"}
         ]
       },
             {
         copy: "<p>Question 2</p>",
         buttons: [
-          { text: "q2: ineligible", link: "/rejection" },
-          { text: "next question", link: "/question/3" }
+          { text: "q2: ineligible" },
+          { text: "next question" }
         ]
       },
             {
         copy: "<p>Question 3</p>",
         buttons: [
-          { text: "q3: ineligible", link: "/rejection" },
-          { text: "next question", link: "/question/4" }
+          { text: "q3: ineligible"},
+          { text: "next question"}
         ]
       },
     ]
@@ -46,7 +46,7 @@ class Question extends Component {
     return (
       <p>
         {currentButtons.map(function(thisOption,index){
-          return ( <a key={index} className='btn btn--red' href={thisOption.link} onClick={ this.props.nextQuestion } > {thisOption.text} </a> )
+          return ( <a key={index} className='btn btn--red' onClick={ this.props.nextQuestion } > {thisOption.text} </a> )
         }.bind(this))}
       </p>
     );

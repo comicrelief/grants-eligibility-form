@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import IntroMessage from './Components/IntroMessage/IntroMessage';
+import Home from './Components/Home/Home';
 import RejectionMessage from './Components/RejectionMessage/RejectionMessage';
 import SuccessMessage from './Components/SuccessMessage/SuccessMessage';
 import Question from './Components/Question/Question';
@@ -27,7 +27,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="content">
-            <Route exact path="/" render={() => <IntroMessage {...this.state} /> } />
+            <Route exact path="/" render={() => <Home {...this.state} /> } />
             <Route path="/question/:question_number" render={ ()=> <Question {...this.state} nextQuestion={function(e){ this.nextQuestion(e);}.bind(this)}/> } />
             <Route path="/rejection" render={ () => <RejectionMessage  {...this.state} /> } />
             <Route path="/success" render={ () => <SuccessMessage {...this.state} /> } />
