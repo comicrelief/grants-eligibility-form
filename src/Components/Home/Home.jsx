@@ -5,6 +5,14 @@ import propTypes from 'prop-types';
  * Home class
  */
 class Home extends Component {
+  /**
+   * Home constructor
+   * @param props
+   */
+  constructor(props) {
+    super(props);
+    this.handleStartForm = this.handleStartForm.bind(this);
+  }
 
   /**
    * Render the Home
@@ -14,9 +22,16 @@ class Home extends Component {
     return (
         <div>
           <p>Thanks for using our eligibility checker. We’re going to ask you a few questions about your organisation and what you need funding for. We’ll use these answers to see whether you might be eligible for an open initiative.</p>
-          <a className="btn btn--red" href={'/question/' + this.props.current_question }>Start</a>
+          
+          <button onClick={() => this.handleStartForm()} className="btn btn--red">Start</button>
         </div>
     );
+  }
+
+  handleStartForm() {
+    this.props.history.push({
+      pathname: `/question/1`,
+    });
   }
 }
 

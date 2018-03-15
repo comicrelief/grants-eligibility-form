@@ -1,35 +1,46 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import DOMPurify from 'dompurify';
 import Parser from 'html-react-parser';
 
 /**
- * IntroMessage class
+ * Question class
  */
 class Question extends Component {
 
- static defaultProps = {
+  /**
+   * Question constructor
+   * @param props
+   */
+   constructor(props) {
+      super(props);
+
+      this.state = {
+        currentQuestion: 1,
+        responses: {},
+      }
+    }
+
+  static defaultProps = {
     questions: [
       {
-        copy: "<p> 1: What type of organisation? </p>",
-        buttons: [
-          { text: "q1: ineligible"},
-          { text: "next question"}
-        ]
+        copy: "<p>1: What type of organisation?</p>",
+        buttons: [{ text: "Individual", eligible: false}, { text: "Charity", eligible: true }]
       },
-            {
-        copy: "<p>Question 2</p>",
-        buttons: [
-          { text: "q2: ineligible" },
-          { text: "next question" }
-        ]
+      {
+        copy: "<p>2: Organisation name: 2</p>",
+        buttons: [{ text: "TEXTFIELD TO COME", eligible: true}]
       },
-            {
-        copy: "<p>Question 3</p>",
-        buttons: [
-          { text: "q3: ineligible"},
-          { text: "next question"}
-        ]
+      {
+        copy: "<p>3: What activities?</p>",
+        buttons: [{ text: "Religious", eligible: false}, {text: "Other", eligible: true}]
+      },
+      {
+        copy: "<p>4: Only looking to cover capital costs?</p>",
+        buttons: [{ text: "Yes", eligible: false}, {text: "No", eligible: true}]
+      },
+      {
+        copy: "<p>5: Core costs?</p>",
+        buttons: [{ text: "Yes", eligible: false}, {text: "No", eligible: true}]
       },
     ]
   };
@@ -40,20 +51,52 @@ class Question extends Component {
    */
   renderButtons() {
 
-    // Access our zero-indexed (hence -1) question array
-    let currentButtons = this.props.questions[this.props.current_question-1]['buttons'];
+    /* Access our zero-indexed question array */
+    let currentButtons = this.props.questions[this.state.currentQuestion - 1]['buttons'];
 
     return (
-      <p>
-        {currentButtons.map(function(thisOption,index){
-          return ( <a key={index} className='btn btn--red' onClick={ this.props.nextQuestion } > {thisOption.text} </a> )
+      <div className="buttons">
+        {currentButtons.map(function(thisButton,index){
+          return (
+            <p key={index}>
+              <a key={index} data-e={thisButton.eligible} className='btn btn--red' onClick={function(e){this.submitAnswer(e);}.bind(this)}>
+                {thisButton.text}
+              </a>
+            </p>
+          )
         }.bind(this))}
-      </p>
+      </div>
     );
   }
 
-  testo(){
-    console.log("testo!");
+  /* Handles submission of each question, storing the response and switching content as required */
+  submitAnswer(e) {
+
+    // Get the button's value, update the form state
+    let thisResponse = e.target.getAttribute("data-e");
+    let thisQuestion = this.state.currentQuestion;
+    let newPath = "";
+
+    // Store the response 
+    let stateCopy = Object.assign({}, this.state);
+    stateCopy.responses[thisQuestion] = thisResponse;
+    stateCopy.currentQuestion = thisQuestion+1;
+    this.setState(stateCopy);
+
+    /* If this answer still represents an eligable submission, continue the journey */
+    if (thisResponse === 'true') {
+      newPath = `/question/` + (thisQuestion+1);
+    } 
+
+    else {
+      // TODO: pass rejection type to RejectionMessage comp to switch content dynamically
+      newPath = `/rejection/`;
+    }
+
+    /* Update the URL */
+    this.props.history.push({
+      pathname: newPath,
+    });
   }
 
   /**
@@ -62,10 +105,11 @@ class Question extends Component {
    */
   render() {
     // Cache the current copy and user options from our zero-indexed array
-    let currentCopy = this.props.questions[this.props.current_question-1]['copy'];
+    let currentCopy = this.props.questions[this.state.currentQuestion - 1]['copy'];
+
     return (
-        <div>
-          {Parser( currentCopy )}
+        <div className={'question question-' + this.state.currentQuestion}>
+          { Parser(currentCopy) }
           { this.renderButtons() }
         </div>
     );
@@ -74,7 +118,6 @@ class Question extends Component {
 
 /* Define proptypes */
 Question.propTypes = {
-  nextQuestion: propTypes.func.isRequired,
   questions: propTypes.arrayOf(propTypes.shape({
     copy: propTypes.string.isRequired,
     buttons: propTypes.array.isRequired,
