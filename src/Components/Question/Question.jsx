@@ -11,7 +11,7 @@ class Question extends Component {
    * Question constructor
    * @param props
    */
-   constructor(props) {
+  constructor(props) {
       super(props);
 
       this.state = {
@@ -24,23 +24,56 @@ class Question extends Component {
     questions: [
       {
         copy: "<p>1: What type of organisation?</p>",
-        buttons: [{ text: "Individual", eligible: false}, { text: "Charity", eligible: true }]
+        buttons: [
+        { question_type:"organisation-type", text: "Individual", value: "individual", reject:"true", message: "1" },
+        { question_type:"organisation-type", text: "Charity", value:"charity", reject:"false", message:"" }]
       },
       {
         copy: "<p>2: Organisation name: 2</p>",
-        buttons: [{ text: "TEXTFIELD TO COME", eligible: true}]
+        buttons: [{ question_type:"organisation-name", text: "TEXTFIELD TO COME",  value:"some text", reject: "false", message:"" }]
       },
       {
         copy: "<p>3: What activities?</p>",
-        buttons: [{ text: "Religious", eligible: false}, {text: "Other", eligible: true}]
+        buttons: [
+        { question_type:"activities-type", text: "Religious", value:"religious", reject: "true", message:"2" },
+        { question_type:"activities-type", text: "Other", value:"other", reject: "false", message:"" }]
       },
       {
         copy: "<p>4: Only looking to cover capital costs?</p>",
-        buttons: [{ text: "Yes", eligible: false}, {text: "No", eligible: true}]
+        buttons: [
+        { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message:"2" },
+        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message:"" }]
       },
       {
         copy: "<p>5: Core costs?</p>",
-        buttons: [{ text: "Yes", eligible: false}, {text: "No", eligible: true}]
+        buttons: [
+        { question_type:"core-costs", text: "Yes", value:"yes", reject: "false", message: "" },
+        { question_type:"core-costs", text: "No", value:"no", reject: "false", message: "" }]
+      },
+      {
+        copy: "<p>6: Over 100k income?</p>",
+        buttons: [
+        { question_type:"over-100k", text: "Yes", value:"yes", reject: "false", message: "" },
+        { question_type:"over-100k", text: "No", value:"no", reject: "false", message: "" }]
+      },
+      {
+        copy: "<p>7: Sports project?</p>",
+        buttons: [
+        { question_type:"sports-project", text: "Yes", value:"yes", reject: "false", message: "" },
+        { question_type:"sports-project", text: "No", value:"no", reject: "check", message: "" }]
+      },
+      {
+        copy: "<p>8: Project location?</p>",
+        buttons: [
+          { question_type:"project-location", text: "UK", value:"uk", reject: "false", message: "" },
+          { question_type:"project-location", text: "India", value:"india", reject: "check", message: "" },
+          { question_type:"project-location", text: "Other", value:"other", reject: "check", message: ""  }]
+      },
+      {
+        copy: "<p>9: In London?</p>",
+        buttons: [
+        { question_type:"london", text: "Yes", value:"yes", reject: "check", message: "" },
+        { question_type:"london", text: "No", value:"no", reject: "check", message: "" }]
       },
     ]
   };
@@ -59,7 +92,13 @@ class Question extends Component {
         {currentButtons.map(function(thisButton,index){
           return (
             <p key={index}>
-              <a key={index} data-e={thisButton.eligible} className='btn btn--red' onClick={function(e){this.submitAnswer(e);}.bind(this)}>
+              <a key={index} 
+                data-q={thisButton.question_type}
+                data-v={thisButton.value}
+                data-r={thisButton.reject}
+                data-m={thisButton.message}
+                className='btn btn--red'
+                onClick={function(e){this.submitAnswer(e);}.bind(this)}>
                 {thisButton.text}
               </a>
             </p>
@@ -72,25 +111,47 @@ class Question extends Component {
   /* Handles submission of each question, storing the response and switching content as required */
   submitAnswer(e) {
 
-    // Get the button's value, update the form state
-    let thisResponse = e.target.getAttribute("data-e");
-    let thisQuestion = this.state.currentQuestion;
-    let newPath = "";
+    /* Get this response's attrs and values */
+    let thisButton = e.target;
+    let isRejected = thisButton.getAttribute("data-r");
+    let thisValue = thisButton.getAttribute("data-v");
+    let thisQuestionType = thisButton.getAttribute("data-q");
 
-    // Store the response 
+    /* Cache current question to use as array pointer */
+    let thisQuestion = this.state.currentQuestion;
+
+    /* Store the user's response to the question */ 
     let stateCopy = Object.assign({}, this.state);
-    stateCopy.responses[thisQuestion] = thisResponse;
-    stateCopy.currentQuestion = thisQuestion+1;
+    stateCopy.responses[thisQuestionType] = thisValue;
     this.setState(stateCopy);
 
+    let newPath = "";
+    
     /* If this answer still represents an eligable submission, continue the journey */
-    if (thisResponse === 'true') {
-      newPath = `/question/` + (thisQuestion+1);
+    if (isRejected === 'false') {
+      let stateCopy = Object.assign({}, this.state);
+      stateCopy.currentQuestion = ( thisQuestion + 1 );
+      this.setState(stateCopy);
+      newPath = `/question/` + ( thisQuestion + 1 );
     } 
 
+    /* If this answer is a direct rejection, forward user to the rejection page with specific variant  */ 
+    else if (isRejected === 'true') {
+      newPath = `/rejection/` + thisButton.getAttribute("data-m");
+    } 
+
+    /* Else, this is our "check" value, and we need to check prior answers to determine the outcome */ 
     else {
-      // TODO: pass rejection type to RejectionMessage comp to switch content dynamically
-      newPath = `/rejection/`;
+      let coreCosts = this.state.responses['core-costs'];
+      let over100k = this.state.responses['over-100k'];
+
+      let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, coreCosts, over100k );
+
+      console.log("message to show: ", messageToShow);
+
+      // TODO: sort out message switching
+      newPath = '';
+
     }
 
     /* Update the URL */
@@ -114,6 +175,55 @@ class Question extends Component {
         </div>
     );
   }
+
+
+    /* Helper function to deal with repeated logic */
+    static messageSwitch(questionType, value, coreCosts, over100k) {
+
+      switch(questionType) {
+        case "sports-project":
+          console.log('sports-project');
+
+          if (coreCosts === 'no'){ return "6"; }
+          else if (coreCosts === 'yes') { return (over100k === 'yes' ? "4" : "5"); }
+          break;
+
+        case "project-location":
+          console.log('project location');
+
+          if (value === 'other') {
+            if (coreCosts === 'no'){ return "7"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "8" : "9"); }
+          }
+
+          else if (value === 'india') {
+            if (coreCosts === 'no'){ return "NO NUMBER ON THE SHEET"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "NO NUMBER ON THE SHEET" : "NO NUMBER ON THE SHEET"); }
+           }
+           break;
+
+
+        case "london":
+          console.log('london');
+
+          if (value === 'no') {
+            if (coreCosts === 'no'){ return "NO NUMBER ON THE SHEET"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "NO NUMBER ON THE SHEET" : "NO NUMBER ON THE SHEET"); }
+           }
+
+           else if (value === 'yes') {
+            if (coreCosts === 'no'){ return "NO NUMBER ON THE SHEET"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "NO NUMBER ON THE SHEET" : "NO NUMBER ON THE SHEET"); }
+           }
+
+        default:
+          console.log('default');
+      }
+      
+
+
+
+    }
 }
 
 /* Define proptypes */

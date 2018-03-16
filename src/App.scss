@@ -12,15 +12,19 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/fonts";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/typography";
 
-.App {
+#grants-form {
   text-align: center;
   @include container();
   padding: 60px 0;
 
-  .title {
-    @include span(10);
+  .App {
+        @include span(10);
     @include push(1);
     margin-bottom: 25px;
+  }
+
+  .title {
+
   }
 }
 
