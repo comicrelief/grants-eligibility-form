@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import Parser from 'html-react-parser';
 
-
 // Import all of our template variants
 import m1 from './templates/m1.html';
 import m2 from './templates/m2.html';
@@ -44,7 +43,7 @@ static defaultProps = {
     var currentMessage = this.props.match.params.outcome_number - 1;
 
     return (
-        <div className="outcome-message">
+        <div className="cr-body outcome-message">
           {Parser(this.props.messages[currentMessage])}
         </div>
     );

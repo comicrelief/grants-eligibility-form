@@ -1,16 +1,22 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/core";
+
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/colours";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/lists";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/_lists";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/grid";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/typography";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/typography/typography";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/buttons/buttons";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/links/links";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/_mixins";
+
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/fonts";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 
 #grants-form {
   text-align: center;
