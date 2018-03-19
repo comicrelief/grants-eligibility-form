@@ -2,29 +2,29 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
 /**
- * IntroMessage class
+ * OutcomeMessage class
  */
-class SuccessMessage extends Component {
+class OutcomeMessage extends Component {
 
   /**
-   * Render the SuccessMessage
+   * Render the OutcomeMessage
    * @return {XML}
    */
   render() {
     return (
-        <p>heres the SuccessMessage copy</p>
+        <p>heres the default OutcomeMessage copy</p>
     );
   }
 }
 
-SuccessMessage.propTypes = {
+OutcomeMessage.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }),
 };
 
-SuccessMessage.defaultProps = {
+OutcomeMessage.defaultProps = {
   history: { push: null },
 };
 
-export default SuccessMessage;
+export default OutcomeMessage;

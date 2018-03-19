@@ -137,7 +137,7 @@ class Question extends Component {
 
     /* If this answer is a direct rejection, forward user to the rejection page with specific variant  */ 
     else if (isRejected === 'true') {
-      newPath = `/rejection/` + thisButton.getAttribute("data-m");
+      newPath = `/outcome/` + thisButton.getAttribute("data-m");
     } 
 
     /* Else, this is our "check" value, and we need to check prior answers to determine the outcome */ 
