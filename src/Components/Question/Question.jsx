@@ -41,8 +41,8 @@ class Question extends Component {
       {
         copy: "<p>4: Only looking to cover capital costs?</p>",
         buttons: [
-        { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message:"2" },
-        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message:"" }]
+        { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message: "3" },
+        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message: "" }]
       },
       {
         copy: "<p>5: Core costs?</p>",
@@ -146,6 +146,8 @@ class Question extends Component {
       let over100k = this.state.responses['over-100k'];
 
       let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, coreCosts, over100k );
+      
+      console.log("thisQuestionType: ", thisQuestionType, " - thisValue: ", thisValue, " - coreCosts: ", coreCosts, " - over100k: ", over100k);
 
       console.log("message to show: ", messageToShow);
 
@@ -178,51 +180,39 @@ class Question extends Component {
 
 
     /* Helper function to deal with repeated logic */
-    static messageSwitch(questionType, value, coreCosts, over100k) {
+    static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
 
-      switch(questionType) {
+      switch(currentQuestionType) {
         case "sports-project":
-          console.log('sports-project');
-
           if (coreCosts === 'no'){ return "6"; }
           else if (coreCosts === 'yes') { return (over100k === 'yes' ? "4" : "5"); }
           break;
 
         case "project-location":
-          console.log('project location');
-
           if (value === 'other') {
             if (coreCosts === 'no'){ return "7"; }
             else if (coreCosts === 'yes') { return (over100k === 'yes' ? "8" : "9"); }
           }
 
           else if (value === 'india') {
-            if (coreCosts === 'no'){ return "NO NUMBER ON THE SHEET"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "NO NUMBER ON THE SHEET" : "NO NUMBER ON THE SHEET"); }
-           }
-           break;
-
+            if (coreCosts === 'no'){ return "10"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "11" : "12"); }
+           } break;
 
         case "london":
-          console.log('london');
-
           if (value === 'no') {
-            if (coreCosts === 'no'){ return "NO NUMBER ON THE SHEET"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "NO NUMBER ON THE SHEET" : "NO NUMBER ON THE SHEET"); }
+            if (coreCosts === 'no'){ return "10"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "11" : "12"); }
            }
 
            else if (value === 'yes') {
-            if (coreCosts === 'no'){ return "NO NUMBER ON THE SHEET"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "NO NUMBER ON THE SHEET" : "NO NUMBER ON THE SHEET"); }
-           }
+            if (coreCosts === 'no'){ return "13"; }
+            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "14" : "15"); }
+           } break;
 
         default:
           console.log('default');
-      }
-      
-
-
-
+      }  
     }
 }
 
