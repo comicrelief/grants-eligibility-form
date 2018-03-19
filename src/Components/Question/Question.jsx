@@ -30,7 +30,8 @@ class Question extends Component {
       },
       {
         copy: "<p>2: Organisation name: 2</p>",
-        buttons: [{ question_type:"organisation-name", text: "TEXTFIELD TO COME",  value:"some text", reject: "false", message:"" }]
+        buttons: [{ question_type:"organisation-name", text: "TEXTFIELD TO COME",  value:"some text", reject: "false", message:"" }],
+        text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }]
       },
       {
         copy: "<p>3: What activities?</p>",
@@ -108,6 +109,33 @@ class Question extends Component {
     );
   }
 
+    /**
+   * Render the user choices for this specific questions
+   * @return {XML}
+   */
+  renderInput() {
+
+    /* Access our zero-indexed question array */
+    let currentInput = this.props.questions[this.state.currentQuestion - 1]['text_input'];
+
+    if (currentInput !== undefined) {
+      return (
+        <div className="text-input">
+          {currentInput.map(function(thisInput,index){
+            return (
+              <div key={index + 'wrapper'} className="field-item">
+                <label key={index + 'label'}>{thisInput.text}</label>
+                <input key={index + 'input'} type="text" />
+              </div>
+            )
+          }.bind(this))}
+        </div>
+      );
+    } else {
+      console.log("no inputs");
+    }
+  }
+
   /* Handles submission of each question, storing the response and switching content as required */
   submitAnswer(e) {
 
@@ -146,14 +174,8 @@ class Question extends Component {
       let over100k = this.state.responses['over-100k'];
 
       let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, coreCosts, over100k );
-      
-      console.log("thisQuestionType: ", thisQuestionType, " - thisValue: ", thisValue, " - coreCosts: ", coreCosts, " - over100k: ", over100k);
 
-      console.log("message to show: ", messageToShow);
-
-      // TODO: sort out message switching
-      newPath = '';
-
+      newPath = `/outcome/` + messageToShow;
     }
 
     /* Update the URL */
@@ -173,13 +195,14 @@ class Question extends Component {
     return (
         <div className={'question question-' + this.state.currentQuestion}>
           { Parser(currentCopy) }
+          { this.renderInput() }
           { this.renderButtons() }
         </div>
     );
   }
 
 
-    /* Helper function to deal with repeated logic */
+    /* Helper function to help contain messy message logic */
     static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
 
       switch(currentQuestionType) {
