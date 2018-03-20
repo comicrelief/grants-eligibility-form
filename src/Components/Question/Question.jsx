@@ -12,13 +12,49 @@ class Question extends Component {
    * @param props
    */
   constructor(props) {
-      super(props);
+    super(props);
 
-      this.state = {
-        currentQuestion: 1,
-        responses: {},
-      }
+    this.state = {
+      currentQuestion: 1,
+      responses: {},
+      company_name: "",
+    };
+
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.currentQuestion !== this.props.match.params.question_number) {
+      this.setState({currentQuestion: this.props.match.params.question_number});
     }
+  }
+
+  componentDidUpdate() {
+    if (this.state.currentQuestion !== this.props.match.params.question_number) {
+      this.setState({currentQuestion: this.props.match.params.question_number});
+    }
+  }
+
+  handleTextChange(event) {
+    this.setState({company_name: event.target.value});
+  }
+
+  handleSubmit(event) {
+    console.log('handleSubmit!');
+    event.preventDefault();
+
+    let thisQuestion = this.state.currentQuestion;
+
+    this.setState({currentQuestion: ( thisQuestion + 1) });
+
+    let newPath = `/question/` + ( thisQuestion + 1 );
+
+    /* Update the URL */
+    this.props.history.push({
+      pathname: newPath,
+    });
+  }
 
   static defaultProps = {
     questions: [
@@ -30,7 +66,6 @@ class Question extends Component {
       },
       {
         copy: "<p>2: Organisation name: 2</p>",
-        buttons: [{ question_type:"organisation-name", text: "TEXTFIELD TO COME",  value:"some text", reject: "false", message:"" }],
         text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }]
       },
       {
@@ -88,25 +123,27 @@ class Question extends Component {
     /* Access our zero-indexed question array */
     let currentButtons = this.props.questions[this.state.currentQuestion - 1]['buttons'];
 
-    return (
-      <div className="buttons">
-        {currentButtons.map(function(thisButton,index){
-          return (
-            <p key={index}>
-              <a key={index} 
-                data-q={thisButton.question_type}
-                data-v={thisButton.value}
-                data-r={thisButton.reject}
-                data-m={thisButton.message}
-                className='btn btn--red'
-                onClick={function(e){this.submitAnswer(e);}.bind(this)}>
-                {thisButton.text}
-              </a>
-            </p>
-          )
-        }.bind(this))}
-      </div>
-    );
+    if (currentButtons !== undefined) {
+      return (
+        <div className="buttons">
+          {currentButtons.map(function(thisButton,index){
+            return (
+              <p key={index}>
+                <a key={index} 
+                  data-q={thisButton.question_type}
+                  data-v={thisButton.value}
+                  data-r={thisButton.reject}
+                  data-m={thisButton.message}
+                  className='btn btn--red'
+                  onClick={function(e){this.submitAnswer(e);}.bind(this)}>
+                  {thisButton.text}
+                </a>
+              </p>
+            )
+          }.bind(this))}
+        </div>
+      );
+    }
   }
 
     /**
@@ -120,19 +157,18 @@ class Question extends Component {
 
     if (currentInput !== undefined) {
       return (
-        <div className="text-input">
+        <form onSubmit={this.handleSubmit}>
           {currentInput.map(function(thisInput,index){
             return (
-              <div key={index + 'wrapper'} className="field-item">
+              <div key={index + 'wrapper'} className="field-item text-input">
                 <label key={index + 'label'}>{thisInput.text}</label>
-                <input key={index + 'input'} type="text" />
+                <input required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange}/>
+                <input type="submit" value="Submit" />
               </div>
             )
           }.bind(this))}
-        </div>
+        </form>
       );
-    } else {
-      console.log("no inputs");
     }
   }
 
@@ -170,10 +206,9 @@ class Question extends Component {
 
     /* Else, this is our "check" value, and we need to check prior answers to determine the outcome */ 
     else {
-      let coreCosts = this.state.responses['core-costs'];
-      let over100k = this.state.responses['over-100k'];
+      let theseResponses = this.state.responses;
 
-      let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, coreCosts, over100k );
+      let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k'] );
 
       newPath = `/outcome/` + messageToShow;
     }
@@ -201,49 +236,45 @@ class Question extends Component {
     );
   }
 
+  /* Helper function to help contain messy message logic */
+  static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
+    switch(currentQuestionType) {
+      case "sports-project":
+        if (coreCosts === 'no'){ return "6"; }
+        else if (coreCosts === 'yes') { return (over100k === 'yes' ? "4" : "5"); }
+        break;
 
-    /* Helper function to help contain messy message logic */
-    static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
+      case "project-location":
+        if (value === 'other') {
+          if (coreCosts === 'no'){ return "7"; }
+          else if (coreCosts === 'yes') { return (over100k === 'yes' ? "8" : "9"); }
+        }
+        else if (value === 'india') {
+          if (coreCosts === 'no'){ return "10"; }
+          else if (coreCosts === 'yes') { return (over100k === 'yes' ? "11" : "12"); }
+         } break;
 
-      switch(currentQuestionType) {
-        case "sports-project":
-          if (coreCosts === 'no'){ return "6"; }
-          else if (coreCosts === 'yes') { return (over100k === 'yes' ? "4" : "5"); }
-          break;
+      case "london":
+        if (value === 'no') {
+          if (coreCosts === 'no'){ return "10"; }
+          else if (coreCosts === 'yes') { return (over100k === 'yes' ? "11" : "12"); }
+         }
+         else if (value === 'yes') {
+          if (coreCosts === 'no'){ return "13"; }
+          else if (coreCosts === 'yes') { return (over100k === 'yes' ? "14" : "15"); }
+         } break;
 
-        case "project-location":
-          if (value === 'other') {
-            if (coreCosts === 'no'){ return "7"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "8" : "9"); }
-          }
-
-          else if (value === 'india') {
-            if (coreCosts === 'no'){ return "10"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "11" : "12"); }
-           } break;
-
-        case "london":
-          if (value === 'no') {
-            if (coreCosts === 'no'){ return "10"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "11" : "12"); }
-           }
-
-           else if (value === 'yes') {
-            if (coreCosts === 'no'){ return "13"; }
-            else if (coreCosts === 'yes') { return (over100k === 'yes' ? "14" : "15"); }
-           } break;
-
-        default:
-          console.log('default');
-      }  
-    }
+      default:
+        console.log('default');
+    }  
+  }
 }
 
 /* Define proptypes */
 Question.propTypes = {
   questions: propTypes.arrayOf(propTypes.shape({
-    copy: propTypes.string.isRequired,
-    buttons: propTypes.array.isRequired,
+    copy: propTypes.string,
+    buttons: propTypes.array,
   })).isRequired,};
 
 export default Question;
