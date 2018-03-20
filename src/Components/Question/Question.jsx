@@ -17,7 +17,6 @@ class Question extends Component {
     this.state = {
       currentQuestion: 1,
       responses: {},
-      company_name: "",
     };
 
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -25,35 +24,37 @@ class Question extends Component {
   }
 
   componentDidMount() {
-    if (this.state.currentQuestion !== this.props.match.params.question_number) {
-      this.setState({currentQuestion: this.props.match.params.question_number});
-    }
-  }
+    this.updateQuestionNumber();
+  }""
 
   componentDidUpdate() {
-    if (this.state.currentQuestion !== this.props.match.params.question_number) {
-      this.setState({currentQuestion: this.props.match.params.question_number});
+    this.updateQuestionNumber();
+  }
+
+  /* Update the state to reflect our input field*/
+  handleTextChange(event) {
+    let stateCopy = Object.assign({}, this.state);
+    stateCopy.responses['company_name'] = event.target.value;
+    this.setState(stateCopy);
+  }
+  
+  /* Update the state to reflect our current question */
+  updateQuestionNumber() {
+    let currUrlQ = parseInt(this.props.match.params.question_number, 10);
+    if (this.state.currentQuestion !== currUrlQ ) {
+      this.setState({currentQuestion: currUrlQ });
     }
   }
 
-  handleTextChange(event) {
-    this.setState({company_name: event.target.value});
-  }
-
+  /* Handles 'submission' of the company input question */
   handleSubmit(event) {
-    console.log('handleSubmit!');
     event.preventDefault();
-
-    let thisQuestion = this.state.currentQuestion;
-
-    this.setState({currentQuestion: ( thisQuestion + 1) });
-
-    let newPath = `/question/` + ( thisQuestion + 1 );
+    /* Create path to next question */
+    let nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
+    let newPath = `/question/` + nextQuestion;
 
     /* Update the URL */
-    this.props.history.push({
-      pathname: newPath,
-    });
+    this.props.history.push({ pathname: newPath });
   }
 
   static defaultProps = {
@@ -146,7 +147,7 @@ class Question extends Component {
     }
   }
 
-    /**
+  /**
    * Render the user choices for this specific questions
    * @return {XML}
    */
@@ -193,9 +194,6 @@ class Question extends Component {
     
     /* If this answer still represents an eligable submission, continue the journey */
     if (isRejected === 'false') {
-      let stateCopy = Object.assign({}, this.state);
-      stateCopy.currentQuestion = ( thisQuestion + 1 );
-      this.setState(stateCopy);
       newPath = `/question/` + ( thisQuestion + 1 );
     } 
 
@@ -207,9 +205,7 @@ class Question extends Component {
     /* Else, this is our "check" value, and we need to check prior answers to determine the outcome */ 
     else {
       let theseResponses = this.state.responses;
-
       let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k'] );
-
       newPath = `/outcome/` + messageToShow;
     }
 
