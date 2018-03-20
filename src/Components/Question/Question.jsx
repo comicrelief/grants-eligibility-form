@@ -13,19 +13,18 @@ class Question extends Component {
    */
   constructor(props) {
     super(props);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
       currentQuestion: 1,
       responses: {},
     };
-
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.updateQuestionNumber();
-  }""
+  }
 
   componentDidUpdate() {
     this.updateQuestionNumber();
