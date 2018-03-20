@@ -56,63 +56,7 @@ class Question extends Component {
     this.props.history.push({ pathname: newPath });
   }
 
-  static defaultProps = {
-    questions: [
-      {
-        copy: "<p>1: What type of organisation?</p>",
-        buttons: [
-        { question_type:"organisation-type", text: "Individual", value: "individual", reject:"true", message: "1" },
-        { question_type:"organisation-type", text: "Charity", value:"charity", reject:"false", message:"" }]
-      },
-      {
-        copy: "<p>2: Organisation name: 2</p>",
-        text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }]
-      },
-      {
-        copy: "<p>3: What activities?</p>",
-        buttons: [
-        { question_type:"activities-type", text: "Religious", value:"religious", reject: "true", message:"2" },
-        { question_type:"activities-type", text: "Other", value:"other", reject: "false", message:"" }]
-      },
-      {
-        copy: "<p>4: Only looking to cover capital costs?</p>",
-        buttons: [
-        { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message: "3" },
-        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message: "" }]
-      },
-      {
-        copy: "<p>5: Core costs?</p>",
-        buttons: [
-        { question_type:"core-costs", text: "Yes", value:"yes", reject: "false", message: "" },
-        { question_type:"core-costs", text: "No", value:"no", reject: "false", message: "" }]
-      },
-      {
-        copy: "<p>6: Over 100k income?</p>",
-        buttons: [
-        { question_type:"over-100k", text: "Yes", value:"yes", reject: "false", message: "" },
-        { question_type:"over-100k", text: "No", value:"no", reject: "false", message: "" }]
-      },
-      {
-        copy: "<p>7: Sports project?</p>",
-        buttons: [
-        { question_type:"sports-project", text: "Yes", value:"yes", reject: "false", message: "" },
-        { question_type:"sports-project", text: "No", value:"no", reject: "check", message: "" }]
-      },
-      {
-        copy: "<p>8: Project location?</p>",
-        buttons: [
-          { question_type:"project-location", text: "UK", value:"uk", reject: "false", message: "" },
-          { question_type:"project-location", text: "India", value:"india", reject: "check", message: "" },
-          { question_type:"project-location", text: "Other", value:"other", reject: "check", message: ""  }]
-      },
-      {
-        copy: "<p>9: In London?</p>",
-        buttons: [
-        { question_type:"london", text: "Yes", value:"yes", reject: "check", message: "" },
-        { question_type:"london", text: "No", value:"no", reject: "check", message: "" }]
-      },
-    ]
-  };
+  
 
   /**
    * Render the user choices for this specific questions
@@ -128,7 +72,7 @@ class Question extends Component {
         <div className="buttons">
           {currentButtons.map(function(thisButton,index){
             return (
-              <p key={index}>
+              <p className="btn-wrap" key={index}>
                 <a key={index} 
                   data-q={thisButton.question_type}
                   data-v={thisButton.value}
@@ -220,14 +164,39 @@ class Question extends Component {
    */
   render() {
     // Cache the current copy and user options from our zero-indexed array
-    let currentCopy = this.props.questions[this.state.currentQuestion - 1]['copy'];
+    let currentQuestion = this.props.questions[this.state.currentQuestion - 1];
+    let currentCopy = currentQuestion['copy'];
+    let currentTitle = currentQuestion['title'];
 
     return (
-        <div className={'question question-' + this.state.currentQuestion}>
+      <main role="main">
+      { currentTitle !== undefined ?
+        <header className="bg--red promo-header promo-header--default promo-header--no-image">
+          <div className="promo-header__content">
+            <div className="promo-header__content-inner promo-header__content-inner--centre">
+              <div className="cr-body">
+                <h1 className="font--white text-align-center">{ Parser(currentTitle) }</h1>
+              </div>
+            </div>
+          </div>
+        </header> :
+
+       <header className="bg--white promo-header promo-header--default promo-header--no-image">
+          <div className="promo-header__content">
+            <div className="promo-header__content-inner promo-header__content-inner--centre">
+              <div className="cr-body">
+                <h2 className="font--black text-align-center">(progress bar here)</h2>
+              </div>
+            </div>
+          </div>
+        </header>
+      }
+        <div className={'bg--grey question question-' + this.state.currentQuestion}>
           { Parser(currentCopy) }
           { this.renderInput() }
           { this.renderButtons() }
         </div>
+      </main>
     );
   }
 
@@ -263,6 +232,65 @@ class Question extends Component {
         console.log('default');
     }  
   }
+
+  static defaultProps = {
+    questions: [
+      { 
+        title: "Get started",
+        copy: "<p>1: What type of organisation?</p>",
+        buttons: [
+        { question_type:"organisation-type", text: "Individual", value: "individual", reject:"true", message: "1" },
+        { question_type:"organisation-type", text: "Charity", value:"charity", reject:"false", message:"" }]
+      },
+      {
+        copy: "<p>2: Organisation name: 2</p>",
+        text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }]
+      },
+      {
+        copy: "<p>3: What activities?</p>",
+        buttons: [
+        { question_type:"activities-type", text: "Religious", value:"religious", reject: "true", message:"2" },
+        { question_type:"activities-type", text: "Other", value:"other", reject: "false", message:"" }]
+      },
+      { 
+        copy: "<p>4: Only looking to cover capital costs?</p>",
+        buttons: [
+        { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message: "3" },
+        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message: "" }]
+      },
+      {
+        copy: "<p>5: Core costs?</p>",
+        buttons: [
+        { question_type:"core-costs", text: "Yes", value:"yes", reject: "false", message: "" },
+        { question_type:"core-costs", text: "No", value:"no", reject: "false", message: "" }]
+      },
+      {
+        copy: "<p>6: Over 100k income?</p>",
+        buttons: [
+        { question_type:"over-100k", text: "Yes", value:"yes", reject: "false", message: "" },
+        { question_type:"over-100k", text: "No", value:"no", reject: "false", message: "" }]
+      },
+      {
+        copy: "<p>7: Sports project?</p>",
+        buttons: [
+        { question_type:"sports-project", text: "Yes", value:"yes", reject: "false", message: "" },
+        { question_type:"sports-project", text: "No", value:"no", reject: "check", message: "" }]
+      },
+      {
+        copy: "<p>8: Project location?</p>",
+        buttons: [
+          { question_type:"project-location", text: "UK", value:"uk", reject: "false", message: "" },
+          { question_type:"project-location", text: "India", value:"india", reject: "check", message: "" },
+          { question_type:"project-location", text: "Other", value:"other", reject: "check", message: ""  }]
+      },
+      {
+        copy: "<p>9: In London?</p>",
+        buttons: [
+        { question_type:"london", text: "Yes", value:"yes", reject: "check", message: "" },
+        { question_type:"london", text: "No", value:"no", reject: "check", message: "" }]
+      },
+    ]
+  };
 }
 
 /* Define proptypes */

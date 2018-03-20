@@ -9,27 +9,45 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/_mixins";
-
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/fonts";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/typography";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 
 #grants-form {
   text-align: center;
   @include container();
-  padding: 60px 0;
+  //padding: 60px 0;
 
   .App {
-    @include span(8);
-    @include push(2);
-    margin-bottom: 25px;
+  
   }
 }
 
-form, .content {
-  @include span(12);
+.content {
+  padding: 30px 0;
+  @include span(10);
+  @include push(1);
 }
+
+.btn-wrap {
+  margin: 0;
+  .btn {
+    margin: 30px 0 0 0;
+  }
+  + .btn-wrap .btn {
+    margin: 10px 0 0 0;
+  }
+}
+
+.question {
+  padding: 30px 0;
+}
+
+
+
