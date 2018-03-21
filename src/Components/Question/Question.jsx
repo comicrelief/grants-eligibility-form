@@ -80,20 +80,18 @@ class Question extends Component {
 
     if (currentButtons !== undefined) {
       return (
-        <div className="buttons">
+        <div className="buttons text-align-center">
           {currentButtons.map(function(thisButton,index){
             return (
-              <p className="btn-wrap text-align-center" key={index}>
                 <a key={index} 
                   data-q={thisButton.question_type}
                   data-v={thisButton.value}
                   data-r={thisButton.reject}
                   data-m={thisButton.message}
-                  className='btn btn--red'
+                  className='grants-btn btn'
                   onClick={function(e){this.submitAnswer(e);}.bind(this)}>
                   {thisButton.text}
                 </a>
-              </p>
             )
           }.bind(this))}
         </div>

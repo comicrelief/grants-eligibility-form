@@ -19,27 +19,26 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 
-#grants-form {
-}
-
 main {
   @include clearfix;
 }
 
 .content {
-  @include span(8);
-  @include push(2);
+  @include span(10);
+  @include push(1);
 }
 
-.btn-wrap {
+.buttons {
   margin: 0;
 
-  .btn {
-    margin: 30px 0 0 0;
-  }
+  .btn:first-child:not(:only-child) {
+    margin: 10px;
+    @extend .btn--red;
 
-  + .btn-wrap .btn {
-    margin: 10px 0 0 0;
+    + .btn {
+      margin: 10px;
+      @extend .btn--royal-blue;
+    }
   }
 }
 
@@ -77,6 +76,11 @@ main {
 
 .text-align-center {
   text-align: center;
+
+  // Represents our bold 'title'
+  &.font--family-bold {
+    margin: 50px 0;
+  }
 }
 
 .text-input {
