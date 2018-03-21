@@ -83,7 +83,7 @@ class Question extends Component {
         <div className="buttons">
           {currentButtons.map(function(thisButton,index){
             return (
-              <p className="btn-wrap" key={index}>
+              <p className="btn-wrap text-align-center" key={index}>
                 <a key={index} 
                   data-q={thisButton.question_type}
                   data-v={thisButton.value}
@@ -115,7 +115,7 @@ class Question extends Component {
         <form onSubmit={this.handleSubmit}>
           {currentInput.map(function(thisInput,index){
             return (
-              <div key={index + 'wrapper'} className="field-item text-input">
+              <div key={index + 'wrapper'} className="field-item text-input text-align-center">
                 <label key={index + 'label'}>{thisInput.text}</label>
                 <input required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange}/>
                 <input type="submit" value="Submit" />
@@ -194,20 +194,21 @@ class Question extends Component {
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
-                <h3 className="font--black text-align-center">(progress bar)</h3>
+                <h5 className="font--black text-align-center">(progress bar)</h5>
               </div>
             </div>
           </div>
         </header>
       }
         <main role="main" className="bg--grey">
-        <div className={'bg--grey question question-' + this.state.currentQuestion}>
-          { Parser(currentQuestion['button_copy']) }
-          { this.renderInput() }
-          { this.renderButtons() }
-          { Parser( currentQuestion['template'] ) }
-        </div>
-      </main>
+          <div className="content">
+            <div className={'bg--grey question question-' + this.state.currentQuestion}>
+              { Parser( currentQuestion['template'] ) }
+              { this.renderInput() }
+              { this.renderButtons() }
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -259,7 +260,6 @@ class Question extends Component {
         button_copy: "<p>2: Organisation name: 2</p>",
         text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }],
         template: q2
-
       },
       {
         button_copy: "<p>3: What activities?</p>",
@@ -318,7 +318,6 @@ class Question extends Component {
 /* Define proptypes */
 Question.propTypes = {
   questions: propTypes.arrayOf(propTypes.shape({
-    button_copy: propTypes.string,
     buttons: propTypes.array,
   })).isRequired,};
 

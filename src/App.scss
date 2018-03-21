@@ -20,14 +20,13 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 
 #grants-form {
-  text-align: center;
 }
 
 main {
+  @include clearfix;
 }
 
 .content {
-  padding: 30px 0;
   @include span(8);
   @include push(2);
 }
@@ -47,4 +46,8 @@ main {
 .question {
   @include container();
   padding: 30px 0;
+}
+
+.text-align-center {
+  text-align: center;
 }
