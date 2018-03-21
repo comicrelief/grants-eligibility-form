@@ -51,6 +51,7 @@ class Question extends Component {
     super(props);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
 
     this.state = {
       currentQuestion: 1,
@@ -142,7 +143,7 @@ class Question extends Component {
     if (currentInput !== undefined) {
       return (
         <form onSubmit={this.handleSubmit}>
-          {currentInput.map((thisInput) => (
+          {currentInput.map(thisInput => (
             <div key={thisInput.question_type + 'wrapper'} className="field-item text-input text-align-center">
               <label htmlFor={thisInput.question_type + '-label'} key={thisInput.question_type + '-label'}>{thisInput.text}</label>
               <input
@@ -173,7 +174,7 @@ class Question extends Component {
     if (currentButtons !== undefined) {
       return (
         <div className="buttons text-align-center">
-          {currentButtons.map((thisButton) => (
+          {currentButtons.map(thisButton => (
             <button
               key={thisButton.question_type}
               data-q={thisButton.question_type}
@@ -181,7 +182,7 @@ class Question extends Component {
               data-r={thisButton.reject}
               data-m={thisButton.message}
               className="grants-btn btn"
-              onClick={function (e) { this.submitAnswer(e); }.bind(this)}
+              onClick={function (e) { this.submitAnswer(e); }}
             >
               {thisButton.text}
             </button>
@@ -264,6 +265,7 @@ Question.propTypes = {
 };
 
 Question.defaultProps = {
+  match: null,
   history: { push: null },
   questions: [
     {
