@@ -17,6 +17,32 @@ import q9 from './templates/q9.html';
  * Question class
  */
 class Question extends Component {
+  /* Helper function to help contain messy message logic */
+  static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
+    switch (currentQuestionType) {
+      case 'sports-project':
+        if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
+        break;
+
+      case 'project-location':
+        if (value === 'other') {
+          if (coreCosts === 'no') { return '7'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '8' : '9'); }
+        } else if (value === 'india') {
+          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
+        } break;
+
+      case 'london':
+        if (value === 'no') {
+          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
+        } else if (value === 'yes') {
+          if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
+        } break;
+
+      default:
+        console.log('default');
+    }
+    return null;
+  }
   /**
    * Question constructor
    * @param props
@@ -116,10 +142,17 @@ class Question extends Component {
     if (currentInput !== undefined) {
       return (
         <form onSubmit={this.handleSubmit}>
-          {currentInput.map((thisInput, index) => (
-            <div key={index + 'wrapper'} className="field-item text-input text-align-center">
-              <label htmlFor={index + 'input'} key={index + 'label'}>{thisInput.text}</label>
-              <input id={index + 'input'} placeholder={thisInput.text} required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange} />
+          {currentInput.map((thisInput) => (
+            <div key={thisInput.question_type + 'wrapper'} className="field-item text-input text-align-center">
+              <label htmlFor={thisInput.question_type + '-label'} key={thisInput.question_type + '-label'}>{thisInput.text}</label>
+              <input
+                id={thisInput.question_type + '-label'}
+                placeholder={thisInput.text}
+                required
+                key={thisInput.question_type + '-input'}
+                type="text"
+                onChange={this.handleTextChange}
+              />
               <input type="submit" value="Continue" />
             </div>
             ))}
@@ -140,10 +173,9 @@ class Question extends Component {
     if (currentButtons !== undefined) {
       return (
         <div className="buttons text-align-center">
-          {currentButtons.map((thisButton, index) => (
+          {currentButtons.map((thisButton) => (
             <button
-              role="button"
-              key={index}
+              key={thisButton.question_type}
               data-q={thisButton.question_type}
               data-v={thisButton.value}
               data-r={thisButton.reject}
@@ -174,7 +206,9 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h1 className="font--white text-align-center">{ Parser(currentQuestion.title) }</h1>
+                  <h1 className="font--white text-align-center">
+                    { Parser(currentQuestion.title) }
+                  </h1>
                 </div>
               </div>
             </div>
@@ -202,36 +236,35 @@ class Question extends Component {
       </div>
     );
   }
-
-  /* Helper function to help contain messy message logic */
-  static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
-    switch (currentQuestionType) {
-      case 'sports-project':
-        if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
-        break;
-
-      case 'project-location':
-        if (value === 'other') {
-          if (coreCosts === 'no') { return '7'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '8' : '9'); }
-        } else if (value === 'india') {
-          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
-        } break;
-
-      case 'london':
-        if (value === 'no') {
-          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
-        } else if (value === 'yes') {
-          if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
-        } break;
-
-      default:
-        console.log('default');
-    }
-  }
 }
 
-OutcomeMessage.defaultProps = {
-  messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15],
+/* Define proptypes */
+Question.propTypes = {
+  history: { push: null },
+  match: propTypes.arrayOf(React.PropTypes.element),
+  questions: propTypes.arrayOf(propTypes.shape({
+    title: propTypes.string,
+    button_copy: propTypes.string,
+    template: propTypes.string,
+    text_input: propTypes.arrayOf(propTypes.shape({
+      question_type: propTypes.string,
+      text: propTypes.string,
+      value: propTypes.string,
+      reject: propTypes.string,
+      message: propTypes.string,
+    })),
+    buttons: propTypes.arrayOf(propTypes.shape({
+      question_type: propTypes.string,
+      text: propTypes.string,
+      value: propTypes.string,
+      reject: propTypes.string,
+      message: propTypes.string,
+    })),
+  })),
+};
+
+Question.defaultProps = {
+  history: { push: null },
   questions: [
     {
       title: 'Get started',
@@ -248,7 +281,7 @@ OutcomeMessage.defaultProps = {
     {
       button_copy: '<p>2: Organisation name: 2</p>',
       text_input: [{
-        question_type: 'organisation-name', text: 'Your organisation name', value: 'some text', reject: 'false', message: '',
+        question_type: 'organisation-name', text: 'Your organisation name', value: '', reject: 'false', message: '',
       }],
       template: q2,
     },
@@ -333,13 +366,6 @@ OutcomeMessage.defaultProps = {
       template: q9,
     },
   ],
-};
-
-/* Define proptypes */
-Question.propTypes = {
-  questions: propTypes.arrayOf(propTypes.shape({
-    buttons: propTypes.array,
-  })).isRequired,
 };
 
 export default Question;
