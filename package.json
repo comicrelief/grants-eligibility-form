@@ -60,7 +60,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "lint": "node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint . --ext=jsx --ext=js",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "test": "run-p --race start cy:run"
