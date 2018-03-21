@@ -21,33 +21,30 @@
 
 #grants-form {
   text-align: center;
-  @include container();
-  //padding: 60px 0;
+}
 
-  .App {
-  
-  }
+main {
 }
 
 .content {
   padding: 30px 0;
-  @include span(10);
-  @include push(1);
+  @include span(8);
+  @include push(2);
 }
 
 .btn-wrap {
   margin: 0;
+
   .btn {
     margin: 30px 0 0 0;
   }
+
   + .btn-wrap .btn {
     margin: 10px 0 0 0;
   }
 }
 
 .question {
+  @include container();
   padding: 30px 0;
 }
-
-
-

@@ -169,7 +169,7 @@ class Question extends Component {
     let currentTitle = currentQuestion['title'];
 
     return (
-      <main role="main">
+      <div>
       { currentTitle !== undefined ?
         <header className="bg--red promo-header promo-header--default promo-header--no-image">
           <div className="promo-header__content">
@@ -191,12 +191,14 @@ class Question extends Component {
           </div>
         </header>
       }
+        <main role="main" className="bg--grey">
         <div className={'bg--grey question question-' + this.state.currentQuestion}>
           { Parser(currentCopy) }
           { this.renderInput() }
           { this.renderButtons() }
         </div>
       </main>
+      </div>
     );
   }
 

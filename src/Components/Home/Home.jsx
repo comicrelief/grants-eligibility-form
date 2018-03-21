@@ -20,7 +20,7 @@ class Home extends Component {
    */
   render() {
     return (
-      <main role="main">
+      <div>
         <header className="bg--red promo-header promo-header--default   promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
@@ -30,16 +30,18 @@ class Home extends Component {
             </div>
           </div>
         </header>
-          <div className="content">
-            <h3>Thanks for using our eligibility checker. We&#39;re going to ask you a few questions about your organisation and what you need funding for. We&#39;ll use these answers to see whether you might be eligible for an open initiative. 
-            </h3>
-            <button
-              onClick={() => this.handleStartForm()}
-              className="btn btn--red">
-              Get started
-            </button>
-        </div>
-      </main>
+        <main role="main">
+            <div className="content">
+              <h3>Thanks for using our eligibility checker. We&#39;re going to ask you a few questions about your organisation and what you need funding for. We&#39;ll use these answers to see whether you might be eligible for an open initiative. 
+              </h3>
+              <button
+                onClick={() => this.handleStartForm()}
+                className="btn btn--red">
+                Get started
+              </button>
+          </div>
+        </main>
+      </div>
     );
   }
 
