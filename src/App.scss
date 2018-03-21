@@ -46,6 +46,33 @@ main {
 .question {
   @include container();
   padding: 50px 0;
+
+  ul {
+    margin: 15px 0;
+    padding: 0 0 0 20px;
+    list-style: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    li {
+      position: relative;
+      padding: 0 0 0 30px;
+      list-style: none;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      
+      &:before {
+        position: absolute;
+        top: 0;
+        left: -3px;
+        padding: 0 16px 0 0;
+        content: "\25CF";
+        color: $colour-red;
+      }
+    }
+  }
 }
 
 .text-align-center {
@@ -69,3 +96,5 @@ main {
     padding: 16px 40px;
   }
 }
+
+
