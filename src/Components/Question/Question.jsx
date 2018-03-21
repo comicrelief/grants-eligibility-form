@@ -17,7 +17,6 @@ import q9 from './templates/q9.html';
  * Question class
  */
 class Question extends Component {
-
   /**
    * Question constructor
    * @param props
@@ -41,18 +40,18 @@ class Question extends Component {
     this.updateQuestionNumber();
   }
 
-  /* Update the state to reflect our input field*/
+  /* Update the state to reflect our input field */
   handleTextChange(event) {
-    let stateCopy = Object.assign({}, this.state);
-    stateCopy.responses['company_name'] = event.target.value;
+    const stateCopy = Object.assign({}, this.state);
+    stateCopy.responses.company_name = event.target.value;
     this.setState(stateCopy);
   }
-  
+
   /* Update the state to reflect our current question */
   updateQuestionNumber() {
-    let currUrlQ = parseInt(this.props.match.params.question_number, 10);
-    if (this.state.currentQuestion !== currUrlQ ) {
-      this.setState({currentQuestion: currUrlQ });
+    const currUrlQ = parseInt(this.props.match.params.question_number, 10);
+    if (this.state.currentQuestion !== currUrlQ) {
+      this.setState({ currentQuestion: currUrlQ });
     }
   }
 
@@ -60,14 +59,76 @@ class Question extends Component {
   handleSubmit(event) {
     event.preventDefault();
     /* Create path to next question */
-    let nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
-    let newPath = `/question/` + nextQuestion;
+    const nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
+    const newPath = '/question/' + nextQuestion;
 
     /* Update the URL */
     this.props.history.push({ pathname: newPath });
   }
 
-  
+  /* Handles submission of each question, storing the response and switching content as required */
+  submitAnswer(e) {
+    /* Get this response's attrs and values */
+    const thisButton = e.target;
+    const isRejected = thisButton.getAttribute('data-r');
+    const thisValue = thisButton.getAttribute('data-v');
+    const thisQuestionType = thisButton.getAttribute('data-q');
+
+    /* Cache current question to use as array pointer */
+    const thisQuestion = this.state.currentQuestion;
+
+    /* Store the user's response to the question */
+    const stateCopy = Object.assign({}, this.state);
+    stateCopy.responses[thisQuestionType] = thisValue;
+    this.setState(stateCopy);
+
+    let newPath = '';
+
+    /* If this answer still represents an eligable submission, continue the journey */
+    if (isRejected === 'false') {
+      newPath = '/question/' + (thisQuestion + 1);
+    } else if (isRejected === 'true') {
+      /* If this answer is a direct rejection, forward user
+       * to the rejection page with specific variant  */
+      newPath = '/outcome/' + thisButton.getAttribute('data-m');
+    } else {
+      /* Else, this is our "check" value, and we need to
+       * check prior answers to determine the outcome */ 
+      const theseResponses = this.state.responses;
+      const messageToShow = Question.messageSwitch(thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k']);
+      newPath = '/outcome/' + messageToShow;
+    }
+
+    /* Update the URL */
+    this.props.history.push({
+      pathname: newPath,
+    });
+  }
+
+  /**
+   * Render the user choices for this specific questions
+   * @return {XML}
+   */
+  renderInput() {
+    /* Access our zero-indexed question array */
+    const currentInput = this.props.questions[this.state.currentQuestion - 1].text_input;
+
+    if (currentInput !== undefined) {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          {currentInput.map(function(thisInput,index) {
+            return (
+              <div key={index + 'wrapper'} className="field-item text-input text-align-center">
+                <label htmlFor={index + 'input'} key={index + 'label'}>{thisInput.text}</label>
+                <input id={index + 'input'} placeholder={thisInput.text} required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange}/>
+                <input type="submit" value="Continue" />
+              </div>
+            )
+          }.bind(this))}
+        </form>
+      );
+    } else return null;
+  }
 
   /**
    * Render the user choices for this specific questions
@@ -96,75 +157,7 @@ class Question extends Component {
           }.bind(this))}
         </div>
       );
-    }
-  }
-
-  /**
-   * Render the user choices for this specific questions
-   * @return {XML}
-   */
-  renderInput() {
-
-    /* Access our zero-indexed question array */
-    let currentInput = this.props.questions[this.state.currentQuestion - 1]['text_input'];
-
-    if (currentInput !== undefined) {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          {currentInput.map(function(thisInput,index){
-            return (
-              <div key={index + 'wrapper'} className="field-item text-input text-align-center">
-                <label key={index + 'label'}>{thisInput.text}</label>
-                <input placeholder={thisInput.text} required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange}/>
-                <input type="submit" value="Continue" />
-              </div>
-            )
-          }.bind(this))}
-        </form>
-      );
-    }
-  }
-
-  /* Handles submission of each question, storing the response and switching content as required */
-  submitAnswer(e) {
-
-    /* Get this response's attrs and values */
-    let thisButton = e.target;
-    let isRejected = thisButton.getAttribute("data-r");
-    let thisValue = thisButton.getAttribute("data-v");
-    let thisQuestionType = thisButton.getAttribute("data-q");
-
-    /* Cache current question to use as array pointer */
-    let thisQuestion = this.state.currentQuestion;
-
-    /* Store the user's response to the question */ 
-    let stateCopy = Object.assign({}, this.state);
-    stateCopy.responses[thisQuestionType] = thisValue;
-    this.setState(stateCopy);
-
-    let newPath = "";
-    
-    /* If this answer still represents an eligable submission, continue the journey */
-    if (isRejected === 'false') {
-      newPath = `/question/` + ( thisQuestion + 1 );
-    } 
-
-    /* If this answer is a direct rejection, forward user to the rejection page with specific variant  */ 
-    else if (isRejected === 'true') {
-      newPath = `/outcome/` + thisButton.getAttribute("data-m");
-    } 
-
-    /* Else, this is our "check" value, and we need to check prior answers to determine the outcome */ 
-    else {
-      let theseResponses = this.state.responses;
-      let messageToShow = Question.messageSwitch( thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k'] );
-      newPath = `/outcome/` + messageToShow;
-    }
-
-    /* Update the URL */
-    this.props.history.push({
-      pathname: newPath,
-    });
+    } else return null;
   }
 
   /**
@@ -243,9 +236,11 @@ class Question extends Component {
         console.log('default');
     }  
   }
+}
 
-  static defaultProps = {
-    questions: [
+OutcomeMessage.defaultProps = {
+  messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15],
+  questions: [
       { 
         title: "Get started",
         button_copy: "<p>1: What type of organisation?</p>",
@@ -310,8 +305,7 @@ class Question extends Component {
         template: q9
       },
     ]
-  };
-}
+};
 
 /* Define proptypes */
 Question.propTypes = {

@@ -14,6 +14,12 @@ class Home extends Component {
     this.handleStartForm = this.handleStartForm.bind(this);
   }
 
+  handleStartForm() {
+    this.props.history.push({
+      pathname: '/question/1',
+    });
+  }
+
   /**
    * Render the Home
    * @return {XML}
@@ -31,24 +37,24 @@ class Home extends Component {
           </div>
         </header>
         <main role="main">
-            <div className="content">
-              <h3>Thanks for using our eligibility checker. We&#39;re going to ask you a few questions about your organisation and what you need funding for. We&#39;ll use these answers to see whether you might be eligible for an open initiative. 
-              </h3>
-              <button
-                onClick={() => this.handleStartForm()}
-                className="btn btn--red">
-                Get started
-              </button>
+          <div className="content">
+            <h3>
+              Thanks for using our eligibility checker. We&#39;re
+              going to ask you a few questions
+              bout your organisation and what you need funding for.
+              We&#39;ll use these answers to see whether
+              you might be eligible for an open initiative.
+            </h3>
+            <button
+              onClick={() => this.handleStartForm()}
+              className="btn btn--red"
+            >
+            Get started
+            </button>
           </div>
         </main>
       </div>
     );
-  }
-
-  handleStartForm() {
-    this.props.history.push({
-      pathname: `/question/1`,
-    });
   }
 }
 

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import propTypes from 'prop-types';
+import React from 'react';
 import Parser from 'html-react-parser';
 
 // Import all of our template variants
@@ -22,34 +21,19 @@ import m15 from './templates/m15.html';
 /**
  * OutcomeMessage class
  */
-class OutcomeMessage extends Component {
+function OutcomeMessage() {
+  /* Convert the current number to suit our zero-indexed array of messages */
+  const currentMessage = this.props.match.params.outcome_number - 1;
 
-static defaultProps = {
-  history: { push: null },
+  return (
+    <div className="cr-body outcome-message">
+      {Parser(this.props.messages[currentMessage])}
+    </div>
+  );
+}
+
+OutcomeMessage.defaultProps = {
   messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15],
-}
-
-  /**
-   * Render the OutcomeMessage
-   * @return {XML}
-   */
-  render() {
-
-    /* Convert the current number to suit our zero-indexed array of messages */
-    var currentMessage = this.props.match.params.outcome_number - 1;
-
-    return (
-        <div className="cr-body outcome-message">
-          {Parser(this.props.messages[currentMessage])}
-        </div>
-    );
-  }
-}
-
-OutcomeMessage.propTypes = {
-  history: propTypes.shape({
-    push: propTypes.func,
-  }),
 };
 
 export default OutcomeMessage;
