@@ -165,8 +165,8 @@ class Question extends Component {
   render() {
     // Cache the current copy and user options from our zero-indexed array
     let currentQuestion = this.props.questions[this.state.currentQuestion - 1];
-    let currentCopy = currentQuestion['copy'];
     let currentTitle = currentQuestion['title'];
+    let currentCopy = currentQuestion['button_copy'];
 
     return (
       <div>
@@ -185,7 +185,7 @@ class Question extends Component {
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
-                <h2 className="font--black text-align-center">(progress bar here)</h2>
+                <h3 className="font--black text-align-center">(progress bar)</h3>
               </div>
             </div>
           </div>
@@ -239,54 +239,54 @@ class Question extends Component {
     questions: [
       { 
         title: "Get started",
-        copy: "<p>1: What type of organisation?</p>",
+        button_copy: "<p>1: What type of organisation?</p>",
         buttons: [
         { question_type:"organisation-type", text: "Individual", value: "individual", reject:"true", message: "1" },
         { question_type:"organisation-type", text: "Charity", value:"charity", reject:"false", message:"" }]
       },
       {
-        copy: "<p>2: Organisation name: 2</p>",
+        button_copy: "<p>2: Organisation name: 2</p>",
         text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }]
       },
       {
-        copy: "<p>3: What activities?</p>",
+        button_copy: "<p>3: What activities?</p>",
         buttons: [
         { question_type:"activities-type", text: "Religious", value:"religious", reject: "true", message:"2" },
         { question_type:"activities-type", text: "Other", value:"other", reject: "false", message:"" }]
       },
       { 
-        copy: "<p>4: Only looking to cover capital costs?</p>",
+        button_copy: "<p>4: Only looking to cover capital costs?</p>",
         buttons: [
         { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message: "3" },
         { question_type:"capital-costs", text: "No", value:"no", reject: "false", message: "" }]
       },
       {
-        copy: "<p>5: Core costs?</p>",
+        button_copy: "<p>5: Core costs?</p>",
         buttons: [
         { question_type:"core-costs", text: "Yes", value:"yes", reject: "false", message: "" },
         { question_type:"core-costs", text: "No", value:"no", reject: "false", message: "" }]
       },
       {
-        copy: "<p>6: Over 100k income?</p>",
+        button_copy: "<p>6: Over 100k income?</p>",
         buttons: [
         { question_type:"over-100k", text: "Yes", value:"yes", reject: "false", message: "" },
         { question_type:"over-100k", text: "No", value:"no", reject: "false", message: "" }]
       },
       {
-        copy: "<p>7: Sports project?</p>",
+        button_copy: "<p>7: Sports project?</p>",
         buttons: [
         { question_type:"sports-project", text: "Yes", value:"yes", reject: "false", message: "" },
         { question_type:"sports-project", text: "No", value:"no", reject: "check", message: "" }]
       },
       {
-        copy: "<p>8: Project location?</p>",
+        button_copy: "<p>8: Project location?</p>",
         buttons: [
           { question_type:"project-location", text: "UK", value:"uk", reject: "false", message: "" },
           { question_type:"project-location", text: "India", value:"india", reject: "check", message: "" },
           { question_type:"project-location", text: "Other", value:"other", reject: "check", message: ""  }]
       },
       {
-        copy: "<p>9: In London?</p>",
+        button_copy: "<p>9: In London?</p>",
         buttons: [
         { question_type:"london", text: "Yes", value:"yes", reject: "check", message: "" },
         { question_type:"london", text: "No", value:"no", reject: "check", message: "" }]
@@ -298,7 +298,7 @@ class Question extends Component {
 /* Define proptypes */
 Question.propTypes = {
   questions: propTypes.arrayOf(propTypes.shape({
-    copy: propTypes.string,
+    button_copy: propTypes.string,
     buttons: propTypes.array,
   })).isRequired,};
 
