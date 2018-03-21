@@ -1,4 +1,4 @@
-## Grants Eligiblity Form React app
+## Grants Eligiblity Form React app [![CircleCI](https://circleci.com/gh/comicrelief/grants-eligibility-form.svg?style=svg&circle-token=b0f09cb4681deee17d8293a7b74edcbc2bf91cac)](https://circleci.com/gh/comicrelief/grants-eligibility-form)
 >This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 
