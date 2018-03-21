@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import Parser from 'html-react-parser';
 
+// Import all of our template variants
+import q1 from './templates/q1.html';
+import q2 from './templates/q2.html';
+import q3 from './templates/q3.html';
+import q4 from './templates/q4.html';
+import q5 from './templates/q5.html';
+import q6 from './templates/q6.html';
+import q7 from './templates/q7.html';
+import q8 from './templates/q8.html';
+import q9 from './templates/q9.html';
+
 /**
  * Question class
  */
@@ -165,17 +176,15 @@ class Question extends Component {
   render() {
     // Cache the current copy and user options from our zero-indexed array
     let currentQuestion = this.props.questions[this.state.currentQuestion - 1];
-    let currentTitle = currentQuestion['title'];
-    let currentCopy = currentQuestion['button_copy'];
 
     return (
       <div>
-      { currentTitle !== undefined ?
+      { currentQuestion['title'] !== undefined ?
         <header className="bg--red promo-header promo-header--default promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
-                <h1 className="font--white text-align-center">{ Parser(currentTitle) }</h1>
+                <h1 className="font--white text-align-center">{ Parser(currentQuestion['title']) }</h1>
               </div>
             </div>
           </div>
@@ -193,9 +202,10 @@ class Question extends Component {
       }
         <main role="main" className="bg--grey">
         <div className={'bg--grey question question-' + this.state.currentQuestion}>
-          { Parser(currentCopy) }
+          { Parser(currentQuestion['button_copy']) }
           { this.renderInput() }
           { this.renderButtons() }
+          { Parser( currentQuestion['template'] ) }
         </div>
       </main>
       </div>
@@ -242,54 +252,64 @@ class Question extends Component {
         button_copy: "<p>1: What type of organisation?</p>",
         buttons: [
         { question_type:"organisation-type", text: "Individual", value: "individual", reject:"true", message: "1" },
-        { question_type:"organisation-type", text: "Charity", value:"charity", reject:"false", message:"" }]
+        { question_type:"organisation-type", text: "Charity", value:"charity", reject:"false", message:"" }],
+        template: q1
       },
       {
         button_copy: "<p>2: Organisation name: 2</p>",
-        text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }]
+        text_input: [{ question_type:"organisation-name", text: "Your organisation name",  value:"some text", reject: "false", message:"" }],
+        template: q2
+
       },
       {
         button_copy: "<p>3: What activities?</p>",
         buttons: [
         { question_type:"activities-type", text: "Religious", value:"religious", reject: "true", message:"2" },
-        { question_type:"activities-type", text: "Other", value:"other", reject: "false", message:"" }]
+        { question_type:"activities-type", text: "Other", value:"other", reject: "false", message:"" }],
+        template: q3
       },
       { 
         button_copy: "<p>4: Only looking to cover capital costs?</p>",
         buttons: [
         { question_type:"capital-costs", text: "Yes", value:"yes", reject: "true", message: "3" },
-        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message: "" }]
+        { question_type:"capital-costs", text: "No", value:"no", reject: "false", message: "" }],
+        template: q4
       },
       {
         button_copy: "<p>5: Core costs?</p>",
         buttons: [
         { question_type:"core-costs", text: "Yes", value:"yes", reject: "false", message: "" },
-        { question_type:"core-costs", text: "No", value:"no", reject: "false", message: "" }]
+        { question_type:"core-costs", text: "No", value:"no", reject: "false", message: "" }],
+        template: q5
       },
       {
         button_copy: "<p>6: Over 100k income?</p>",
         buttons: [
         { question_type:"over-100k", text: "Yes", value:"yes", reject: "false", message: "" },
-        { question_type:"over-100k", text: "No", value:"no", reject: "false", message: "" }]
+        { question_type:"over-100k", text: "No", value:"no", reject: "false", message: "" }],
+        template: q6
       },
       {
         button_copy: "<p>7: Sports project?</p>",
         buttons: [
         { question_type:"sports-project", text: "Yes", value:"yes", reject: "false", message: "" },
-        { question_type:"sports-project", text: "No", value:"no", reject: "check", message: "" }]
+        { question_type:"sports-project", text: "No", value:"no", reject: "check", message: "" }],
+        template: q7
       },
       {
         button_copy: "<p>8: Project location?</p>",
         buttons: [
           { question_type:"project-location", text: "UK", value:"uk", reject: "false", message: "" },
           { question_type:"project-location", text: "India", value:"india", reject: "check", message: "" },
-          { question_type:"project-location", text: "Other", value:"other", reject: "check", message: ""  }]
+          { question_type:"project-location", text: "Other", value:"other", reject: "check", message: ""  }],
+        template: q8
       },
       {
         button_copy: "<p>9: In London?</p>",
         buttons: [
         { question_type:"london", text: "Yes", value:"yes", reject: "check", message: "" },
-        { question_type:"london", text: "No", value:"no", reject: "check", message: "" }]
+        { question_type:"london", text: "No", value:"no", reject: "check", message: "" }],
+        template: q9
       },
     ]
   };
