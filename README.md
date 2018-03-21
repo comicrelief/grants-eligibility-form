@@ -29,11 +29,13 @@ To run and build new tests, run `cypress` in interactive mode. Cypress will open
 yarn cy:open
 ```
 
+Make sure you are also running the app using `yarn start`.
+
+
 To run the test suite as CI would run it, use
 
 ```sh
-yarn cy:run
+yarn test
 ```
 
-(make sure that in both cases you are running the app as well via `yarn start`)
-
+This will run both the app and the tests at the same time.
