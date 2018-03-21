@@ -242,7 +242,7 @@ class Question extends Component {
 /* Define proptypes */
 Question.propTypes = {
   history: { push: null },
-  match: propTypes.arrayOf(React.PropTypes.element),
+  match: null,
   questions: propTypes.arrayOf(propTypes.shape({
     title: propTypes.string,
     button_copy: propTypes.string,
