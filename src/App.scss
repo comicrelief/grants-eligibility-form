@@ -45,9 +45,27 @@ main {
 
 .question {
   @include container();
-  padding: 30px 0;
+  padding: 50px 0;
 }
 
 .text-align-center {
   text-align: center;
+}
+
+.text-input {
+  position: relative;
+  margin: 30px 0;
+
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-indent: -9999px;
+  }
+
+  .btn {
+    border: 0;
+    border-radius: 0;
+    padding: 16px 40px;
+  }
 }

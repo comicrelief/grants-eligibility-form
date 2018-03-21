@@ -117,8 +117,8 @@ class Question extends Component {
             return (
               <div key={index + 'wrapper'} className="field-item text-input text-align-center">
                 <label key={index + 'label'}>{thisInput.text}</label>
-                <input required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange}/>
-                <input type="submit" value="Submit" />
+                <input placeholder={thisInput.text} required key={index + 'input'} type="text" value={this.state.text_value} onChange={this.handleTextChange}/>
+                <input type="submit" value="Continue" />
               </div>
             )
           }.bind(this))}
