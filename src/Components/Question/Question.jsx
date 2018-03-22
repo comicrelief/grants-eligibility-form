@@ -19,7 +19,12 @@ import q9 from './templates/q9.html';
 class Question extends Component {
   /* Helper function to help contain messy message logic */
   static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
-    console.log('messageSwitch', currentQuestionType, value, coreCosts, over100k);
+    console.log(
+      'currentQuestionType:', currentQuestionType,
+      '- value:', value,
+      '- core costs:', coreCosts,
+      '- over100k', over100k,
+    );
 
     switch (currentQuestionType) {
       case 'sports-project':
