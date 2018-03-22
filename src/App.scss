@@ -27,32 +27,11 @@ main {
   @include clearfix;
 }
 
-.content {
-  @include span(12);
 
-  @include breakpoint($screen-md) {
-      @include span(8);
-      @include push(2);
-  }
-}
 
-.buttons {
-  margin: 0;
 
-  .btn:first-child:not(:only-child) {
-    margin: 10px;
-    @extend .btn--red;
 
-    + .btn {
-      margin: 10px;
-      @extend .btn--royal-blue;
-    }
-  }
-}
-
-.question {
-  @include container();
-  padding: 50px 0;
+.single-msg.question .single-msg__copy_wrapper .single-msg__copy {
 
   ul {
     margin: 15px 0;
@@ -77,6 +56,20 @@ main {
         padding: 0 16px 0 0;
         content: "\25CF";
         color: $colour-red;
+      }
+    }
+  }
+
+  .buttons {
+    margin: 0;
+
+    button.btn:first-child:not(:only-child) {
+      margin: 10px;
+      @extend .btn--red;
+
+      + button.btn {
+        margin: 10px;
+        @extend .btn--royal-blue;
       }
     }
   }
