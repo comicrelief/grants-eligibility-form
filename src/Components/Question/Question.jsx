@@ -171,12 +171,14 @@ class Question extends Component {
     /* Access our zero-indexed question array */
     const currentButtons = this.props.questions[this.state.currentQuestion - 1].buttons;
 
+    console.log(currentButtons);
+
     if (currentButtons !== undefined) {
       return (
         <div className="buttons text-align-center">
           {currentButtons.map(thisButton => (
             <button
-              key={thisButton.question_type}
+              key={thisButton.question_type + '-' + thisButton.text}
               data-q={thisButton.question_type}
               data-v={thisButton.value}
               data-r={thisButton.reject}
@@ -257,7 +259,6 @@ Question.propTypes = {
   }),
   questions: propTypes.arrayOf(propTypes.shape({
     title: propTypes.string,
-    button_copy: propTypes.string,
     template: propTypes.string,
     text_input: propTypes.arrayOf(propTypes.shape({
       question_type: propTypes.string,
@@ -281,8 +282,8 @@ Question.defaultProps = {
   history: { push: null },
   questions: [
     {
+      template: q1,
       title: 'Get started',
-      button_copy: '<p>1: What type of organisation?</p>',
       buttons: [
         {
           question_type: 'organisation-type', text: 'Individual', value: 'individual', reject: 'true', message: '1',
@@ -290,28 +291,26 @@ Question.defaultProps = {
         {
           question_type: 'organisation-type', text: 'Charity', value: 'charity', reject: 'false', message: '',
         }],
-      template: q1,
     },
     {
-      button_copy: '<p>2: Organisation name: 2</p>',
+      template: q2,
       text_input: [{
         question_type: 'organisation-name', text: 'Your organisation name', value: '', reject: 'false', message: '',
       }],
-      template: q2,
+
     },
     {
-      button_copy: '<p>3: What activities?</p>',
+      template: q3,
       buttons: [
         {
-          question_type: 'activities-type', text: 'Religious', value: 'religious', reject: 'true', message: '2',
+          question_type: 'activities-type', text: 'Yes', value: 'yes', reject: 'true', message: '2',
         },
         {
-          question_type: 'activities-type', text: 'Other', value: 'other', reject: 'false', message: '',
+          question_type: 'activities-type', text: 'No', value: 'no', reject: 'false', message: '',
         }],
-      template: q3,
     },
     {
-      button_copy: '<p>4: Only looking to cover capital costs?</p>',
+      template: q4,
       buttons: [
         {
           question_type: 'capital-costs', text: 'Yes', value: 'yes', reject: 'true', message: '3',
@@ -319,10 +318,9 @@ Question.defaultProps = {
         {
           question_type: 'capital-costs', text: 'No', value: 'no', reject: 'false', message: '',
         }],
-      template: q4,
     },
     {
-      button_copy: '<p>5: Core costs?</p>',
+      template: q5,
       buttons: [
         {
           question_type: 'core-costs', text: 'Yes', value: 'yes', reject: 'false', message: '',
@@ -330,10 +328,9 @@ Question.defaultProps = {
         {
           question_type: 'core-costs', text: 'No', value: 'no', reject: 'false', message: '',
         }],
-      template: q5,
     },
     {
-      button_copy: '<p>6: Over 100k income?</p>',
+      template: q6,
       buttons: [
         {
           question_type: 'over-100k', text: 'Yes', value: 'yes', reject: 'false', message: '',
@@ -341,10 +338,9 @@ Question.defaultProps = {
         {
           question_type: 'over-100k', text: 'No', value: 'no', reject: 'false', message: '',
         }],
-      template: q6,
     },
     {
-      button_copy: '<p>7: Sports project?</p>',
+      template: q7,
       buttons: [
         {
           question_type: 'sports-project', text: 'Yes', value: 'yes', reject: 'false', message: '',
@@ -352,10 +348,9 @@ Question.defaultProps = {
         {
           question_type: 'sports-project', text: 'No', value: 'no', reject: 'check', message: '',
         }],
-      template: q7,
     },
     {
-      button_copy: '<p>8: Project location?</p>',
+      template: q8,
       buttons: [
         {
           question_type: 'project-location', text: 'UK', value: 'uk', reject: 'false', message: '',
@@ -366,10 +361,9 @@ Question.defaultProps = {
         {
           question_type: 'project-location', text: 'Other', value: 'other', reject: 'check', message: '',
         }],
-      template: q8,
     },
     {
-      button_copy: '<p>9: In London?</p>',
+      template: q9,
       buttons: [
         {
           question_type: 'london', text: 'Yes', value: 'yes', reject: 'check', message: '',
@@ -377,7 +371,6 @@ Question.defaultProps = {
         {
           question_type: 'london', text: 'No', value: 'no', reject: 'check', message: '',
         }],
-      template: q9,
     },
   ],
 };

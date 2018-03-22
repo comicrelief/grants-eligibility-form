@@ -28,9 +28,6 @@ main {
 }
 
 
-
-
-
 .single-msg.question .single-msg__copy_wrapper .single-msg__copy {
 
   ul {
@@ -61,15 +58,19 @@ main {
   }
 
   .buttons {
-    margin: 0;
+    margin: 30px 0 0;
 
     button.btn:first-child:not(:only-child) {
       margin: 10px;
       @extend .btn--red;
 
-      + button.btn {
+      ~ button.btn {
         margin: 10px;
         @extend .btn--royal-blue;
+
+        + button.btn {
+         @extend .btn--yellow;
+        }
       }
     }
   }
@@ -80,7 +81,7 @@ main {
 
   // Represents our bold 'title'
   &.font--family-bold {
-    margin: 50px 0;
+    //margin: 50px 0;
   }
 }
 
@@ -102,4 +103,12 @@ main {
   }
 }
 
-
+a.link {
+  h3 &,
+  h4 &,
+  h5 & {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+}
