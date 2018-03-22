@@ -10,6 +10,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/single-msg/_single-msg";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
@@ -19,13 +20,20 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
+
+
 main {
   @include clearfix;
 }
 
 .content {
-  @include span(10);
-  @include push(1);
+  @include span(12);
+
+  @include breakpoint($screen-md) {
+      @include span(8);
+      @include push(2);
+  }
 }
 
 .buttons {

@@ -226,13 +226,21 @@ class Question extends Component {
           </header>
       }
         <main role="main" className="bg--grey">
-          <div className="content">
-            <div className={'bg--grey question question-' + this.state.currentQuestion}>
-              { Parser(currentQuestion.template) }
-              { this.renderInput() }
-              { this.renderButtons() }
+          <section className={'paragraph single-msg single-msg--copy-only bg--white bg--grey question question-' + this.state.currentQuestion}>
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__body">
+                    <div className="cr-body">
+                      { Parser(currentQuestion.template) }
+                      { this.renderInput() }
+                      { this.renderButtons() }
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
         </main>
       </div>
     );
