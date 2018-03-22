@@ -10,6 +10,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/single-msg/_single-msg";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
@@ -19,32 +20,95 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 
-#grants-form {
-  text-align: center;
-}
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
+
 
 main {
+  @include clearfix;
 }
 
-.content {
-  padding: 30px 0;
-  @include span(8);
-  @include push(2);
+
+.single-msg.question .single-msg__copy_wrapper .single-msg__copy {
+
+  ul {
+    margin: 15px 0;
+    padding: 0 0 0 20px;
+    list-style: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    li {
+      position: relative;
+      padding: 0 0 0 30px;
+      list-style: none;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      
+      &:before {
+        position: absolute;
+        top: 0;
+        left: -3px;
+        padding: 0 16px 0 0;
+        content: "\25CF";
+        color: $colour-red;
+      }
+    }
+  }
+
+  .buttons {
+    margin: 30px 0 0;
+
+    button.btn:first-child:not(:only-child) {
+      margin: 10px;
+      @extend .btn--red;
+
+      ~ button.btn {
+        margin: 10px;
+        @extend .btn--royal-blue;
+
+        + button.btn {
+         @extend .btn--yellow;
+        }
+      }
+    }
+  }
 }
 
-.btn-wrap {
-  margin: 0;
+.text-align-center {
+  text-align: center;
+
+  // Represents our bold 'title'
+  &.font--family-bold {
+    //margin: 50px 0;
+  }
+}
+
+.text-input {
+  position: relative;
+  margin: 30px 0;
+
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-indent: -9999px;
+  }
 
   .btn {
-    margin: 30px 0 0 0;
-  }
-
-  + .btn-wrap .btn {
-    margin: 10px 0 0 0;
+    border: 0;
+    border-radius: 0;
+    padding: 16px 40px;
   }
 }
 
-.question {
-  @include container();
-  padding: 30px 0;
+a.link {
+  h3 &,
+  h4 &,
+  h5 & {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
 }
