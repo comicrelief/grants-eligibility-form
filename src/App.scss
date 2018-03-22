@@ -106,12 +106,31 @@ main {
   }
 }
 
-a.link {
+a.link, ul li {
   h3 &,
   h4 &,
   h5 & {
     font-family: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
+  }
+}
+
+.font--red {
+  color: $colour-red !important;
+}
+
+.cross {
+
+  &:before {
+    background: url(~/images/error-red-cross.svg) -10px -8px no-repeat;
+    content: '';
+    display: inline-block;
+    font-size: inherit;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    margin-right: 3px;
   }
 }
