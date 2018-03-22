@@ -107,6 +107,7 @@ main {
 }
 
 a.link, ul li {
+  p &,
   h3 &,
   h4 &,
   h5 & {
@@ -121,9 +122,9 @@ a.link, ul li {
 }
 
 .cross {
-
+  //margin-bottom:  30px;
   &:before {
-    background: url(~/images/error-red-cross.svg) -10px -8px no-repeat;
+    background: url(./images/error-red-cross.svg) -10px -8px no-repeat;
     content: '';
     display: inline-block;
     font-size: inherit;
@@ -131,6 +132,10 @@ a.link, ul li {
     width: 20px;
     height: 20px;
     top: 2px;
-    margin-right: 3px;
+    margin-right: 6px;
   }
+}
+
+.outcome h4 {
+  margin: 35px 0px;
 }
