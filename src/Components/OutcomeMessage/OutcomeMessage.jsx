@@ -32,7 +32,7 @@ class OutcomeMessage extends Component {
     const currentMessage = this.props.match.params.outcome_number - 1;
 
     return (
-      <div className="cr-body outcome-message">
+      <div className="outcome-message">
         {Parser(this.props.messages[currentMessage])}
       </div>
     );

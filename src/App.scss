@@ -22,6 +22,9 @@
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
+html, body {
+  background-color: $colour-grey;
+}
 
 main {
   @include clearfix;
