@@ -182,7 +182,7 @@ class Question extends Component {
               data-r={thisButton.reject}
               data-m={thisButton.message}
               className="grants-btn btn"
-              onClick={function (e) { this.submitAnswer(e); }}
+              onClick={this.submitAnswer}
             >
               {thisButton.text}
             </button>
@@ -250,7 +250,11 @@ class Question extends Component {
 /* Define proptypes */
 Question.propTypes = {
   history: { push: null },
-  match: null,
+  match: propTypes.shape({
+    params: propTypes.shape({
+      question_number: propTypes.string,
+    }),
+  }),
   questions: propTypes.arrayOf(propTypes.shape({
     title: propTypes.string,
     button_copy: propTypes.string,

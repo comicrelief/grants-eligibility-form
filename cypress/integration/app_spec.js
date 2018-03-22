@@ -18,15 +18,15 @@ describe('Grants form tests', () => {
 
     it('should reject my application if I am an individual', () => {
       cy.get('.btn').click()
-      cy.get('.question-1 > p').should('contain', 'type')
-      cy.get(':nth-child(1) > .btn').should('contain', 'Individual')
-      cy.get(':nth-child(1) > .btn').click()
+      cy.get('.question-1 .cr-body h4').should('contain', 'individual')
+      cy.get('.buttons .btn:nth-child(1)').should('contain', 'Individual')
+      cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('h2').should('contain', 'We don’t think you’re eligible')
     })
 
     it('should accept my application if I answer correctly', () => {
       cy.get('.btn').click()
-      cy.get('.question-1 > p').should('contain', 'type')
+      cy.get('.question-1 > h4').should('contain', 'type')
       cy.get(':nth-child(2) > .btn').should('contain', 'Charity')
       cy.get(':nth-child(2) > .btn').click()
       cy.get('[type="text"]').type('Test charity name')
