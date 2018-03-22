@@ -137,5 +137,13 @@ a.link, ul li {
 }
 
 .outcome h4 {
-  margin: 35px 0px;
+  margin: 25px 0;
+
+  @include breakpoint($screen-md){
+    margin: 15px 0;
+  }
+
+  @include breakpoint($screen-lg){
+    margin: 35px 0px;
+  }
 }
