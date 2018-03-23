@@ -147,3 +147,15 @@ a.link, ul li {
     margin: 35px 0px;
   }
 } */
+
+.apply-footer.single-msg.single-msg--copy-only .single-msg__copy_wrapper {
+  @include span(12);
+
+  @include breakpoint($screen-md) {
+    @include span(12);
+  }
+
+  @include breakpoint($screen-lg) {
+    @include span(12);
+  }
+}
