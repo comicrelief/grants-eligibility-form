@@ -24,6 +24,20 @@ import m15 from './templates/m15.html';
  */
 class OutcomeMessage extends Component {
   /**
+   * Trigger our submission when this component mounts, at the end of the journey
+   */
+  componentDidMount() {
+    this.submitInfo();
+  }
+
+  /**
+   * Send form height message to parent iframe.
+   */
+  submitInfo() {
+    console.log('submitInfo');
+  }
+
+  /**
    * Render the OutcomeMessage
    * @return {XML}
    */
