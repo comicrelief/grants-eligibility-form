@@ -32,8 +32,26 @@ class OutcomeMessage extends Component {
     const currentMessage = this.props.match.params.outcome_number - 1;
 
     return (
-      <div className="cr-body outcome-message">
+      <div className="outcome-message">
         {Parser(this.props.messages[currentMessage])}
+
+        <section className="single-msg single-msg--copy-only bg--white apply-footer">
+          <div className="single-msg__outer-wrapper">
+            <div className="single-msg__copy_wrapper bg--white">
+              <div className="single-msg__copy">
+                <div className="single-msg__title text-align-center">
+                  <h3>You can find more information about our approach in</h3>
+                  <h3>
+                    <a className="link link--dark-purple" target="_blank" rel="noopener noreferrer" href="https://www.comicrelief.com/funding/applying-for-grants/guidance">
+                    Guidance on Applying
+                    </a>
+                    .
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

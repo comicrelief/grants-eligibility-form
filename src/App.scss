@@ -22,6 +22,9 @@
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
+html, body {
+  background-color: $colour-grey;
+}
 
 main {
   @include clearfix;
@@ -103,12 +106,56 @@ main {
   }
 }
 
-a.link {
+a.link, ul li {
+  p &,
   h3 &,
   h4 &,
   h5 & {
     font-family: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
+  }
+}
+
+.font--red {
+  color: $colour-red !important;
+}
+
+.cross {
+  //margin-bottom:  30px;
+  &:before {
+    background: url(./images/error-red-cross.svg) -10px -8px no-repeat;
+    content: '';
+    display: inline-block;
+    font-size: inherit;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    margin-right: 6px;
+  }
+}
+
+/* .outcome h4 {
+  margin: 25px 0;
+
+  @include breakpoint($screen-md){
+    margin: 15px 0;
+  }
+
+  @include breakpoint($screen-lg){
+    margin: 35px 0px;
+  }
+} */
+
+.apply-footer.single-msg.single-msg--copy-only .single-msg__copy_wrapper {
+  @include span(12);
+
+  @include breakpoint($screen-md) {
+    @include span(12);
+  }
+
+  @include breakpoint($screen-lg) {
+    @include span(12);
   }
 }
