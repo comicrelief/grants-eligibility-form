@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import Parser from 'html-react-parser';
@@ -26,15 +27,37 @@ class OutcomeMessage extends Component {
   /**
    * Trigger our submission when this component mounts, at the end of the journey
    */
-  componentDidMount() {
+  componentWillMount() {
     this.submitInfo();
   }
-
   /**
-   * Send form height message to parent iframe.
+   * Helper function to determine parent page url the form is embedded into
+   */
+  getParentUrl() {
+    const url = (window.location !== window.parent.location)
+      ? document.referrer : document.location.href;
+    return url;
+  }
+  /**
+   * Handles submission to the message queues
    */
   submitInfo() {
-    console.log('submitInfo');
+    const thisURL = this.getParentUrl();
+    const allResponses = this.props.location.state.responses;
+
+    /* Construct json object only of values required by data contract */
+    let postBody = {
+      organisation: allResponses['organisation-type'],
+      success: allResponses.success,
+      created: new Date().getTime(),
+      campaign: 'CR',
+      transSource: 'CR_GrantsEligibility',
+      transSourceUrl: thisURL,
+    };
+
+    postBody = JSON.stringify(postBody);
+
+    console.log('postbody2', postBody);
   }
 
   /**
@@ -48,7 +71,6 @@ class OutcomeMessage extends Component {
     return (
       <div className="outcome-message">
         {Parser(this.props.messages[currentMessage])}
-
         <section className="single-msg single-msg--copy-only bg--white apply-footer">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
@@ -78,11 +100,17 @@ OutcomeMessage.propTypes = {
       outcome_number: propTypes.string,
     }),
   }),
+  location: propTypes.shape({
+    state: propTypes.shape({
+      responses: propTypes.shape,
+    }),
+  }),
 };
 
 OutcomeMessage.defaultProps = {
   messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15],
-  match: null,
+  match: {},
+  location: {},
 };
 
 export default OutcomeMessage;
