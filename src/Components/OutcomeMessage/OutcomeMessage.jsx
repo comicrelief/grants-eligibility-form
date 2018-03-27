@@ -28,6 +28,7 @@ class OutcomeMessage extends Component {
    * Trigger our submission when this component mounts, at the end of the journey
    */
   componentWillMount() {
+    // Submission endpoint from env file
     this.submitInfo();
   }
   /**
@@ -42,22 +43,60 @@ class OutcomeMessage extends Component {
    * Handles submission to the message queues
    */
   submitInfo() {
-    const thisURL = this.getParentUrl();
+    /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
+
+    /* Get the current parent URL and the endpoint URL for submitting to */
+    const thisURL = this.getParentUrl();
+    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
+    const xhr = this.createCORSRequest('POST', endpointUrl);
 
     /* Construct json object only of values required by data contract */
     let postBody = {
       organisation: allResponses['organisation-type'],
-      success: allResponses.success,
+      success: allResponses.success ? 1 : 0,
+      transSourceURL: thisURL,
       created: new Date().getTime(),
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
-      transSourceUrl: thisURL,
     };
 
     postBody = JSON.stringify(postBody);
 
-    console.log('postbody2', postBody);
+    if (!xhr) { throw new Error('CORS not supported'); }
+
+    xhr.onerror = function () { console.log('There was an error'); };
+
+    xhr.onload = function () { console.log('There was an error'); };
+
+    xhr.onreadystatechange = function () {
+      if (xhr.status === 200 && xhr.readyState === 4) {
+        console.log('post successful');
+      }
+    };
+
+    xhr.send(postBody);
+  }
+
+  /* Helper function used during submission */
+  createCORSRequest(method, url) {
+    let xhr = new XMLHttpRequest();
+    if ('withCredentials' in xhr) {
+      // Check if the XMLHttpRequest object has a "withCredentials" property.
+      // "withCredentials" only exists on XMLHTTPRequest2 objects.
+      xhr.open(method, url, true);
+    } else if (typeof XDomainRequest !== 'undefined') {
+      // Otherwise, check if XDomainRequest.
+      // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+    } else {
+      // Otherwise, CORS is not supported by the browser.
+      xhr = null;
+    }
+    xhr.setRequestHeader('Content-type', 'application/json');
+
+    return xhr;
   }
 
   /**

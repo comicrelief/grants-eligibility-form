@@ -265,7 +265,9 @@ class Question extends Component {
 
 /* Define proptypes */
 Question.propTypes = {
-  history: { push: null },
+  history: propTypes.shape({
+    push: propTypes.func,
+  }),
   match: propTypes.shape({
     params: propTypes.shape({
       question_number: propTypes.string,
