@@ -67,8 +67,6 @@ class OutcomeMessage extends Component {
 
     xhr.onerror = function () { console.log('There was an error'); };
 
-    xhr.onload = function () { console.log('There was an error'); };
-
     xhr.onreadystatechange = function () {
       if (xhr.status === 200 && xhr.readyState === 4) {
         console.log('post successful');
