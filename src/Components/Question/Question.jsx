@@ -107,6 +107,7 @@ class Question extends Component {
     const isRejected = thisButton.getAttribute('data-r');
     const thisValue = thisButton.getAttribute('data-v');
     const thisQuestionType = thisButton.getAttribute('data-q');
+    const theseResponses = this.state.responses;
 
     /* Cache current question to use as array pointer */
     const thisQuestion = this.state.currentQuestion;
@@ -114,28 +115,36 @@ class Question extends Component {
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
-    this.setState(stateCopy);
 
     let newPath = '';
 
     /* If this answer still represents an eligable submission, continue the journey */
     if (isRejected === 'false') {
       newPath = '/question/' + (thisQuestion + 1);
+      stateCopy.responses.success = true;
     } else if (isRejected === 'true') {
       /* If this answer is a direct rejection, forward user
        * to the rejection page with specific variant  */
       newPath = '/outcome/' + thisButton.getAttribute('data-m');
+      stateCopy.responses.success = false;
     } else {
       /* Else, this is our "check" value, and we need to
        * check prior answers to determine the outcome */
-      const theseResponses = this.state.responses;
       const messageToShow = Question.messageSwitch(thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k']);
       newPath = '/outcome/' + messageToShow;
+
+      /* Check the value against our 'fail' msg numbers */
+      const isSuccessOrNot = !['1', '2', '3', '4', '6', '7', '8'].includes(messageToShow);
+      stateCopy.responses.success = isSuccessOrNot;
     }
+
 
     /* Update the URL */
     this.props.history.push({
       pathname: newPath,
+      state: {
+        responses: theseResponses,
+      },
     });
   }
 
@@ -256,7 +265,9 @@ class Question extends Component {
 
 /* Define proptypes */
 Question.propTypes = {
-  history: { push: null },
+  history: propTypes.shape({
+    push: propTypes.func,
+  }),
   match: propTypes.shape({
     params: propTypes.shape({
       question_number: propTypes.string,

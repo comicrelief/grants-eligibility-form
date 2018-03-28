@@ -110,6 +110,10 @@
     "extends": "react-app",
     "globals": {
       "window": true
+    },
+    "env": {
+      "browser": true,
+      "node": true
     }
   }
 }
