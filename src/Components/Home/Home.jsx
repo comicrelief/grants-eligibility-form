@@ -37,7 +37,7 @@ class Home extends Component {
           </div>
         </header>
         <main role="main">
-          <section className="paragraph single-msg single-msg--copy-only bg--white home">
+          <section className="paragraph single-msg single-msg--copy-only bg--white home question">
             <div className="single-msg__outer-wrapper">
               <div className="single-msg__copy_wrapper bg--white">
                 <div className="single-msg__copy">

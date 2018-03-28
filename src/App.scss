@@ -27,7 +27,6 @@ html, body {
   background-color: #F0F0F0;
 }
 
-
 main {
   @include clearfix;
 }
@@ -73,6 +72,13 @@ main {
         + button.btn {
          @extend .btn--black-ghost;
         }
+      }
+    }
+
+    button.btn {
+      width: 100%;
+      @include breakpoint($screen-md) {
+        width: auto;
       }
     }
   }
@@ -182,4 +188,3 @@ ul li {
     padding: 0;
   }
 }
-
