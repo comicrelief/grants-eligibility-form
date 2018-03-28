@@ -41,7 +41,7 @@ describe('Grants form tests', () => {
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('.buttons .btn:nth-child(1)').should('contain', 'Yes')
       cy.get('.buttons .btn:nth-child(1)').click()
-      cy.get('.buttons .btn:nth-child(1)').should('contain', 'UK')
+      cy.get('.buttons .btn:nth-child(1)').should('contain', 'United Kingdom')
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('.buttons .btn:nth-child(2)').should('contain', 'No')
       cy.get('.buttons .btn:nth-child(2)').click()

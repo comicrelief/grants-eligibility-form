@@ -27,7 +27,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <header className="bg--red promo-header promo-header--default   promo-header--no-image">
+        <header className="bg--red promo-header promo-header--default  promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
@@ -37,29 +37,29 @@ class Home extends Component {
           </div>
         </header>
         <main role="main">
-          <section className="paragraph single-msg single-msg--copy-only bg--white">
+          <section className="paragraph single-msg single-msg--copy-only bg--white home">
             <div className="single-msg__outer-wrapper">
               <div className="single-msg__copy_wrapper bg--white">
                 <div className="single-msg__copy">
                   <div className="single-msg__body">
-                    <div className="cr-body">
-                      <h4>
+                    <div className="cr-body text-align-center">
+                      <h3>
                         Thanks for using our eligibility checker. We&#39;re
                         going to ask you a few questions
                         about your organisation and what you need funding for.
-                      </h4>
-                      <h4>
+                      </h3>
+                      <h3>
                         We&#39;ll use these answers to see whether
                         you might be eligible for an open initiative.
-                      </h4>
-                      <p className="text-align-center">
+                      </h3>
+                      <div className="buttons text-align-center">
                         <button
                           onClick={() => this.handleStartForm()}
                           className="btn btn--red"
                         >
                           Get started
                         </button>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>

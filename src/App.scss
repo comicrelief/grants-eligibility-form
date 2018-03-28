@@ -4,25 +4,28 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/_lists";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/grid";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/typography";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/typography/typography";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/buttons/buttons";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/links/links";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/single-msg/_single-msg";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/_mixins";
-@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/fonts";
-@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/typography";
+
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/typography/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/buttons/buttons";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/single-msg/_single-msg";
+
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_typography";
+
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
 html, body {
-  background-color: $colour-grey;
+  background-color: #F0F0F0;
 }
 
 main {
@@ -35,9 +38,7 @@ main {
     margin: 15px 0;
     padding: 0 0 0 20px;
     list-style: none;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+    @extend p;
 
     li {
       position: relative;
@@ -70,7 +71,7 @@ main {
         @extend .btn--royal-blue;
 
         + button.btn {
-         @extend .btn--yellow;
+         @extend .btn--black-ghost;
         }
       }
     }
@@ -104,7 +105,7 @@ main {
   }
 }
 
-a.link, ul li {
+ul li {
   p &,
   h3 &,
   h4 &,
@@ -145,10 +146,29 @@ a.link, ul li {
   }
 }
 
-#grants-form .single-msg.outcome  {
-  .single-msg__copy_wrapper,
-  .single-msg__image {
-    margin-left: 0;
-    margin-right: 0; 
+#grants-form {
+  .buttons {
+    margin-top:30px;
+    button.btn:not(.btn-3) {
+      border:0;
+    }
+    .question-8 & {
+      button.btn {
+        display: block;
+        margin: 15px;
+      } 
+    }
+  }
+
+  .single-msg.outcome  {
+    .single-msg__copy_wrapper,
+    .single-msg__image {
+      margin-left: 0;
+      margin-right: 0; 
+    }
+  }
+
+  .bg--grey {
+    background-color: #F0F0F0;
   }
 }

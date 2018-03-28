@@ -46,9 +46,9 @@ class Question extends Component {
         } break;
 
       default:
-        console.log('default');
+        return 'default';
     }
-    return null;
+    return 'nothing';
   }
   /**
    * Question constructor
@@ -190,14 +190,14 @@ class Question extends Component {
     if (currentButtons !== undefined) {
       return (
         <div className="buttons text-align-center">
-          {currentButtons.map(thisButton => (
+          {currentButtons.map((thisButton, index) => (
             <button
               key={thisButton.question_type + '-' + thisButton.text}
               data-q={thisButton.question_type}
               data-v={thisButton.value}
               data-r={thisButton.reject}
               data-m={thisButton.message}
-              className="grants-btn btn"
+              className={'grants-btn btn btn-' + (index + 1)}
               onClick={this.submitAnswer}
             >
               {thisButton.text}
@@ -369,7 +369,7 @@ Question.defaultProps = {
       template: q8,
       buttons: [
         {
-          question_type: 'project-location', text: 'UK', value: 'uk', reject: 'false', message: '',
+          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'false', message: '',
         },
         {
           question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'check', message: '',
