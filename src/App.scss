@@ -14,7 +14,6 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/single-msg/_single-msg";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
@@ -27,6 +26,7 @@
 html, body {
   background-color: #F0F0F0;
 }
+
 
 main {
   @include clearfix;
@@ -176,3 +176,10 @@ ul li {
     margin: 0;
   }
 }
+
+.single-msg.single-msg--copy-only .single-msg__copy_wrapper {
+  .single-msg__copy {
+    padding: 0;
+  }
+}
+
