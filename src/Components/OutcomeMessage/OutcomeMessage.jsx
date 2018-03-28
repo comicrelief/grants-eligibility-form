@@ -103,7 +103,9 @@ class OutcomeMessage extends Component {
    */
   render() {
     /* Convert the current number to suit our zero-indexed array of messages */
-    const currentMessage = this.props.match.params.outcome_number - 1;
+    let currentMessage = this.props.match.params.outcome_number - 1;
+
+    currentMessage = currentMessage.toString();
 
     return (
       <div className="outcome-message">

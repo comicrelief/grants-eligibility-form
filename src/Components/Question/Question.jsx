@@ -34,7 +34,7 @@ class Question extends Component {
       case 'project-location':
         if (value === 'somewhere-else') {
           if (coreCosts === 'no') { return '7'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '8' : '9'); }
-        } else if (value === 'india') {
+        } else if (value === 'india-etc') {
           if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
         } break;
 
@@ -372,7 +372,7 @@ Question.defaultProps = {
           question_type: 'project-location', text: 'UK', value: 'uk', reject: 'false', message: '',
         },
         {
-          question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-s.africa-brazil-or-kenya', reject: 'check', message: '',
+          question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'check', message: '',
         },
         {
           question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'check', message: '',
