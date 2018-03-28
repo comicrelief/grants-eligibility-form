@@ -46,7 +46,7 @@ class Home extends Component {
                       <h4>
                         Thanks for using our eligibility checker. We&#39;re
                         going to ask you a few questions
-                        bout your organisation and what you need funding for.
+                        about your organisation and what you need funding for.
                       </h4>
                       <h4>
                         We&#39;ll use these answers to see whether

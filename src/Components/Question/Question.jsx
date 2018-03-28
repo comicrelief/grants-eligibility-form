@@ -32,9 +32,9 @@ class Question extends Component {
         break;
 
       case 'project-location':
-        if (value === 'other') {
+        if (value === 'somewhere-else') {
           if (coreCosts === 'no') { return '7'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '8' : '9'); }
-        } else if (value === 'india') {
+        } else if (value === 'india-etc') {
           if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
         } break;
 
@@ -305,7 +305,7 @@ Question.defaultProps = {
           question_type: 'organisation-type', text: 'Individual', value: 'individual', reject: 'true', message: '1',
         },
         {
-          question_type: 'organisation-type', text: 'Charity', value: 'charity', reject: 'false', message: '',
+          question_type: 'organisation-type', text: 'Organisation', value: 'organisation', reject: 'false', message: '',
         }],
     },
     {
@@ -372,10 +372,10 @@ Question.defaultProps = {
           question_type: 'project-location', text: 'UK', value: 'uk', reject: 'false', message: '',
         },
         {
-          question_type: 'project-location', text: 'India', value: 'india', reject: 'check', message: '',
+          question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'check', message: '',
         },
         {
-          question_type: 'project-location', text: 'Other', value: 'other', reject: 'check', message: '',
+          question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'check', message: '',
         }],
     },
     {

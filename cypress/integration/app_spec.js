@@ -27,7 +27,7 @@ describe('Grants form tests', () => {
     it('should accept my application if I answer correctly', () => {
       cy.get('.btn').click()
       cy.get('.question-1 .cr-body h4').should('contain', 'individual')
-      cy.get('.buttons .btn:nth-child(2)').should('contain', 'Charity')
+      cy.get('.buttons .btn:nth-child(2)').should('contain', 'Organisation')
       cy.get('.buttons .btn:nth-child(2)').click()
       cy.get('[type="text"]').type('Test charity name')
       cy.get('[type="submit"]').click()
@@ -45,7 +45,7 @@ describe('Grants form tests', () => {
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('.buttons .btn:nth-child(2)').should('contain', 'No')
       cy.get('.buttons .btn:nth-child(2)').click()
-      cy.get('h1').should('contain', 'We think you might be eligible')
+      cy.get('h1').should('contain', 'You might be eligible for 1 initiative!')
     })
   })
 });
