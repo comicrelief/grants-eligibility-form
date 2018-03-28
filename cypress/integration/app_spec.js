@@ -45,7 +45,7 @@ describe('Grants form tests', () => {
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('.buttons .btn:nth-child(2)').should('contain', 'No')
       cy.get('.buttons .btn:nth-child(2)').click()
-      cy.get('h1').should('contain', 'We think you might be eligible')
+      cy.get('h1').should('contain', 'You might be eligible for 1 initiative!')
     })
   })
 });
