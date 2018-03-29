@@ -4,25 +4,27 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/_lists";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/grid";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/variables/typography";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/typography/typography";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/buttons/buttons";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/links/links";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
-@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/single-msg/_single-msg";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/typography";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/variables/_mixins";
-@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/fonts";
-@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/typography";
+
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/typography/typography";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/buttons/buttons";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
+
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_typography";
+
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
 html, body {
-  background-color: $colour-grey;
+  background-color: #F0F0F0;
 }
 
 main {
@@ -31,13 +33,15 @@ main {
 
 .single-msg.question .single-msg__copy_wrapper .single-msg__copy {
 
+  h3, p {
+    margin-bottom: 20px;
+  }
+
   ul {
     margin: 15px 0;
     padding: 0 0 0 20px;
     list-style: none;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+    @extend p;
 
     li {
       position: relative;
@@ -45,7 +49,7 @@ main {
       list-style: none;
       font-family: inherit;
       font-size: inherit;
-      line-height: inherit;
+      line-height: 25px;
       
       &:before {
         position: absolute;
@@ -57,33 +61,36 @@ main {
       }
     }
   }
+}
 
-  .buttons {
-    margin: 30px 0 0;
+.buttons {
+  margin: 30px 0 0;
 
-    button.btn:first-child:not(:only-child) {
-      margin: 10px;
-      @extend .btn--red;
-
-      ~ button.btn {
-        margin: 10px;
-        @extend .btn--royal-blue;
-
-        + button.btn {
-         @extend .btn--yellow;
-        }
+  button.btn:first-child:not(:only-child) {
+    @extend .btn--red;
+    @include breakpoint($screen-md) {
+      margin-bottom: 0;
+    }
+    ~ button.btn {
+      @extend .btn--royal-blue;
+      + button.btn {
+       @extend .btn--black-ghost;
       }
+    }
+  }
+
+  button.btn {
+    width: 100%;
+    margin: 10px 0 0;
+    @include breakpoint($screen-md) {
+      width: auto;
+      margin: 0 10px;
     }
   }
 }
 
 .text-align-center {
   text-align: center;
-
-  // Represents our bold 'title'
-  &.font--family-bold {
-    //margin: 50px 0;
-  }
 }
 
 .text-input {
@@ -93,18 +100,30 @@ main {
   label {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -9999px;
     text-indent: -9999px;
+  }
+
+  input[type="text"] {
+   font-size: 16px; 
   }
 
   .btn {
     border: 0;
     border-radius: 0;
     padding: 16px 40px;
+    vertical-align: top;
+  }
+
+  .organisation-name__submit {
+    width: 100%;
+    @include breakpoint($screen-md) {
+      width: auto;
+    }
   }
 }
 
-a.link, ul li {
+ul li {
   p &,
   h3 &,
   h4 &,
@@ -145,10 +164,55 @@ a.link, ul li {
   }
 }
 
-#grants-form .single-msg.outcome  {
-  .single-msg__copy_wrapper,
-  .single-msg__image {
-    margin-left: 0;
-    margin-right: 0; 
+#grants-form {
+
+  .buttons {
+    margin-top:30px;
+    button.btn:not(.btn-3) {
+      border:0;
+    }
+  }
+
+  .question-8 .buttons {
+    button.btn {
+      display: block;
+      margin: 10px 0 0;
+      
+      @include breakpoint($screen-md) {
+        margin: 15px auto;
+      }
+    } 
+  }
+ 
+  .single-msg.outcome  {
+    .single-msg__copy_wrapper,
+    .single-msg__image {
+      margin-left: 0;
+      margin-right: 0; 
+    }
+  }
+
+  .bg--grey {
+    background-color: #F0F0F0;
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+}
+
+.single-msg.single-msg__copy_wrapper {
+  .single-msg__copy {
+    padding: 0;
+    .single-msg__body.cr-body {
+      text-align: center;
+    }
+  }
+}
+
+.single-msg .single-msg__outer-wrapper .single-msg__body {
+  text-align: center;
+  @include breakpoint($screen-md) {
+    text-align: left;
   }
 }

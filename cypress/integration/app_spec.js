@@ -18,7 +18,7 @@ describe('Grants form tests', () => {
 
     it('should reject my application if I am an individual', () => {
       cy.get('.btn').click()
-      cy.get('.question-1 .cr-body h4').should('contain', 'individual')
+      cy.get('.question-1 .cr-body h3').should('contain', 'individual')
       cy.get('.buttons .btn:nth-child(1)').should('contain', 'Individual')
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('h1').should('contain', 'We don’t think you’re eligible')
@@ -26,7 +26,7 @@ describe('Grants form tests', () => {
 
     it('should accept my application if I answer correctly', () => {
       cy.get('.btn').click()
-      cy.get('.question-1 .cr-body h4').should('contain', 'individual')
+      cy.get('.question-1 .cr-body h3').should('contain', 'individual')
       cy.get('.buttons .btn:nth-child(2)').should('contain', 'Organisation')
       cy.get('.buttons .btn:nth-child(2)').click()
       cy.get('[type="text"]').type('Test charity name')
@@ -41,7 +41,7 @@ describe('Grants form tests', () => {
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('.buttons .btn:nth-child(1)').should('contain', 'Yes')
       cy.get('.buttons .btn:nth-child(1)').click()
-      cy.get('.buttons .btn:nth-child(1)').should('contain', 'UK')
+      cy.get('.buttons .btn:nth-child(1)').should('contain', 'United Kingdom')
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('.buttons .btn:nth-child(2)').should('contain', 'No')
       cy.get('.buttons .btn:nth-child(2)').click()

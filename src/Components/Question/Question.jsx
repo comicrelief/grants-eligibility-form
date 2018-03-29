@@ -46,9 +46,9 @@ class Question extends Component {
         } break;
 
       default:
-        console.log('default');
+        return 'default';
     }
-    return null;
+    return 'error';
   }
   /**
    * Question constructor
@@ -161,16 +161,22 @@ class Question extends Component {
         <form onSubmit={this.handleSubmit}>
           {currentInput.map(thisInput => (
             <div key={thisInput.question_type + 'wrapper'} className="field-item text-input text-align-center">
-              <label htmlFor={thisInput.question_type + '-label'} key={thisInput.question_type + '-label'}>{thisInput.text}</label>
+              <label htmlFor={thisInput.question_type + '__input'} key={thisInput.question_type + '__label'}>{thisInput.text}</label>
               <input
-                id={thisInput.question_type + '-label'}
+                id={thisInput.question_type + '__input'}
                 placeholder={thisInput.text}
                 required
-                key={thisInput.question_type + '-input'}
+                key={thisInput.question_type + '__input'}
                 type="text"
                 onChange={this.handleTextChange}
+                className={thisInput.question_type + '__input'}
+
               />
-              <input type="submit" value="Continue" />
+              <input
+                type="submit"
+                value="Continue"
+                className={thisInput.question_type + '__submit'}
+              />
             </div>
             ))}
         </form>
@@ -190,14 +196,14 @@ class Question extends Component {
     if (currentButtons !== undefined) {
       return (
         <div className="buttons text-align-center">
-          {currentButtons.map(thisButton => (
+          {currentButtons.map((thisButton, index) => (
             <button
               key={thisButton.question_type + '-' + thisButton.text}
               data-q={thisButton.question_type}
               data-v={thisButton.value}
               data-r={thisButton.reject}
               data-m={thisButton.message}
-              className="grants-btn btn"
+              className={'grants-btn btn btn-' + (index + 1)}
               onClick={this.submitAnswer}
             >
               {thisButton.text}
@@ -235,7 +241,9 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h5 className="font--black text-align-center">(progress bar)</h5>
+                  <h1 className="font--black text-align-center">
+                    You&#39;re on question {this.state.currentQuestion} out of a possible 9
+                  </h1>
                 </div>
               </div>
             </div>
@@ -369,7 +377,7 @@ Question.defaultProps = {
       template: q8,
       buttons: [
         {
-          question_type: 'project-location', text: 'UK', value: 'uk', reject: 'false', message: '',
+          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'false', message: '',
         },
         {
           question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'check', message: '',

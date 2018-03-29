@@ -107,6 +107,8 @@ class OutcomeMessage extends Component {
 
     currentMessage = currentMessage.toString();
 
+    console.log('currentMsg:', currentMessage);
+
     return (
       <div className="outcome-message">
         {Parser(this.props.messages[currentMessage])}
@@ -117,7 +119,7 @@ class OutcomeMessage extends Component {
                 <div className="single-msg__title text-align-center">
                   <h3>You can find more information in</h3>
                   <h3>
-                    <a className="link link--dark-purple" target="_blank" rel="noopener noreferrer" href="https://www.comicrelief.com/funding/applying-for-grants/guidance">
+                    <a className="link link--dark-purple inline" target="_blank" rel="noopener noreferrer" href="https://www.comicrelief.com/funding/applying-for-grants/guidance">
                     &#39;Guidance on applying&#39;
                     </a>
                     .
