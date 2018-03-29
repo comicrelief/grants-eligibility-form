@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import Parser from 'html-react-parser';
@@ -68,10 +69,12 @@ class Question extends Component {
 
   componentDidMount() {
     this.updateQuestionNumber();
+    this.sendFormHeightMessage();
   }
 
   componentDidUpdate() {
     this.updateQuestionNumber();
+    this.sendFormHeightMessage();
   }
 
   /* Update the state to reflect our input field */
@@ -146,6 +149,17 @@ class Question extends Component {
         responses: theseResponses,
       },
     });
+  }
+
+  /**
+   * Send form height message to parent iframe.
+   */
+  sendFormHeightMessage() {
+    const formHeight = document.getElementById('step-form') !== null
+      ? document.getElementById('step-form').clientHeight
+      : '1000';
+
+    window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
   }
 
   /**

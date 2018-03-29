@@ -31,6 +31,14 @@ class OutcomeMessage extends Component {
     // Submission endpoint from env file
     this.submitInfo();
   }
+
+  componentDidMount() {
+    this.sendFormHeightMessage();
+  }
+
+  componentDidUpdate() {
+    this.sendFormHeightMessage();
+  }
   /**
    * Helper function to determine parent page url the form is embedded into
    */
@@ -39,6 +47,18 @@ class OutcomeMessage extends Component {
       ? document.referrer : document.location.href;
     return url;
   }
+
+  /**
+   * Send form height message to parent iframe.
+   */
+  sendFormHeightMessage() {
+    const formHeight = document.getElementById('step-form') !== null
+      ? document.getElementById('step-form').clientHeight
+      : '1000';
+
+    window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
+  }
+
   /**
    * Handles submission to the message queues
    */
