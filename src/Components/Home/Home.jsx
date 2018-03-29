@@ -34,7 +34,7 @@ class Home extends Component {
    */
   sendFormHeightMessage() {
     const formHeight = document.getElementById('step-form') !== null
-      ? document.getElementById('step-form').clientHeight
+      ? document.getElementById('grants-form').clientHeight
       : '1000';
 
     window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
