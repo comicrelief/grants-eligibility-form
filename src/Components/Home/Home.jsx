@@ -33,7 +33,7 @@ class Home extends Component {
    * Send form height message to parent iframe.
    */
   sendFormHeightMessage() {
-    const formHeight = document.getElementById('step-form') !== null
+    const formHeight = document.getElementById('grants-form') !== null
       ? document.getElementById('grants-form').clientHeight
       : '1000';
 
