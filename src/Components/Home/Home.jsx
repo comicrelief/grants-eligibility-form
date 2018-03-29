@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
@@ -14,10 +15,31 @@ class Home extends Component {
     this.handleStartForm = this.handleStartForm.bind(this);
   }
 
+  componentDidMount() {
+    this.sendFormHeightMessage();
+  }
+
+  componentDidUpdate() {
+    this.sendFormHeightMessage();
+  }
+
   handleStartForm() {
     this.props.history.push({
       pathname: '/question/1',
     });
+  }
+
+  /**
+   * Send form height message to parent iframe.
+   */
+  sendFormHeightMessage() {
+    const formHeight = document.getElementById('grants-form') !== null
+      ? document.getElementById('grants-form').clientHeight
+      : '1000';
+
+    setTimeout(function () {
+      window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
+    }, 250);
   }
 
   /**
