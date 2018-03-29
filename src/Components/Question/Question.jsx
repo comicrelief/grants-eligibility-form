@@ -241,7 +241,9 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h5 className="font--black text-align-center">(progress bar)</h5>
+                  <h1 className="font--black text-align-center">
+                    You&#39;re on question {this.state.currentQuestion} out of a possible 9
+                  </h1>
                 </div>
               </div>
             </div>
