@@ -161,16 +161,22 @@ class Question extends Component {
         <form onSubmit={this.handleSubmit}>
           {currentInput.map(thisInput => (
             <div key={thisInput.question_type + 'wrapper'} className="field-item text-input text-align-center">
-              <label htmlFor={thisInput.question_type + '-label'} key={thisInput.question_type + '-label'}>{thisInput.text}</label>
+              <label htmlFor={thisInput.question_type + '__input'} key={thisInput.question_type + '__label'}>{thisInput.text}</label>
               <input
-                id={thisInput.question_type + '-label'}
+                id={thisInput.question_type + '__input'}
                 placeholder={thisInput.text}
                 required
-                key={thisInput.question_type + '-input'}
+                key={thisInput.question_type + '__input'}
                 type="text"
                 onChange={this.handleTextChange}
+                className={thisInput.question_type + '__input'}
+
               />
-              <input type="submit" value="Continue" />
+              <input
+                type="submit"
+                value="Continue"
+                className={thisInput.question_type + '__submit'}
+              />
             </div>
             ))}
         </form>
