@@ -33,7 +33,7 @@ class Question extends Component {
         break;
 
       case 'project-location':
-        if (value === 'somewhere-else') {
+        if (value === 'somewhere-elsee') {
           if (coreCosts === 'no') { return '7'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '8' : '9'); }
         } else if (value === 'india-etc') {
           if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
@@ -139,6 +139,11 @@ class Question extends Component {
       /* Check the value against our 'fail' msg numbers */
       const isSuccessOrNot = !['1', '2', '3', '4', '6', '7', '8'].includes(messageToShow);
       stateCopy.responses.success = isSuccessOrNot;
+
+      if (['error', 'default'].includes(messageToShow)) {
+        alert('ERROR - Question type: ' + thisQuestionType +
+          ' - value: ' + thisValue + ' - core costs: ' + theseResponses['core-costs'] + ' - over 100k: ' + theseResponses['over-100k']);
+      }
     }
 
 
