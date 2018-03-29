@@ -159,7 +159,9 @@ class Question extends Component {
       ? document.getElementById('grants-form').clientHeight
       : '1000';
 
-    window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
+    setTimeout(function () {
+      window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
+    }, 250);
   }
 
   /**
