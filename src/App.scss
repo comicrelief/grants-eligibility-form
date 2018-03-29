@@ -34,7 +34,7 @@ main {
 .single-msg.question .single-msg__copy_wrapper .single-msg__copy {
 
   h3, p {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   ul {
@@ -61,18 +61,18 @@ main {
       }
     }
   }
+}
 
   .buttons {
     margin: 30px 0 0;
 
     button.btn:first-child:not(:only-child) {
-      margin: 10px;
       @extend .btn--red;
-
+      @include breakpoint($screen-md) {
+        margin-bottom: 0;
+      }
       ~ button.btn {
-        margin: 10px;
         @extend .btn--royal-blue;
-
         + button.btn {
          @extend .btn--black-ghost;
         }
@@ -81,12 +81,13 @@ main {
 
     button.btn {
       width: 100%;
+      margin: 10px 0 0;
       @include breakpoint($screen-md) {
         width: auto;
+        margin: 0 10px;
       }
     }
   }
-}
 
 .text-align-center {
   text-align: center;
@@ -152,19 +153,25 @@ ul li {
 }
 
 #grants-form {
+
   .buttons {
     margin-top:30px;
     button.btn:not(.btn-3) {
       border:0;
     }
-    .question-8 & {
-      button.btn {
-        display: block;
-        margin: 15px;
-      } 
-    }
   }
 
+  .question-8 .buttons {
+    button.btn {
+      display: block;
+      margin: 10px 0 0;
+      
+      @include breakpoint($screen-md) {
+        margin: 15px;
+      }
+    } 
+  }
+ 
   .single-msg.outcome  {
     .single-msg__copy_wrapper,
     .single-msg__image {
@@ -193,8 +200,7 @@ ul li {
 
 .single-msg .single-msg__outer-wrapper .single-msg__body {
   text-align: center;
-
   @include breakpoint($screen-md) {
-  text-align: left;
+    text-align: left;
   }
 }
