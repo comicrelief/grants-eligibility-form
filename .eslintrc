@@ -10,5 +10,6 @@
     "class-methods-use-this": "off",
     "prefer-destructuring": "off",
     "react/prefer-stateless-function": "off",
+    "prefer-arrow-callback": "off",
   }
 }
