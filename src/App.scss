@@ -167,7 +167,7 @@ ul li {
       margin: 10px 0 0;
       
       @include breakpoint($screen-md) {
-        margin: 15px;
+        margin: 15px auto;
       }
     } 
   }

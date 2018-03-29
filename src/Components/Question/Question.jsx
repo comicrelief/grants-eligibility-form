@@ -48,7 +48,7 @@ class Question extends Component {
       default:
         return 'default';
     }
-    return 'nothing';
+    return 'error';
   }
   /**
    * Question constructor
