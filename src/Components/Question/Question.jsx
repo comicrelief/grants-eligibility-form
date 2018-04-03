@@ -134,13 +134,22 @@ class Question extends Component {
       /* Else, this is our "check" value, and we need to
        * check prior answers to determine the outcome */
       const messageToShow = Question.messageSwitch(thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k']);
+
       newPath = '/outcome/' + messageToShow;
 
-      /* Check the value against our 'fail' msg numbers */
-      const isSuccessOrNot = !['1', '2', '3', '4', '6', '7', '8'].includes(messageToShow);
-      stateCopy.responses.success = isSuccessOrNot;
-    }
+      /* IE-friendly alternative to 'includes';
+       * set our 'success' flag based on the rejection message numbers */
+      const arr = ['1', '2', '3', '4', '6', '7', '8'];
+      const isRejection = new RegExp('^' + arr.join('|') + '$').test(messageToShow);
 
+      // Flip the boolean value to represent success equivalent
+      stateCopy.responses.success = !isRejection;
+
+      if (messageToShow === 'error' || messageToShow === 'default') {
+        alert('ERROR - Question type: ' + thisQuestionType +
+          ' - value: ' + thisValue + ' - core costs: ' + theseResponses['core-costs'] + ' - over 100k: ' + theseResponses['over-100k']);
+      }
+    }
 
     /* Update the URL */
     this.props.history.push({

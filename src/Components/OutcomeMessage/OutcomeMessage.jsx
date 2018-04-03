@@ -129,7 +129,7 @@ class OutcomeMessage extends Component {
 
     currentMessage = currentMessage.toString();
 
-    console.log('currentMsg:', currentMessage);
+    console.log('Showing message #', currentMessage);
 
     return (
       <div className="outcome-message">
