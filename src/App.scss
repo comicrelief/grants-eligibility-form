@@ -216,3 +216,46 @@ ul li {
     text-align: left;
   }
 }
+
+/* Outcome Message images  */
+.outcome-image {
+  picture {
+    display: none;
+  }
+
+  background-position: top left;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  height: 0;
+  padding: 28% 0;
+
+  @include breakpoint($screen-md) {
+    background-size: 100% auto;
+    height: 0;
+    padding: 23% 16%;
+  }
+}
+
+.outcome-image--london {
+  @extend .outcome-image;
+  background-image: url(./images/outcome-images/london-together-169.jpg);
+  @include breakpoint($screen-md) {
+    background-image: url(./images/outcome-images/london-together-34.jpg);
+  }
+}
+
+.outcome-image--core {
+  @extend .outcome-image;
+  background-image: url(./images/outcome-images/core-strength-169.jpg);
+  @include breakpoint($screen-md) {
+    background-image: url(./images/outcome-images/core-strength-34.jpg);
+  }
+}
+
+.outcome-image--sss {
+  @extend .outcome-image;
+  background-image: url(./images/outcome-images/safe-secure-settled-169.jpg);
+  @include breakpoint($screen-md) {
+    background-image: url(./images/outcome-images/safe-secure-settled-34.jpg);
+  }
+}
