@@ -1,7 +1,11 @@
 /* eslint-env browser */
+/* eslint-disable react/no-typos */
+/* eslint-disable react/forbid-prop-types */
+
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import Parser from 'html-react-parser';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 // Import all of our template variants
 import m1 from './templates/m1.html';
@@ -39,6 +43,13 @@ class OutcomeMessage extends Component {
   componentDidUpdate() {
     this.sendFormHeightMessage();
   }
+
+  componentWillUnmount() {
+    /* If the user is attempting to 'back button' away from the outcome to
+     * re-enter question answers, reset the whole form */
+    this.props.history.push({ pathname: '/' });
+  }
+
   /**
    * Helper function to determine parent page url the form is embedded into
    */
@@ -46,6 +57,12 @@ class OutcomeMessage extends Component {
     const url = (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
     return url;
+  }
+
+  routerWillLeave(nextState) { // return false to block navigation, true to allow
+    if (nextState.action === 'POP') {
+      alert('POP!');
+    }
   }
 
   /**
@@ -129,8 +146,6 @@ class OutcomeMessage extends Component {
 
     currentMessage = currentMessage.toString();
 
-    console.log('Showing message #', currentMessage);
-
     return (
       <div className="outcome-message">
         {Parser(this.props.messages[currentMessage])}
@@ -157,20 +172,16 @@ class OutcomeMessage extends Component {
 }
 
 OutcomeMessage.propTypes = {
-  messages: propTypes.element,
-  match: propTypes.shape({
-    params: propTypes.shape({
-      outcome_number: propTypes.string,
-    }),
-  }),
-  location: propTypes.shape({
-    state: propTypes.shape({
-      responses: propTypes.shape,
-    }),
+  location: ReactRouterPropTypes.location,
+  match: ReactRouterPropTypes.match,
+  messages: propTypes.array,
+  history: propTypes.shape({
+    push: propTypes.func,
   }),
 };
 
 OutcomeMessage.defaultProps = {
+  history: { push: null },
   messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15],
   match: {},
   location: {},
