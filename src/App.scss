@@ -223,15 +223,16 @@ ul li {
     display: none;
   }
 
-  background-position: top left;
+  background-position: top center;
   background-size: 100% auto;
   background-repeat: no-repeat;
-  height: 0;
+  height: auto;
   padding: 28% 0;
 
   @include breakpoint($screen-md) {
+    background-position: top center;
     background-size: 100% auto;
-    height: 0;
+    height: auto;
     padding: 23% 16%;
   }
 }
