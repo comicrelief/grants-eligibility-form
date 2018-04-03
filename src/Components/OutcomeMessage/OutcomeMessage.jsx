@@ -59,12 +59,6 @@ class OutcomeMessage extends Component {
     return url;
   }
 
-  routerWillLeave(nextState) { // return false to block navigation, true to allow
-    if (nextState.action === 'POP') {
-      alert('POP!');
-    }
-  }
-
   /**
    * Send form height message to parent iframe.
    */
