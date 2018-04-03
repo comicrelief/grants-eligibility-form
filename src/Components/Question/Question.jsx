@@ -134,16 +134,16 @@ class Question extends Component {
       /* Else, this is our "check" value, and we need to
        * check prior answers to determine the outcome */
       const messageToShow = Question.messageSwitch(thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k']);
+
       newPath = '/outcome/' + messageToShow;
 
-      /* Check the value against our 'fail' msg numbers */
-      const isSuccessOrNot = !['1', '2', '3', '4', '6', '7', '8'].includes(messageToShow);
+      /* IE-friendly alternative to 'includes';
+       * set our 'success' flag based on the rejection message numbers */
+      const arr = ['1', '2', '3', '4', '6', '7', '8'];
+      const isRejection = new RegExp('^' + arr.join('|') + '$').test(messageToShow);
 
-      // Debugging IE11 friendly alt. version to .includes
-      const successCheck = messageToShow.match(/(1|2|3|4|6|7|8)/);
-      console.log('successCheck', successCheck);
-
-      stateCopy.responses.success = isSuccessOrNot;
+      // Flip the boolean value to represent success equivalent
+      stateCopy.responses.success = !isRejection;
 
       // Debug
       if (['error', 'default'].includes(messageToShow)) {
