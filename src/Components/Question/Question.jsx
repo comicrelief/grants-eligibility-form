@@ -145,8 +145,7 @@ class Question extends Component {
       // Flip the boolean value to represent success equivalent
       stateCopy.responses.success = !isRejection;
 
-      // Debug
-      if (['error', 'default'].includes(messageToShow)) {
+      if (messageToShow === 'error' || messageToShow === 'default') {
         alert('ERROR - Question type: ' + thisQuestionType +
           ' - value: ' + thisValue + ' - core costs: ' + theseResponses['core-costs'] + ' - over 100k: ' + theseResponses['over-100k']);
       }
