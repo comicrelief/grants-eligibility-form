@@ -54,6 +54,7 @@ class OutcomeMessage extends Component {
    * Helper function to determine parent page url the form is embedded into
    */
   getParentUrl() {
+    alert(window.location + ' - ' + window.parent.location + ' - ' + document.referrer + ' - ' + document.location.href);
     const url = (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
     return url;
@@ -106,7 +107,9 @@ class OutcomeMessage extends Component {
       }
     };
 
-    xhr.send(postBody);
+    // Remove submission for debug
+    // xhr.send(postBody);
+    console.log(postBody);
   }
 
   /* Helper function used during submission */
