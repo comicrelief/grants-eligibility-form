@@ -78,9 +78,6 @@ class OutcomeMessage extends Component {
   submitInfo() {
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
-
-    /* Get the current parent URL and the endpoint URL for submitting to */
-    const thisURL = this.getParentUrl();
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
