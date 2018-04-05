@@ -134,8 +134,7 @@ class Question extends Component {
        * set our 'success' flag based on the rejection message numbers */
       let arr = ['1', '2', '3', '4', '6', '7', '8'];
 
-      arr = arr.map(i => '^' + i + '$');
-      arr = arr.join('|');
+      arr = arr.map(i => '^' + i + '$').join('|');
 
       const isRejection = new RegExp(arr).test(messageToShow);
 
