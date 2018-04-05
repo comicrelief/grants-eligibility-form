@@ -103,9 +103,7 @@ class OutcomeMessage extends Component {
       }
     };
 
-    const x = allResponses.success ? 1 : 0;
-    console.log('success? ', x);
-    console.log(postBody);
+    xhr.send(postBody);
   }
 
   /* Helper function used during submission */
