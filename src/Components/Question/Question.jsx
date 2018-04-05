@@ -20,13 +20,6 @@ import q9 from './templates/q9.html';
 class Question extends Component {
   /* Helper function to help contain messy message logic */
   static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
-    console.log(
-      'currentQuestionType:', currentQuestionType,
-      '- value:', value,
-      '- core costs:', coreCosts,
-      '- over100k', over100k,
-    );
-
     switch (currentQuestionType) {
       case 'sports-project':
         if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
@@ -139,8 +132,11 @@ class Question extends Component {
 
       /* IE-friendly alternative to 'includes';
        * set our 'success' flag based on the rejection message numbers */
-      const arr = ['1', '2', '3', '4', '6', '7', '8'];
-      const isRejection = new RegExp('^' + arr.join('|') + '$').test(messageToShow);
+      let arr = ['1', '2', '3', '4', '6', '7', '8'];
+
+      arr = arr.map(i => '^' + i + '$').join('|');
+
+      const isRejection = new RegExp(arr).test(messageToShow);
 
       // Flip the boolean value to represent success equivalent
       stateCopy.responses.success = !isRejection;
