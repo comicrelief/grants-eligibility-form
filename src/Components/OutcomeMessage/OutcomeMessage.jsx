@@ -54,7 +54,6 @@ class OutcomeMessage extends Component {
    * Helper function to determine parent page url the form is embedded into
    */
   getParentUrl() {
-    alert(window.location + ' - ' + window.parent.location + ' - ' + document.referrer + ' - ' + document.location.href);
     const url = (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
     return url;
@@ -87,9 +86,9 @@ class OutcomeMessage extends Component {
 
     /* Construct json object only of values required by data contract */
     let postBody = {
-      organisation: allResponses['organisation-type'],
+      organisation: allResponses.company_name,
       success: allResponses.success ? 1 : 0,
-      transSourceURL: thisURL,
+      transSourceURL: 'https://www.comicrelief.com/funding/applying-for-grants/open-initiatives',
       created: new Date().getTime(),
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
@@ -107,9 +106,7 @@ class OutcomeMessage extends Component {
       }
     };
 
-    // Remove submission for debug
-    // xhr.send(postBody);
-    console.log(postBody);
+    xhr.send(postBody);
   }
 
   /* Helper function used during submission */
