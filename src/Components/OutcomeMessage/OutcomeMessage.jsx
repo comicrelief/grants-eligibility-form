@@ -78,17 +78,14 @@ class OutcomeMessage extends Component {
   submitInfo() {
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
-
-    /* Get the current parent URL and the endpoint URL for submitting to */
-    const thisURL = this.getParentUrl();
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
     /* Construct json object only of values required by data contract */
     let postBody = {
-      organisation: allResponses['organisation-type'],
+      organisation: allResponses.company_name,
       success: allResponses.success ? 1 : 0,
-      transSourceURL: thisURL,
+      transSourceURL: 'https://www.comicrelief.com/funding/applying-for-grants/open-initiatives',
       created: new Date().getTime(),
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',

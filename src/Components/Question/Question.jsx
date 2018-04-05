@@ -195,7 +195,7 @@ class Question extends Component {
                 type="text"
                 onChange={this.handleTextChange}
                 className={thisInput.question_type + '__input'}
-
+                maxLength="200"
               />
               <input
                 type="submit"
