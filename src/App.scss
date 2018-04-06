@@ -166,14 +166,13 @@ ul.list li {
 }
 
 #grants-form {
-
   .buttons {
     margin-top:30px;
     button.btn:not(.btn-3) {
       border:0;
     }
   }
-
+  
   .question-8 .buttons {
     button.btn {
       display: block;
@@ -268,13 +267,13 @@ button.previous-question {
   font-size: inherit;
   line-height: 14px;
   border-bottom: 4px solid rgba(41, 2, 44, 0.5);
-  @extend .link;
   @extend .inline;
   @extend .link--dark-purple;
 }
 
 ul.progress-indicator {
   padding:0;
+  margin: 10px 0 60px;
   li {
     padding: 0;
     width: 10%;
@@ -282,11 +281,31 @@ ul.progress-indicator {
       content: none;
     }
 
-    &.progress-indicator--todo.no-circle:not(.progress-indicator--active) {
-      .progress-indicator__step.progress-indicator__circle {
+    .progress-bar__title {
+      word-break: normal;
+      position: absolute;
+      left: -12px;
+      top: 25px;
+      left: 0;
+      width: 100%;
+      font-size: 13px;
+
+      @include breakpoint($screen-md) {
+        font-size: 18px;
+        left: 0;
+      }
+    }
+
+    &.progress-indicator--todo.no-circle .progress-indicator__step.progress-indicator__circle {
         background-color: transparent;
         border: 0;
-      }
+    }
+    
+    &.progress-indicator--done.no-circle .progress-indicator__circle {
+      margin-top: 6px;
+      border: 0;
+      border-radius: 0;
+      height: 3px;
     }
   }
 }

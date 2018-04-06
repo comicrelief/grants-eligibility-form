@@ -189,7 +189,7 @@ class Question extends Component {
     return (
       <ul className={'progress-indicator progress-indicator__steps-' + total}>
 
-        <li className={'' + this.progressClassNames(1, currQ)}>
+        <li className={this.progressClassNames(1, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">About</span>
@@ -210,7 +210,7 @@ class Question extends Component {
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'' + this.progressClassNames(5, currQ)}>
+        <li className={this.progressClassNames(5, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Finance</span>
@@ -231,7 +231,7 @@ class Question extends Component {
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(9, currQ)}>
+        <li className={this.progressClassNames(9, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Project</span>
@@ -352,9 +352,6 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h3 className="font--black text-align-center">
-                    You&#39;re on question {this.state.currentQuestion} out of a possible 9
-                  </h3>
                   { this.renderProgress() }
                   { this.renderPreviousButton() }
                 </div>
