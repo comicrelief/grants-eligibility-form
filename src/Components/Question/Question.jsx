@@ -53,6 +53,7 @@ class Question extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
+    this.previousQuestion = this.previousQuestion.bind(this);
 
     this.state = {
       currentQuestion: 1,
@@ -93,6 +94,14 @@ class Question extends Component {
     const newPath = '/question/' + nextQuestion;
 
     /* Update the URL */
+    this.props.history.push({ pathname: newPath });
+  }
+
+  /* Allows the user to step back one question by updating the path
+  * which, in turn, updates the currentQuestion number in updateQuestionNumber func  */
+  previousQuestion() {
+    const newPath = '/question/' + (this.state.currentQuestion - 1);
+
     this.props.history.push({ pathname: newPath });
   }
 
@@ -231,6 +240,22 @@ class Question extends Component {
   }
 
   /**
+   * Render the user choices for this specific questions
+   * @return {XML}
+   */
+  renderPreviousButton() {
+    return (
+      <button
+        key={'back-to-question-' + this.state.currentQuestion}
+        className="link-dark-purple link previous-question"
+        onClick={this.previousQuestion}
+      >
+        Go back to previous question
+      </button>
+    );
+  }
+
+  /**
    * Render the Question
    * @return {XML}
    */
@@ -257,9 +282,12 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h1 className="font--black text-align-center">
+                  <h3 className="font--black text-align-center">
                     You&#39;re on question {this.state.currentQuestion} out of a possible 9
-                  </h1>
+                  </h3>
+                  <p>
+                    { this.renderPreviousButton() }
+                  </p>
                 </div>
               </div>
             </div>
