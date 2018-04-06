@@ -189,49 +189,40 @@ class Question extends Component {
     return (
       <ul className={'progress-indicator progress-indicator__steps-' + total}>
 
-        <li className={this.progressClassNames(1, currQ)}>
+        <li className={'step-2 ' + this.progressClassNames(2, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">About</span>
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(2, currQ)}>
+        <li className={'no-circle step-3 ' + this.progressClassNames(3, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(3, currQ)}>
+        <li className={'no-circle step-4 ' + this.progressClassNames(4, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(4, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-          </span>
-        </li>
-        <li className={this.progressClassNames(5, currQ)}>
+        <li className={'step-5 ' + this.progressClassNames(5, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Finance</span>
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(6, currQ)}>
+        <li className={'no-circle step-6 ' + this.progressClassNames(6, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(7, currQ)}>
+        {/* To keep the question numbers balanced and avoid having to totally rework styles */}
+        <li className={'no-circle step-6.5 ' + this.progressClassNames(6.5, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'no-circle ' + this.progressClassNames(8, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-          </span>
-        </li>
-        <li className={this.progressClassNames(9, currQ)}>
+        <li className={'step-7 ' + this.progressClassNames(7, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Project</span>
