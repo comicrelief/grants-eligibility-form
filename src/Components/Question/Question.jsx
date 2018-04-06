@@ -57,6 +57,7 @@ class Question extends Component {
 
     this.state = {
       currentQuestion: 1,
+      totalQuestions: 9,
       responses: {},
     };
   }
@@ -173,6 +174,73 @@ class Question extends Component {
     }, 250);
   }
 
+  progressClassNames(stepNum, currentQ) {
+    if (stepNum < currentQ) {
+      return 'progress-indicator--done';
+    } else if (stepNum === currentQ) {
+      return 'progress-indicator--active';
+    } return 'progress-indicator--todo';
+  }
+
+  renderProgress() {
+    const currQ = this.state.currentQuestion;
+    const total = this.state.totalQuestions;
+
+    return (
+      <ul className={'progress-indicator progress-indicator__steps-' + total}>
+
+        <li className={'' + this.progressClassNames(1, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">About</span>
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(2, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(3, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(4, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'' + this.progressClassNames(5, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Finance</span>
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(6, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(7, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(8, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'no-circle ' + this.progressClassNames(9, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Project</span>
+          </span>
+        </li>
+      </ul>
+    );
+  }
+
   /**
    * Render the user choices for this specific questions
    * @return {XML}
@@ -245,13 +313,15 @@ class Question extends Component {
    */
   renderPreviousButton() {
     return (
-      <button
-        key={'back-to-question-' + this.state.currentQuestion}
-        className="link-dark-purple link previous-question"
-        onClick={this.previousQuestion}
-      >
-        Go back to previous question
-      </button>
+      <p>
+        <button
+          key={'back-to-question-' + this.state.currentQuestion}
+          className="link-dark-purple link previous-question"
+          onClick={this.previousQuestion}
+        >
+          Go back to previous question
+        </button>
+      </p>
     );
   }
 
@@ -285,9 +355,8 @@ class Question extends Component {
                   <h3 className="font--black text-align-center">
                     You&#39;re on question {this.state.currentQuestion} out of a possible 9
                   </h3>
-                  <p>
-                    { this.renderPreviousButton() }
-                  </p>
+                  { this.renderProgress() }
+                  { this.renderPreviousButton() }
                 </div>
               </div>
             </div>

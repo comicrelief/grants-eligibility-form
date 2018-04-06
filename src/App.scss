@@ -14,6 +14,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/progress-indicator/_progress-indicator";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
@@ -37,7 +38,7 @@ main {
     margin-bottom: 20px;
   }
 
-  ul {
+  ul.list {
     margin: 15px 0;
     padding: 0 0 0 20px;
     list-style: none;
@@ -123,7 +124,7 @@ main {
   }
 }
 
-ul li {
+ul.list li {
   p &,
   h3 &,
   h4 &,
@@ -254,5 +255,38 @@ ul li {
   background-image: url(./images/outcome-images/safe-secure-settled-169.jpg);
   @include breakpoint($screen-md) {
     background-image: url(./images/outcome-images/safe-secure-settled-34.jpg);
+  }
+}
+
+/* Making the button resemble a link */
+button.previous-question {
+  background: none;
+  border: none;
+  padding: 7px 0;
+  cursor: pointer;
+  outline: inherit;
+  font-size: inherit;
+  line-height: 14px;
+  border-bottom: 4px solid rgba(41, 2, 44, 0.5);
+  @extend .link;
+  @extend .inline;
+  @extend .link--dark-purple;
+}
+
+ul.progress-indicator {
+  padding:0;
+  li {
+    padding: 0;
+    width: 10%;
+    &:before {
+      content: none;
+    }
+
+    &.progress-indicator--todo.no-circle:not(.progress-indicator--active) {
+      .progress-indicator__step.progress-indicator__circle {
+        background-color: transparent;
+        border: 0;
+      }
+    }
   }
 }
