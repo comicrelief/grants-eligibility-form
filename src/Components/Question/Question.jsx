@@ -151,7 +151,7 @@ class Question extends Component {
       // Flip the boolean value to represent success equivalent
       stateCopy.responses.success = !isRejection;
 
-      // Catch any errors returned by the logic
+      // Catch any errors and alert the user something's gone wrong
       if (messageToShow === 'error') {
         newPath = '/' + messageToShow;
       }
