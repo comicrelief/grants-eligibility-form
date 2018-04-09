@@ -280,13 +280,7 @@ ul.progress-indicator {
   li {
     padding: 0;
     width: 14%;
-
-    &.step-2,
-    &.step-3,
-    &.step-4 {
-      //width: 10%;
-    }
-
+    
     &:before {
       content: none;
     }
