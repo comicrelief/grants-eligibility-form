@@ -220,6 +220,17 @@ ul.list li {
   }
 }
 
+// Preload the images
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+    content: url(./images/outcome-images/london-together-169.jpg) 
+      url(./images/outcome-images/london-together-34.jpg) 
+      url(./images/outcome-images/core-strength-169.jpg)
+      url(./images/outcome-images/core-strength-34.jpg)
+      url(./images/outcome-images/safe-secure-settled-169.jpg)
+      url(./images/outcome-images/safe-secure-settled-34.jpg)
+}
+
 /* Outcome Message images  */
 .outcome-image {
   background-position: top center;
