@@ -24,6 +24,26 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
+/* Image paths as variables */
+$london-169 : "./images/outcome-images/london-together-169.jpg";
+$london-34 : "./images/outcome-images/london-together-34.jpg";
+$core-169 : "./images/outcome-images/core-strength-169.jpg";
+$core-34 : "./images/outcome-images/core-strength-34.jpg";
+$sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
+$sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
+
+/* Pre-load bg images */
+body::after{
+  position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+  content:
+    url($london-169)
+    url($london-34)
+    url($core-169)
+    url($core-34)
+    url($sss-169)
+    url($sss-34)
+}
+
 html, body {
   background-color: #F0F0F0;
 }
@@ -220,17 +240,6 @@ ul.list li {
   }
 }
 
-// Preload the images
-body::after{
-    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-    content: url(./images/outcome-images/london-together-169.jpg) 
-      url(./images/outcome-images/london-together-34.jpg) 
-      url(./images/outcome-images/core-strength-169.jpg)
-      url(./images/outcome-images/core-strength-34.jpg)
-      url(./images/outcome-images/safe-secure-settled-169.jpg)
-      url(./images/outcome-images/safe-secure-settled-34.jpg)
-}
-
 /* Outcome Message images  */
 .outcome-image {
   background-position: top center;
@@ -249,25 +258,25 @@ body::after{
 
 .outcome-image--london {
   @extend .outcome-image;
-  background-image: url(./images/outcome-images/london-together-169.jpg);
+  background-image: url($london-169);
   @include breakpoint($screen-md) {
-    background-image: url(./images/outcome-images/london-together-34.jpg);
+    background-image: url($london-34);
   }
 }
 
 .outcome-image--core {
   @extend .outcome-image;
-  background-image: url(./images/outcome-images/core-strength-169.jpg);
+  background-image: url($core-169);
   @include breakpoint($screen-md) {
-    background-image: url(./images/outcome-images/core-strength-34.jpg);
+    background-image: url($core-34);
   }
 }
-
+   
 .outcome-image--sss {
   @extend .outcome-image;
-  background-image: url(./images/outcome-images/safe-secure-settled-169.jpg);
+  background-image: url($sss-169);
   @include breakpoint($screen-md) {
-    background-image: url(./images/outcome-images/safe-secure-settled-34.jpg);
+    background-image: url($sss-34);
   }
 }
 
