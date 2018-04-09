@@ -118,6 +118,9 @@ main {
 
   .organisation-name__submit {
     width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     @include breakpoint($screen-md) {
       width: auto;
     }
