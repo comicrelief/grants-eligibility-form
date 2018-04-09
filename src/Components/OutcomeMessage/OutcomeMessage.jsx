@@ -103,7 +103,7 @@ class OutcomeMessage extends Component {
       }
     };
 
-    console.log(postBody);
+    xhr.send(postBody);
   }
 
   /* Helper function used during submission */
