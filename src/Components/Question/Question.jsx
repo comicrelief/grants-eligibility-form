@@ -150,6 +150,11 @@ class Question extends Component {
 
       // Flip the boolean value to represent success equivalent
       stateCopy.responses.success = !isRejection;
+
+      // Catch any errors returned by the logic
+      if (messageToShow === 'error') {
+        newPath = '/' + messageToShow;
+      }
     }
 
     /* Update the URL */
