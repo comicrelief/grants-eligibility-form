@@ -66,7 +66,8 @@ class Home extends Component {
                   <div className="single-msg__body">
                     <div className="cr-body text-align-center">
                       <h3>
-                        Thanks for using our eligibility checker. We&#39;re
+                        You can use our eligibility checker to find out if
+                        you are eligible for any of our initiatives. We&#39;re
                         going to ask you a few questions
                         about your organisation and what you need funding for.
                       </h3>
