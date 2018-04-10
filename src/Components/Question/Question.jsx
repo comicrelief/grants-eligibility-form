@@ -53,9 +53,11 @@ class Question extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
+    this.previousQuestion = this.previousQuestion.bind(this);
 
     this.state = {
       currentQuestion: 1,
+      totalQuestions: 9,
       responses: {},
     };
   }
@@ -93,6 +95,14 @@ class Question extends Component {
     const newPath = '/question/' + nextQuestion;
 
     /* Update the URL */
+    this.props.history.push({ pathname: newPath });
+  }
+
+  /* Allows the user to step back one question by updating the path
+  * which, in turn, updates the currentQuestion number in updateQuestionNumber func  */
+  previousQuestion() {
+    const newPath = '/question/' + (this.state.currentQuestion - 1);
+
     this.props.history.push({ pathname: newPath });
   }
 
@@ -140,6 +150,11 @@ class Question extends Component {
 
       // Flip the boolean value to represent success equivalent
       stateCopy.responses.success = !isRejection;
+
+      // Catch any errors and alert the user something's gone wrong
+      if (messageToShow === 'error') {
+        newPath = '/' + messageToShow;
+      }
     }
 
     /* Update the URL */
@@ -162,6 +177,64 @@ class Question extends Component {
     setTimeout(function () {
       window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
     }, 250);
+  }
+
+  progressClassNames(stepNum, currentQ) {
+    if (stepNum < currentQ) {
+      return 'progress-indicator--done';
+    } else if (stepNum === currentQ) {
+      return 'progress-indicator--active';
+    } return 'progress-indicator--todo';
+  }
+
+  renderProgress() {
+    const currQ = this.state.currentQuestion;
+    const total = this.state.totalQuestions;
+
+    return (
+      <ul className={'progress-indicator progress-indicator__steps-' + total}>
+
+        <li className={'step-2 ' + this.progressClassNames(2, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">About</span>
+          </span>
+        </li>
+        <li className={'no-circle step-3 ' + this.progressClassNames(3, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'no-circle step-4 ' + this.progressClassNames(4, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'step-5 ' + this.progressClassNames(5, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Finance</span>
+          </span>
+        </li>
+        <li className={'no-circle step-6 ' + this.progressClassNames(6, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        {/* To keep the question numbers balanced and avoid having to totally rework styles */}
+        <li className={'no-circle step-6.5 ' + this.progressClassNames(6.5, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+          </span>
+        </li>
+        <li className={'step-7 ' + this.progressClassNames(7, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Project</span>
+          </span>
+        </li>
+      </ul>
+    );
   }
 
   /**
@@ -231,6 +304,24 @@ class Question extends Component {
   }
 
   /**
+   * Render the user choices for this specific questions
+   * @return {XML}
+   */
+  renderPreviousButton() {
+    return (
+      <p>
+        <button
+          key={'back-to-question-' + this.state.currentQuestion}
+          className="link-dark-purple link previous-question"
+          onClick={this.previousQuestion}
+        >
+          Go back to previous question
+        </button>
+      </p>
+    );
+  }
+
+  /**
    * Render the Question
    * @return {XML}
    */
@@ -257,9 +348,8 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h1 className="font--black text-align-center">
-                    You&#39;re on question {this.state.currentQuestion} out of a possible 9
-                  </h1>
+                  { this.renderProgress() }
+                  { this.renderPreviousButton() }
                 </div>
               </div>
             </div>

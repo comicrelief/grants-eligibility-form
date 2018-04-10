@@ -14,6 +14,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/form/form";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/progress-indicator/_progress-indicator";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
@@ -22,6 +23,26 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
+
+/* Image paths as variables */
+$london-169 : "./images/outcome-images/london-together-169.jpg";
+$london-34 : "./images/outcome-images/london-together-34.jpg";
+$core-169 : "./images/outcome-images/core-strength-169.jpg";
+$core-34 : "./images/outcome-images/core-strength-34.jpg";
+$sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
+$sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
+
+/* Pre-load bg images */
+body::after{
+  position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+  content:
+    url($london-169)
+    url($london-34)
+    url($core-169)
+    url($core-34)
+    url($sss-169)
+    url($sss-34)
+}
 
 html, body {
   background-color: #F0F0F0;
@@ -37,7 +58,7 @@ main {
     margin-bottom: 20px;
   }
 
-  ul {
+  ul.list {
     margin: 15px 0;
     padding: 0 0 0 20px;
     list-style: none;
@@ -117,13 +138,16 @@ main {
 
   .organisation-name__submit {
     width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     @include breakpoint($screen-md) {
       width: auto;
     }
   }
 }
 
-ul li {
+ul.list li {
   p &,
   h3 &,
   h4 &,
@@ -165,7 +189,6 @@ ul li {
 }
 
 #grants-form {
-
   .buttons {
     margin-top:30px;
     button.btn:not(.btn-3) {
@@ -219,10 +242,6 @@ ul li {
 
 /* Outcome Message images  */
 .outcome-image {
-  picture {
-    display: none;
-  }
-
   background-position: top center;
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -239,24 +258,78 @@ ul li {
 
 .outcome-image--london {
   @extend .outcome-image;
-  background-image: url(./images/outcome-images/london-together-169.jpg);
+  background-image: url($london-169);
   @include breakpoint($screen-md) {
-    background-image: url(./images/outcome-images/london-together-34.jpg);
+    background-image: url($london-34);
   }
 }
 
 .outcome-image--core {
   @extend .outcome-image;
-  background-image: url(./images/outcome-images/core-strength-169.jpg);
+  background-image: url($core-169);
   @include breakpoint($screen-md) {
-    background-image: url(./images/outcome-images/core-strength-34.jpg);
+    background-image: url($core-34);
+  }
+}
+   
+.outcome-image--sss {
+  @extend .outcome-image;
+  background-image: url($sss-169);
+  @include breakpoint($screen-md) {
+    background-image: url($sss-34);
   }
 }
 
-.outcome-image--sss {
-  @extend .outcome-image;
-  background-image: url(./images/outcome-images/safe-secure-settled-169.jpg);
-  @include breakpoint($screen-md) {
-    background-image: url(./images/outcome-images/safe-secure-settled-34.jpg);
+/* Making the button resemble a link */
+button.previous-question {
+  background: none;
+  border: none;
+  padding: 7px 0;
+  cursor: pointer;
+  outline: inherit;
+  font-size: inherit;
+  line-height: 14px;
+  border-bottom: 4px solid rgba(41, 2, 44, 0.5);
+  @extend .inline;
+  @extend .link--dark-purple;
+}
+
+ul.progress-indicator {
+  padding:0;
+  margin: 10px 0 60px;
+  li {
+    padding: 0;
+    width: 14%;
+    
+    &:before {
+      content: none;
+    }
+
+    .progress-bar__title {
+      word-break: normal;
+      position: absolute;
+      left: -12px;
+      top: 25px;
+      left: 0;
+      width: 100%;
+      font-size: 13px;
+
+      @include breakpoint($screen-md) {
+        font-size: 18px;
+        left: 0;
+      }
+    }
+
+    &.progress-indicator--todo.no-circle .progress-indicator__step.progress-indicator__circle {
+        background-color: transparent;
+        border: 0;
+    }
+    
+    &.progress-indicator--done.no-circle .progress-indicator__circle {
+      margin-top: 6px;
+      border: 0;
+      border-radius: 0;
+      height: 3px;
+    }
   }
 }
