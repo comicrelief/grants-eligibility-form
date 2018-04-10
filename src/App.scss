@@ -31,17 +31,14 @@ $core-169 : "./images/outcome-images/core-strength-169.jpg";
 $core-34 : "./images/outcome-images/core-strength-34.jpg";
 $sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
 $sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
+$vawg-34 :  "https://webstyle.unicomm.fsu.edu/img/placeholders/ratio-3-4.png";
+$vawg-169 :  "https://pattern-lab-systest.apps.comicrelief.com/cr/kss-assets/images/16-9-img.jpg";
 
 /* Pre-load bg images */
 body::after{
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
   content:
-    url($london-169)
-    url($london-34)
-    url($core-169)
-    url($core-34)
-    url($sss-169)
-    url($sss-34)
+    url($london-169) url($london-34) url($core-169) url($core-34) url($sss-169) url($sss-34) url($vawg-34) url($vawg-169)
 }
 
 html, body {
@@ -277,6 +274,14 @@ ul.list li {
   background-image: url($sss-169);
   @include breakpoint($screen-md) {
     background-image: url($sss-34);
+  }
+}
+
+.outcome-image--vawg {
+  @extend .outcome-image;
+  background-image: url($vawg-169);
+  @include breakpoint($screen-md) {
+    background-image: url($vawg-34);
   }
 }
 
