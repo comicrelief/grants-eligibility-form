@@ -66,14 +66,12 @@ class Home extends Component {
                   <div className="single-msg__body">
                     <div className="cr-body text-align-center">
                       <h3>
-                        You can use our eligibility checker to find out if
-                        you are eligible for any of our initiatives. We&#39;re
-                        going to ask you a few questions
-                        about your organisation and what you need funding for.
+                      We&#39;re going to ask you a few questions
+                      about your organisation and what you need funding for.
                       </h3>
                       <h3>
-                        We&#39;ll use these answers to see whether
-                        you might be eligible for an open initiative.
+                      Once you&#39;ve answered, you&#39;ll be able to
+                      see which of our initiatives you&#39;re eligible to apply for.
                       </h3>
                       <div className="buttons text-align-center">
                         <button
