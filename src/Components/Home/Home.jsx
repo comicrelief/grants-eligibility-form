@@ -66,12 +66,12 @@ class Home extends Component {
                   <div className="single-msg__body">
                     <div className="cr-body text-align-center">
                       <h3>
-                      We&#39;re going to ask you a few questions
-                      about your organisation why you need funding.
+                        You can use our eligibility checker to find out
+                        if you might be eligible for any of our current initiatives.
                       </h3>
                       <h3>
-                      Once you&#39;ve answered you&#39;ll be able to see
-                      which of our initiatives you&#39;re eligible to apply for.
+                        We&#39;re going to ask you a few questions about your
+                        organisation and what you need funding for.
                       </h3>
                       <div className="buttons text-align-center">
                         <button
