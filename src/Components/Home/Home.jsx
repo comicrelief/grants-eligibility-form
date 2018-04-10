@@ -67,11 +67,11 @@ class Home extends Component {
                     <div className="cr-body text-align-center">
                       <h3>
                       We&#39;re going to ask you a few questions
-                      about your organisation and what you need funding for.
+                      about your organisation why you need funding.
                       </h3>
                       <h3>
-                      Once you&#39;ve answered, you&#39;ll be able to
-                      see which of our initiatives you&#39;re eligible to apply for.
+                      Once you&#39;ve answered you&#39;ll be able to see
+                      which of our initiatives you&#39;re eligible to apply for.
                       </h3>
                       <div className="buttons text-align-center">
                         <button
