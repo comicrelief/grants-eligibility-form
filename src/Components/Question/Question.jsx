@@ -29,7 +29,7 @@ class Question extends Component {
         if (value === 'somewhere-else') {
           return '7';
         } else if (value === 'india-etc') {
-          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
+          return '10';
         } break;
 
       case 'london':

@@ -246,10 +246,13 @@ ul.list li {
   padding: 28% 0;
 
   @include breakpoint($screen-md) {
-    background-position: top center;
+    background-position: center center;
     background-size: 100% auto;
     height: auto;
-    padding: 23% 16%;
+    padding: 21% 16%;
+    .single-msg--copy-left & {
+      padding: 16% 16%;
+    }
   }
 }
 
