@@ -27,7 +27,7 @@ class Question extends Component {
 
       case 'london':
         if (value === 'no') {
-          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
+          if (coreCosts === 'no') { return '16'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '17' : '18'); }
         } else if (value === 'yes') {
           if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
         } break;
@@ -135,8 +135,7 @@ class Question extends Component {
 
       /* IE-friendly alternative to 'includes';
        * set our 'success' flag based on the rejection message numbers */
-      let arr = ['1', '2', '3', '4', '6', '7', '8'];
-
+      let arr = ['1', '2', '3', '4', '6', '7'];
       arr = arr.map(i => '^' + i + '$').join('|');
 
       const isRejection = new RegExp(arr).test(messageToShow);
