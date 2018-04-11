@@ -108,7 +108,7 @@ class OutcomeMessage extends Component {
         console.log('post successful');
       }
     };
-  
+
     xhr.send(postBody);
   }
 
