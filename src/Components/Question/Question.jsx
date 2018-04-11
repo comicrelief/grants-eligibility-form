@@ -24,7 +24,6 @@ class Question extends Component {
       case 'sports-project':
         if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
         break;
-
       case 'london':
         if (value === 'no') {
           if (coreCosts === 'no') { return '16'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '17' : '18'); }
@@ -33,7 +32,7 @@ class Question extends Component {
         } break;
 
       default:
-        return 'default';
+        return 'error';
     }
     return 'error';
   }
