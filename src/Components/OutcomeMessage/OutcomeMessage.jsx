@@ -86,7 +86,6 @@ class OutcomeMessage extends Component {
       organisation: allResponses.company_name,
       success: allResponses.success ? 1 : 0,
       transSourceURL: 'https://www.comicrelief.com/funding/applying-for-grants/open-initiatives',
-      created: new Date().getTime(),
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
     };
