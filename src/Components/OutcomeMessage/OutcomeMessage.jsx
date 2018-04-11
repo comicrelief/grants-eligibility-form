@@ -76,7 +76,7 @@ class OutcomeMessage extends Component {
 
     setTimeout(function () {
       window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
-    }, 250);
+    }, 350);
   }
 
   /**
