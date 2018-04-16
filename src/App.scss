@@ -31,8 +31,8 @@ $core-169 : "./images/outcome-images/core-strength-169.jpg";
 $core-34 : "./images/outcome-images/core-strength-34.jpg";
 $sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
 $sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
-$vawg-34 :  "https://webstyle.unicomm.fsu.edu/img/placeholders/ratio-3-4.png";
-$vawg-169 :  "https://pattern-lab-systest.apps.comicrelief.com/cr/kss-assets/images/16-9-img.jpg";
+$vawg-34 :  "./images/outcome-images/vawg-34.jpg";
+$vawg-169 :   "./images/outcome-images/vawg-169.jpg";
 
 /* Pre-load bg images */
 body::after{
@@ -246,12 +246,13 @@ ul.list li {
   padding: 28% 0;
 
   @include breakpoint($screen-md) {
-    background-position: center center;
+    background-position: top center;
     background-size: 100% auto;
     height: auto;
     padding: 21% 16%;
     // Represents our 'ineligible' rows
     .single-msg--copy-left & {
+      background-position: center center;
       padding: 16% 16%;
     }
   }
