@@ -246,6 +246,10 @@ ul.list li {
   background-repeat: no-repeat;
   height: auto;
   padding: 28% 0;
+ 
+  .single-msg--copy-left & {
+    background-position: top center;
+  }
 
   @include breakpoint($screen-md) {
     background-position: top center;
