@@ -31,17 +31,14 @@ $core-169 : "./images/outcome-images/core-strength-169.jpg";
 $core-34 : "./images/outcome-images/core-strength-34.jpg";
 $sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
 $sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
+$vawg-34 :  "./images/outcome-images/vawg-34.jpg";
+$vawg-169 :   "./images/outcome-images/vawg-169.jpg";
 
 /* Pre-load bg images */
 body::after{
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
   content:
-    url($london-169)
-    url($london-34)
-    url($core-169)
-    url($core-34)
-    url($sss-169)
-    url($sss-34)
+    url($london-169) url($london-34) url($core-169) url($core-34) url($sss-169) url($sss-34) url($vawg-34) url($vawg-169)
 }
 
 html, body {
@@ -53,6 +50,8 @@ main {
 }
 
 .single-msg.question .single-msg__copy_wrapper .single-msg__copy {
+
+  padding: 0 15px;
 
   h3, p {
     margin-bottom: 20px;
@@ -247,12 +246,21 @@ ul.list li {
   background-repeat: no-repeat;
   height: auto;
   padding: 28% 0;
+ 
+  .single-msg--copy-left & {
+    background-position: top center;
+  }
 
   @include breakpoint($screen-md) {
     background-position: top center;
     background-size: 100% auto;
     height: auto;
-    padding: 23% 16%;
+    padding: 21% 16%;
+    // Represents our 'ineligible' rows
+    .single-msg--copy-left & {
+      background-position: center center;
+      padding: 16% 16%;
+    }
   }
 }
 
@@ -277,6 +285,14 @@ ul.list li {
   background-image: url($sss-169);
   @include breakpoint($screen-md) {
     background-image: url($sss-34);
+  }
+}
+
+.outcome-image--vawg {
+  @extend .outcome-image;
+  background-image: url($vawg-169);
+  @include breakpoint($screen-md) {
+    background-image: url($vawg-34);
   }
 }
 

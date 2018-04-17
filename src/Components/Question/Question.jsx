@@ -24,23 +24,15 @@ class Question extends Component {
       case 'sports-project':
         if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
         break;
-
-      case 'project-location':
-        if (value === 'somewhere-else') {
-          if (coreCosts === 'no') { return '7'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '8' : '9'); }
-        } else if (value === 'india-etc') {
-          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
-        } break;
-
       case 'london':
         if (value === 'no') {
-          if (coreCosts === 'no') { return '10'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '11' : '12'); }
+          if (coreCosts === 'no') { return '16'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '17' : '18'); }
         } else if (value === 'yes') {
           if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
         } break;
 
       default:
-        return 'default';
+        return 'error';
     }
     return 'error';
   }
@@ -142,8 +134,7 @@ class Question extends Component {
 
       /* IE-friendly alternative to 'includes';
        * set our 'success' flag based on the rejection message numbers */
-      let arr = ['1', '2', '3', '4', '6', '7', '8'];
-
+      let arr = ['1', '2', '3', '4', '6', '7'];
       arr = arr.map(i => '^' + i + '$').join('|');
 
       const isRejection = new RegExp(arr).test(messageToShow);
@@ -176,7 +167,7 @@ class Question extends Component {
 
     setTimeout(function () {
       window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
-    }, 250);
+    }, 350);
   }
 
   progressClassNames(stepNum, currentQ) {
@@ -486,10 +477,10 @@ Question.defaultProps = {
           question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'false', message: '',
         },
         {
-          question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'check', message: '',
+          question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'true', message: '10',
         },
         {
-          question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'check', message: '',
+          question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'true', message: '7',
         }],
     },
     {
