@@ -92,7 +92,7 @@ class OutcomeMessage extends Component {
     let postBody = {
       organisation: allResponses.company_name,
       success: allResponses.success ? 1 : 0,
-      transSourceURL: 'https://www.comicrelief.com/funding/applying-for-grants/open-initiatives',
+      transSourceURL: 'https://www.comicrelief.com/eligibility-checker',
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
     };
