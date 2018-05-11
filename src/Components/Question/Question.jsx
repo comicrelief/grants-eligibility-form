@@ -20,14 +20,13 @@ import q9 from './templates/q9.html';
 class Question extends Component {
   /* Helper function to help contain messy message logic */
   static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
+    alert(currentQuestionType + ' - ' + value);
     switch (currentQuestionType) {
       case 'sports-project':
         if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
         break;
-      case 'london':
-        if (value === 'no') {
-          if (coreCosts === 'no') { return '16'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '17' : '18'); }
-        } else if (value === 'yes') {
+      case 'project-location':
+        if (value === 'uk') {
           if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
         } break;
 
@@ -474,7 +473,7 @@ Question.defaultProps = {
       template: q8,
       buttons: [
         {
-          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'false', message: '',
+          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'check', message: '',
         },
         {
           question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'true', message: '10',
