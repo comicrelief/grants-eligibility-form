@@ -12,7 +12,6 @@ import q5 from './templates/q5.html';
 import q6 from './templates/q6.html';
 import q7 from './templates/q7.html';
 import q8 from './templates/q8.html';
-import q9 from './templates/q9.html';
 
 /**
  * Question class
@@ -20,7 +19,6 @@ import q9 from './templates/q9.html';
 class Question extends Component {
   /* Helper function to help contain messy message logic */
   static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
-    alert(currentQuestionType + ' - ' + value);
     switch (currentQuestionType) {
       case 'sports-project':
         if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
@@ -480,16 +478,6 @@ Question.defaultProps = {
         },
         {
           question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'true', message: '7',
-        }],
-    },
-    {
-      template: q9,
-      buttons: [
-        {
-          question_type: 'london', text: 'Yes', value: 'yes', reject: 'check', message: '',
-        },
-        {
-          question_type: 'london', text: 'No', value: 'no', reject: 'check', message: '',
         }],
     },
   ],
