@@ -12,7 +12,6 @@ import q5 from './templates/q5.html';
 import q6 from './templates/q6.html';
 import q7 from './templates/q7.html';
 import q8 from './templates/q8.html';
-import q9 from './templates/q9.html';
 
 /**
  * Question class
@@ -24,10 +23,8 @@ class Question extends Component {
       case 'sports-project':
         if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
         break;
-      case 'london':
-        if (value === 'no') {
-          if (coreCosts === 'no') { return '16'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '17' : '18'); }
-        } else if (value === 'yes') {
+      case 'project-location':
+        if (value === 'uk') {
           if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
         } break;
 
@@ -474,23 +471,13 @@ Question.defaultProps = {
       template: q8,
       buttons: [
         {
-          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'false', message: '',
+          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'check', message: '',
         },
         {
           question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'true', message: '10',
         },
         {
           question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'true', message: '7',
-        }],
-    },
-    {
-      template: q9,
-      buttons: [
-        {
-          question_type: 'london', text: 'Yes', value: 'yes', reject: 'check', message: '',
-        },
-        {
-          question_type: 'london', text: 'No', value: 'no', reject: 'check', message: '',
         }],
     },
   ],
