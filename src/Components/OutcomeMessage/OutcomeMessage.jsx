@@ -33,11 +33,11 @@ class OutcomeMessage extends Component {
   }
 
   componentDidMount() {
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   componentDidUpdate() {
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   componentWillUnmount() {
@@ -54,20 +54,6 @@ class OutcomeMessage extends Component {
       ? document.referrer : document.location.href;
     return url;
   }
-
-  /**
-   * Send form height message to parent iframe.
-   */
-  sendFormHeightMessage() {
-    const formHeight = document.getElementById('grants-form') !== null
-      ? document.getElementById('grants-form').clientHeight
-      : '1000';
-
-    setTimeout(function () {
-      window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
-    }, 350);
-  }
-
   /**
    * Handles submission to the message queues
    */
@@ -158,6 +144,7 @@ class OutcomeMessage extends Component {
 }
 
 OutcomeMessage.propTypes = {
+  resize: propTypes.func,
   location: ReactRouterPropTypes.location,
   match: ReactRouterPropTypes.match,
   messages: propTypes.array,
@@ -167,6 +154,7 @@ OutcomeMessage.propTypes = {
 };
 
 OutcomeMessage.defaultProps = {
+  resize() { },
   history: { push: null },
   messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11],
   match: {},

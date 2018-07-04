@@ -53,12 +53,12 @@ class Question extends Component {
 
   componentDidMount() {
     this.updateQuestionNumber();
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   componentDidUpdate() {
     this.updateQuestionNumber();
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   /* Update the state to reflect our input field */
@@ -152,19 +152,6 @@ class Question extends Component {
         responses: theseResponses,
       },
     });
-  }
-
-  /**
-   * Send form height message to parent iframe.
-   */
-  sendFormHeightMessage() {
-    const formHeight = document.getElementById('grants-form') !== null
-      ? document.getElementById('grants-form').clientHeight
-      : '1000';
-
-    setTimeout(function () {
-      window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
-    }, 350);
   }
 
   progressClassNames(stepNum, currentQ) {
@@ -367,6 +354,7 @@ class Question extends Component {
 
 /* Define proptypes */
 Question.propTypes = {
+  resize: {},
   history: propTypes.shape({
     push: propTypes.func,
   }),
@@ -396,6 +384,7 @@ Question.propTypes = {
 };
 
 Question.defaultProps = {
+  resize() { },
   match: null,
   history: { push: null },
   questions: [

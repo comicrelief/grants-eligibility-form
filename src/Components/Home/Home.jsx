@@ -16,30 +16,17 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   componentDidUpdate() {
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   handleStartForm() {
     this.props.history.push({
       pathname: '/question/1',
     });
-  }
-
-  /**
-   * Send form height message to parent iframe.
-   */
-  sendFormHeightMessage() {
-    const formHeight = document.getElementById('grants-form') !== null
-      ? document.getElementById('grants-form').clientHeight
-      : '1000';
-
-    setTimeout(function () {
-      window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
-    }, 350);
   }
 
   /**
@@ -94,12 +81,14 @@ class Home extends Component {
 }
 
 Home.propTypes = {
+  resize: propTypes.func,
   history: propTypes.shape({
     push: propTypes.func,
   }),
 };
 
 Home.defaultProps = {
+  resize() { },
   history: { push: null },
 };
 
