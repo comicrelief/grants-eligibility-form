@@ -25,7 +25,7 @@ class Question extends Component {
         break;
       case 'project-location':
         if (value === 'uk') {
-          if (coreCosts === 'no') { return '13'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '14' : '15'); }
+          if (coreCosts === 'no') { return '9'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '10' : '11'); }
         } break;
 
       default:

@@ -15,21 +15,10 @@ import m4 from './templates/m4.html';
 import m5 from './templates/m5.html';
 import m6 from './templates/m6.html';
 import m7 from './templates/m7.html';
-
-import m8 from './templates/m8.html'; // to remove
-import m9 from './templates/m9.html'; // to remove
-
+import m8 from './templates/m8.html';
+import m9 from './templates/m9.html';
 import m10 from './templates/m10.html';
-
-import m11 from './templates/m11.html'; // to remove
-import m12 from './templates/m12.html'; // to remove
-
-import m13 from './templates/m13.html';
-import m14 from './templates/m14.html';
-import m15 from './templates/m15.html';
-import m16 from './templates/m16.html';
-import m17 from './templates/m17.html';
-import m18 from './templates/m18.html';
+import m11 from './templates/m11.html';
 
 /**
  * OutcomeMessage class
@@ -179,7 +168,7 @@ OutcomeMessage.propTypes = {
 
 OutcomeMessage.defaultProps = {
   history: { push: null },
-  messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18],
+  messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11],
   match: {},
   location: {},
 };
