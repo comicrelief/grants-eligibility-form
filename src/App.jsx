@@ -19,7 +19,6 @@ class App extends Component {
   }
 
   resize() {
-    console.log('Resize event');
     const formHeight = document.getElementById('grants-form') !== null
       ? document.getElementById('grants-form').clientHeight
       : '1000';
