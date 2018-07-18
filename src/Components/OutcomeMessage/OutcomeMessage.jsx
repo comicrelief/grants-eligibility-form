@@ -20,6 +20,10 @@ import m9 from './templates/m9.html';
 import m10 from './templates/m10.html';
 import m11 from './templates/m11.html';
 
+import snippet1 from './templates/snippet1.html';
+import snippet2 from './templates/snippet2.html';
+import snippet3 from './templates/snippet3.html';
+
 /**
  * OutcomeMessage class
  */
@@ -63,6 +67,10 @@ class OutcomeMessage extends Component {
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
+    console.log('responses:', allResponses);
+
+    console.log('responses.snippets:', allResponses.snippets);
+
     /* Construct json object only of values required by data contract */
     let postBody = {
       organisation: allResponses.company_name,
@@ -83,8 +91,14 @@ class OutcomeMessage extends Component {
         console.log('post successful');
       }
     };
-    console.log(postBody);
-    // xhr.send(postBody);
+
+    const thisDomain = window.location.href;
+
+    if (thisDomain.includes('localhost')) {
+      // console.log('postBody', postBody);
+    } else {
+      xhr.send(postBody);
+    }
   }
 
   /* Helper function used during submission */
@@ -116,10 +130,13 @@ class OutcomeMessage extends Component {
     /* Convert the current number to suit our zero-indexed array of messages */
     let currentMessage = this.props.match.params.outcome_number - 1;
 
+    const currentSnippet = 'one';
+
     currentMessage = currentMessage.toString();
 
     return (
       <div className="outcome-message">
+        {Parser(this.props.snippets[currentSnippet])}
         {Parser(this.props.messages[currentMessage])}
         <section className="single-msg single-msg--copy-only bg--white apply-footer">
           <div className="single-msg__outer-wrapper">
@@ -148,15 +165,26 @@ OutcomeMessage.propTypes = {
   location: ReactRouterPropTypes.location,
   match: ReactRouterPropTypes.match,
   messages: propTypes.array,
+  snippets: propTypes.shape({
+    one: null,
+    two: null,
+    three: null,
+  }),
   history: propTypes.shape({
     push: propTypes.func,
   }),
+
 };
 
 OutcomeMessage.defaultProps = {
   resize() { },
   history: { push: null },
   messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11],
+  snippets: {
+    one: snippet1,
+    two: snippet2,
+    three: snippet3,
+  },
   match: {},
   location: {},
 };
