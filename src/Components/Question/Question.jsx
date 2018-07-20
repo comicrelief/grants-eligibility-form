@@ -114,7 +114,7 @@ class Question extends Component {
 
     stateCopy.responses.success = true;
 
-    this.updatePath();
+    this.setState(stateCopy);
 
     /* Update the URL */
     this.props.history.push({

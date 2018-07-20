@@ -42,7 +42,7 @@ class App extends Component {
             render={props => <Question {...props} resize={this.resize} />}
           />
           <Route
-            path="/outcome"
+            path="/outcome/"
             render={props => <OutcomeMessage {...props} resize={this.resize} />}
           />
           <Route
