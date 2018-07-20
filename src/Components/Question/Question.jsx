@@ -68,7 +68,6 @@ class Question extends Component {
   updatePath() {
     const nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
     let newPath;
-    console.log('this.state.responses', this.state.responses);
 
     if (nextQuestion > this.state.totalQuestions) {
       newPath = '/outcome/';
@@ -116,8 +115,7 @@ class Question extends Component {
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
-    stateCopy.responses.snippets = theseSnippets.concat(this.state.responses.snippets);
-
+    stateCopy.responses.snippets = (this.state.responses.snippets).concat(theseSnippets);
     stateCopy.responses.success = true;
 
     this.setState(stateCopy);
@@ -369,16 +367,16 @@ Question.defaultProps = {
       title: 'Get started',
       buttons: [
         {
-          question_type: 'question-1', text: 'q1 yes', value: 'individual', snippets: ['snippet1', 'snippet2'],
+          question_type: 'question-1', text: 'q1 yes', value: 'individual', snippets: ['snippet1'],
         },
         {
-          question_type: 'question-1', text: 'q1 no', value: 'organisation', snippets: ['snippet3', 'snippet4'],
+          question_type: 'question-1', text: 'q1 no', value: 'organisation', snippets: ['snippet2'],
         }],
     },
     {
       template: q2,
       text_input: [{
-        question_type: 'question-2', text: 'q2 input', value: '', snippets: ['snippet5', 'snippet6'],
+        question_type: 'question-2', text: 'q2 input', value: '', snippets: ['snippet3'],
       }],
 
     },
@@ -386,60 +384,60 @@ Question.defaultProps = {
       template: q3,
       buttons: [
         {
-          question_type: 'question-3', text: 'q3 yes', value: 'yes', snippets: ['snippet7', 'snippet8'],
+          question_type: 'question-3', text: 'q3 yes', value: 'yes', snippets: ['snippet4'],
         },
         {
-          question_type: 'question-3', text: 'q3 no', value: 'no', snippets: ['snippet9', 'snippet10'],
+          question_type: 'question-3', text: 'q3 no', value: 'no', snippets: ['snippet5'],
         }],
     },
     {
       template: q4,
       buttons: [
         {
-          question_type: 'question-4', text: 'q4 yes', value: 'yes', snippets: ['snippet11', 'snippet12'],
+          question_type: 'question-4', text: 'q4 yes', value: 'yes', snippets: ['snippet6'],
         },
         {
-          question_type: 'question-4', text: 'q4 no', value: 'no', snippets: ['snippet13', 'snippet14'],
+          question_type: 'question-4', text: 'q4 no', value: 'no', snippets: ['snippet7'],
         }],
     },
     {
       template: q5,
       buttons: [
         {
-          question_type: 'question-5', text: 'q5 yes', value: 'yes', snippets: ['snippet15', 'snippet16'],
+          question_type: 'question-5', text: 'q5 yes', value: 'yes', snippets: ['snippet8'],
         },
         {
-          question_type: 'question-5', text: 'q5 no', value: 'no', snippets: ['snippet17', 'snippet18'],
+          question_type: 'question-5', text: 'q5 no', value: 'no', snippets: ['snippet9'],
         }],
     },
     {
       template: q6,
       buttons: [
         {
-          question_type: 'question-6', text: 'q6 yes', value: 'yes', snippets: ['snippet19', 'snippet20'],
+          question_type: 'question-6', text: 'q6 yes', value: 'yes', snippets: ['snippet10'],
         },
         {
-          question_type: 'question-6', text: 'q6 no', value: 'no', snippets: ['snippet21', 'snippet22'],
+          question_type: 'question-6', text: 'q6 no', value: 'no', snippets: ['snippet11'],
         }],
     },
     {
       template: q7,
       buttons: [
         {
-          question_type: 'question-7', text: 'q7 yes', value: 'yes', snippets: ['snippet23', 'snippet24'],
+          question_type: 'question-7', text: 'q7 yes', value: 'yes', snippets: ['snippet12'],
         },
         {
-          question_type: 'question-7', text: 'q7 no', value: 'no', snippets: ['snippet25', 'snippet26'],
+          question_type: 'question-7', text: 'q7 no', value: 'no', snippets: ['snippet13'],
         }],
     },
     {
       template: q8,
       buttons: [
         {
-          question_type: 'question-8', text: 'q8 yes', value: 'yes', snippets: ['snippet27', 'snippet28'],
+          question_type: 'question-8', text: 'q8 yes', value: 'yes', snippets: ['snippet14'],
         },
         {
-          question_type: 'question-8', text: 'q8 no', value: 'no', snippets: ['snippet29', 'snippet30'],
+          question_type: 'question-8', text: 'q8 no', value: 'no', snippets: ['snippet15'],
         }],
     },
   ],

@@ -4,25 +4,15 @@
 
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Parser from 'html-react-parser';
+// import Parser from 'html-react-parser';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import Snippets from './templates/snippets.json';
 
 // Import all of our template variants
-import m1 from './templates/m1.html';
-import m2 from './templates/m2.html';
-import m3 from './templates/m3.html';
-import m4 from './templates/m4.html';
-import m5 from './templates/m5.html';
-import m6 from './templates/m6.html';
-import m7 from './templates/m7.html';
-import m8 from './templates/m8.html';
-import m9 from './templates/m9.html';
-import m10 from './templates/m10.html';
-import m11 from './templates/m11.html';
-
-import snippet1 from './templates/snippet1.html';
-import snippet2 from './templates/snippet2.html';
-import snippet3 from './templates/snippet3.html';
+/* import m1 from './templates/m1.html'; */
+/* import m2 from './templates/m2.html'; */
+/* import m3 from './templates/m3.html'; */
+/* import m4 from './templates/m4.html'; */
 
 /**
  * OutcomeMessage class
@@ -67,9 +57,8 @@ class OutcomeMessage extends Component {
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
-    console.log('responses:', allResponses);
-
-    console.log('responses.snippets:', allResponses.snippets);
+    // console.log('responses:', allResponses);
+    // console.log('responses.snippets:', allResponses.snippets);
 
     /* Construct json object only of values required by data contract */
     let postBody = {
@@ -127,18 +116,28 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    console.log('trying to render Outcome');
-    /* Convert the current number to suit our zero-indexed array of messages */
-    let currentMessage = this.props.match.params.outcome_number - 1;
+    // console.log('copy', Snippets.snippet1.copy);
+    /* to remove, just to keep logic happy
+    let currentMessage = 1; */
 
-    const currentSnippet = 'one';
+    const snippetsToShow = this.props.location.state.responses.snippets;
 
-    currentMessage = currentMessage.toString();
+    // currentMessage = currentMessage.toString();
+
+    /* Build our list items from the relevant snippets */
+    const renderedSnippets = snippetsToShow.map(thisSnippet => (
+      <li>
+        {Snippets[thisSnippet].copy}
+      </li>));
 
     return (
       <div className="outcome-message">
-        {Parser(this.props.snippets[currentSnippet])}
-        {Parser(this.props.messages[currentMessage])}
+
+        <ul>
+          {renderedSnippets}
+        </ul>
+
+        {/* {Parser(this.props.messages[currentMessage])} */}
         <section className="single-msg single-msg--copy-only bg--white apply-footer">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
@@ -146,7 +145,12 @@ class OutcomeMessage extends Component {
                 <div className="single-msg__title text-align-center">
                   <h3>You can find more information in</h3>
                   <h3>
-                    <a className="link link--dark-purple inline" target="_blank" rel="noopener noreferrer" href="https://www.comicrelief.com/funding/applying-for-grants/guidance">
+                    <a
+                      className="link link--dark-purple inline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.comicrelief.com/funding/applying-for-grants/guidance"
+                    >
                     &#39;Guidance on applying&#39;
                     </a>
                     .
@@ -164,13 +168,7 @@ class OutcomeMessage extends Component {
 OutcomeMessage.propTypes = {
   resize: propTypes.func,
   location: ReactRouterPropTypes.location,
-  match: ReactRouterPropTypes.match,
-  messages: propTypes.array,
-  snippets: propTypes.shape({
-    one: null,
-    two: null,
-    three: null,
-  }),
+  // messages: propTypes.array,
   history: propTypes.shape({
     push: propTypes.func,
   }),
@@ -180,13 +178,7 @@ OutcomeMessage.propTypes = {
 OutcomeMessage.defaultProps = {
   resize() { },
   history: { push: null },
-  messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11],
-  snippets: {
-    one: snippet1,
-    two: snippet2,
-    three: snippet3,
-  },
-  match: {},
+  // messages: [m1, m2, m3, m4],
   location: {},
 };
 
