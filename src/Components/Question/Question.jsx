@@ -24,15 +24,17 @@ class Question extends Component {
   constructor(props) {
     super(props);
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextSubmit = this.handleTextSubmit.bind(this);
     this.handleButtonChoice = this.handleButtonChoice.bind(this);
     this.previousQuestion = this.previousQuestion.bind(this);
+    this.updatePath = this.updatePath.bind(this);
 
     this.state = {
       currentQuestion: 1,
       totalQuestions: 8,
       responses: {
         snippets: [],
+        successes: [],
       },
     };
   }
@@ -62,22 +64,31 @@ class Question extends Component {
     }
   }
 
-  /* Handles 'submission' of the company input question */
-  handleSubmit(event) {
-    event.preventDefault();
-    /* Create path to next question */
+  /* Update path to next question or outcome messaging */
+  updatePath() {
     const nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
-    const newPath = '/question/' + nextQuestion;
+    let newPath;
+
+    if (nextQuestion > this.state.totalQuestions) {
+      newPath = '/outcome/';
+    } else {
+      newPath = '/question/' + nextQuestion;
+    }
 
     /* Update the URL */
     this.props.history.push({ pathname: newPath });
+  }
+
+  /* Handles 'submission' of the company input question */
+  handleTextSubmit(event) {
+    event.preventDefault();
+    this.updatePath();
   }
 
   /* Allows the user to step back one question by updating the path
   * which, in turn, updates the currentQuestion number in updateQuestionNumber func  */
   previousQuestion() {
     const newPath = '/question/' + (this.state.currentQuestion - 1);
-
     this.props.history.push({ pathname: newPath });
   }
 
@@ -94,22 +105,25 @@ class Question extends Component {
     const theseResponses = this.state.responses;
 
     /* Cache current question to use as array pointer */
-    const thisQuestion = this.state.currentQuestion;
+    // const thisQuestion = this.state.currentQuestion;
 
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
     stateCopy.responses.snippets = theseSnippets.concat(this.state.responses.snippets);
 
-    const newPath = '/question/' + (thisQuestion + 1);
     stateCopy.responses.success = true;
+
+    this.updatePath();
+
     /* Update the URL */
     this.props.history.push({
-      pathname: newPath,
       state: {
         responses: theseResponses,
       },
     });
+
+    this.updatePath();
   }
 
   progressClassNames(stepNum, currentQ) {
@@ -180,7 +194,7 @@ class Question extends Component {
 
     if (currentInput !== undefined) {
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleTextSubmit}>
           {currentInput.map(thisInput => (
             <div key={thisInput.question_type + 'wrapper'} className="field-item text-input text-align-center">
               <label htmlFor={thisInput.question_type + '__input'} key={thisInput.question_type + '__label'}>{thisInput.text}</label>

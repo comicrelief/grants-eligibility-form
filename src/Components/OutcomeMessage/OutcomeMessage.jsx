@@ -127,6 +127,7 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
+    console.log('trying to render Outcome');
     /* Convert the current number to suit our zero-indexed array of messages */
     let currentMessage = this.props.match.params.outcome_number - 1;
 
