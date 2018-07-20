@@ -10,7 +10,7 @@ describe('Grants form tests', () => {
     cy.visit('/')
   })
 
-  context('Stepping through the form', () => {
+/*  context('Stepping through the form', () => {
     it('should have a proper title', () => {
       cy.title().should('include', 'Grants Eligiblity Form')
       cy.get('.promo-header__content').should('contain', 'Find out if you\'re eligible')
@@ -45,5 +45,5 @@ describe('Grants form tests', () => {
       cy.get('.buttons .btn:nth-child(1)').click()
       cy.get('h1').should('contain', 'You might be eligible for 2 initiatives!')
     })
-  })
+  })*/
 });
