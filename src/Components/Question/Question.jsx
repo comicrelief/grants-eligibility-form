@@ -68,15 +68,21 @@ class Question extends Component {
   updatePath() {
     const nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
     let newPath;
+    console.log('this.state.responses', this.state.responses);
 
     if (nextQuestion > this.state.totalQuestions) {
       newPath = '/outcome/';
+
+      this.props.history.push({
+        pathname: newPath,
+        state: {
+          responses: this.state.responses,
+        },
+      });
     } else {
       newPath = '/question/' + nextQuestion;
+      this.props.history.push({ pathname: newPath });
     }
-
-    /* Update the URL */
-    this.props.history.push({ pathname: newPath });
   }
 
   /* Handles 'submission' of the company input question */
