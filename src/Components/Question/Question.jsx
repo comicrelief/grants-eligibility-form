@@ -17,22 +17,6 @@ import q8 from './templates/q8.html';
  * Question class
  */
 class Question extends Component {
-  /* Helper function to help contain messy message logic */
-  static messageSwitch(currentQuestionType, value, coreCosts, over100k) {
-    switch (currentQuestionType) {
-      case 'sports-project':
-        if (coreCosts === 'no') { return '6'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '4' : '5'); }
-        break;
-      case 'project-location':
-        if (value === 'uk') {
-          if (coreCosts === 'no') { return '9'; } else if (coreCosts === 'yes') { return (over100k === 'yes' ? '10' : '11'); }
-        } break;
-
-      default:
-        return 'error';
-    }
-    return 'error';
-  }
   /**
    * Question constructor
    * @param props
@@ -47,7 +31,9 @@ class Question extends Component {
     this.state = {
       currentQuestion: 1,
       totalQuestions: 8,
-      responses: {},
+      responses: {
+        snippets: [],
+      },
     };
   }
 
@@ -99,13 +85,13 @@ class Question extends Component {
   handleButtonChoice(e) {
     /* Get this response's attrs and values */
     const thisButton = e.target;
-    const isRejected = thisButton.getAttribute('data-r');
     const thisValue = thisButton.getAttribute('data-v');
     const thisQuestionType = thisButton.getAttribute('data-q');
-    const thisSnippets = thisButton.getAttribute('data-s');
+    let theseSnippets = thisButton.getAttribute('data-s');
+    // Convert string to array
+    theseSnippets = theseSnippets.split(',');
 
     const theseResponses = this.state.responses;
-    let newPath = '';
 
     /* Cache current question to use as array pointer */
     const thisQuestion = this.state.currentQuestion;
@@ -113,40 +99,10 @@ class Question extends Component {
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
-    stateCopy.responses.snippets = thisSnippets;
+    stateCopy.responses.snippets = theseSnippets.concat(this.state.responses.snippets);
 
-    /* If this answer still represents an eligible submission, continue the journey */
-    if (isRejected === 'false') {
-      newPath = '/question/' + (thisQuestion + 1);
-      stateCopy.responses.success = true;
-    } else if (isRejected === 'true') {
-      /* If this answer is a direct rejection, forward user
-       * to the rejection page with specific variant  */
-      newPath = '/outcome/' + thisButton.getAttribute('data-m');
-      stateCopy.responses.success = false;
-    } else {
-      /* Else, this is our "check" value, and we need to
-       * check prior answers to determine the outcome */
-      const messageToShow = Question.messageSwitch(thisQuestionType, thisValue, theseResponses['core-costs'], theseResponses['over-100k']);
-
-      newPath = '/outcome/' + messageToShow;
-
-      /* IE-friendly alternative to 'includes';
-       * set our 'success' flag based on the rejection message numbers */
-      let arr = ['1', '2', '3', '7'];
-      arr = arr.map(i => '^' + i + '$').join('|');
-
-      const isRejection = new RegExp(arr).test(messageToShow);
-
-      // Flip the boolean value to represent success equivalent
-      stateCopy.responses.success = !isRejection;
-
-      // Catch any errors and alert the user something's gone wrong
-      if (messageToShow === 'error') {
-        newPath = '/' + messageToShow;
-      }
-    }
-
+    const newPath = '/question/' + (thisQuestion + 1);
+    stateCopy.responses.success = true;
     /* Update the URL */
     this.props.history.push({
       pathname: newPath,
@@ -372,16 +328,12 @@ Question.propTypes = {
     text_input: propTypes.arrayOf(propTypes.shape({
       question_type: propTypes.string,
       text: propTypes.string,
-      value: propTypes.string,
-      reject: propTypes.string,
       message: propTypes.string,
     })),
     buttons: propTypes.arrayOf(propTypes.shape({
       question_type: propTypes.string,
       text: propTypes.string,
       value: propTypes.string,
-      reject: propTypes.string,
-      message: propTypes.string,
       snippets: propTypes.array,
     })),
   })),
@@ -397,16 +349,16 @@ Question.defaultProps = {
       title: 'Get started',
       buttons: [
         {
-          question_type: 'organisation-type', text: 'Individual', value: 'individual', reject: 'true', message: '1', snippets: ['one', 'two', 'three'],
+          question_type: 'question-1', text: 'q1 yes', value: 'individual', snippets: ['snippet1', 'snippet2'],
         },
         {
-          question_type: 'organisation-type', text: 'Organisation', value: 'organisation', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-1', text: 'q1 no', value: 'organisation', snippets: ['snippet3', 'snippet4'],
         }],
     },
     {
       template: q2,
       text_input: [{
-        question_type: 'organisation-name', text: 'Your organisation name', value: '', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+        question_type: 'question-2', text: 'q2 input', value: '', snippets: ['snippet5', 'snippet6'],
       }],
 
     },
@@ -414,63 +366,60 @@ Question.defaultProps = {
       template: q3,
       buttons: [
         {
-          question_type: 'activities-type', text: 'Yes', value: 'yes', reject: 'true', message: '2', snippets: ['one', 'two', 'three'],
+          question_type: 'question-3', text: 'q3 yes', value: 'yes', snippets: ['snippet7', 'snippet8'],
         },
         {
-          question_type: 'activities-type', text: 'No', value: 'no', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-3', text: 'q3 no', value: 'no', snippets: ['snippet9', 'snippet10'],
         }],
     },
     {
       template: q4,
       buttons: [
         {
-          question_type: 'capital-costs', text: 'Yes', value: 'yes', reject: 'true', message: '3', snippets: ['one', 'two', 'three'],
+          question_type: 'question-4', text: 'q4 yes', value: 'yes', snippets: ['snippet11', 'snippet12'],
         },
         {
-          question_type: 'capital-costs', text: 'No', value: 'no', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-4', text: 'q4 no', value: 'no', snippets: ['snippet13', 'snippet14'],
         }],
     },
     {
       template: q5,
       buttons: [
         {
-          question_type: 'core-costs', text: 'Yes', value: 'yes', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-5', text: 'q5 yes', value: 'yes', snippets: ['snippet15', 'snippet16'],
         },
         {
-          question_type: 'core-costs', text: 'No', value: 'no', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-5', text: 'q5 no', value: 'no', snippets: ['snippet17', 'snippet18'],
         }],
     },
     {
       template: q6,
       buttons: [
         {
-          question_type: 'over-100k', text: 'Yes', value: 'yes', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-6', text: 'q6 yes', value: 'yes', snippets: ['snippet19', 'snippet20'],
         },
         {
-          question_type: 'over-100k', text: 'No', value: 'no', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-6', text: 'q6 no', value: 'no', snippets: ['snippet21', 'snippet22'],
         }],
     },
     {
       template: q7,
       buttons: [
         {
-          question_type: 'sports-project', text: 'Yes', value: 'yes', reject: 'false', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-7', text: 'q7 yes', value: 'yes', snippets: ['snippet23', 'snippet24'],
         },
         {
-          question_type: 'sports-project', text: 'No', value: 'no', reject: 'check', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-7', text: 'q7 no', value: 'no', snippets: ['snippet25', 'snippet26'],
         }],
     },
     {
       template: q8,
       buttons: [
         {
-          question_type: 'project-location', text: 'United Kingdom', value: 'uk', reject: 'check', message: '', snippets: ['one', 'two', 'three'],
+          question_type: 'question-8', text: 'q8 yes', value: 'yes', snippets: ['snippet27', 'snippet28'],
         },
         {
-          question_type: 'project-location', text: 'India, South Africa, Brazil or Kenya', value: 'india-etc', reject: 'true', message: '10', snippets: ['one', 'two', 'three'],
-        },
-        {
-          question_type: 'project-location', text: 'Somewhere else', value: 'somewhere-else', reject: 'true', message: '7', snippets: ['one', 'two', 'three'],
+          question_type: 'question-8', text: 'q8 no', value: 'no', snippets: ['snippet29', 'snippet30'],
         }],
     },
   ],
