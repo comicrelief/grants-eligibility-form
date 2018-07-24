@@ -49,8 +49,6 @@ class OutcomeMessage extends Component {
    * Handles submission to the message queues
    */
   submitInfo() {
-    console.log('submit info', this.state);
-
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
     const isSuccessful = !(this.state.isRejected);
@@ -119,16 +117,13 @@ class OutcomeMessage extends Component {
     isRejected = isRejected.map(i => '^' + i + '$').join('|');
     isRejected = new RegExp(isRejected).test('no');
 
-    console.log('isRejected? ', isRejected);
-
     this.state.isRejected = isRejected;
 
     // Submit the form details, now we've done all our logic
     this.submitInfo();
 
     const snippetsToShow = this.props.location.state.snippets;
-    const thing = (isRejected ? 'fail' : 'success');
-    console.log('thing:', thing);
+    const failOrSuccess = (isRejected ? 'fail' : 'success');
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
@@ -142,7 +137,10 @@ class OutcomeMessage extends Component {
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
-                  <ReactMarkdown source={OutcomeHeading[thing].copy} className="outcome-heading" />
+                  <ReactMarkdown
+                    source={OutcomeHeading[failOrSuccess].copy}
+                    className="outcome-heading"
+                  />
                 </div>
               </div>
             </div>
@@ -166,7 +164,10 @@ class OutcomeMessage extends Component {
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
-                  <ReactMarkdown source={OutcomeCopy[thing].copy} className="outcome-copy" />
+                  <ReactMarkdown
+                    source={OutcomeCopy[failOrSuccess].copy}
+                    className="outcome-copy"
+                  />
                 </div>
               </div>
             </div>
