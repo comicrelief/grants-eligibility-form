@@ -12,12 +12,12 @@ import Snippets from './templates/snippets.json';
  * OutcomeMessage class
  */
 class OutcomeMessage extends Component {
-  /**
-   * Trigger our submission when this component mounts, at the end of the journey
-   */
-  componentWillMount() {
-    // Submission endpoint from env file
-    this.submitInfo();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isRejected: false,
+    };
   }
 
   componentDidMount() {
@@ -46,16 +46,18 @@ class OutcomeMessage extends Component {
    * Handles submission to the message queues
    */
   submitInfo() {
+    console.log('submit info', this.state);
+
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
-    console.log();
+    const isSuccessful = !(this.state.isRejected);
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
     /* Construct json object only of values required by data contract */
     let postBody = {
       organisation: allResponses.company_name,
-      success: allResponses.success ? 1 : 0,
+      success: isSuccessful,
       transSourceURL: 'https://www.comicrelief.com/eligibility-checker',
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
@@ -76,7 +78,7 @@ class OutcomeMessage extends Component {
     const thisDomain = window.location.href;
 
     if (thisDomain.includes('localhost')) {
-      // console.log('postBody', postBody);
+      console.log('Simulated local submit', postBody);
     } else {
       xhr.send(postBody);
     }
@@ -108,6 +110,19 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
+    let isRejected = this.props.location.state.successes;
+
+    /* IE-friendly check to see if any of our submissions contain a 'failure' */
+    isRejected = isRejected.map(i => '^' + i + '$').join('|');
+    isRejected = new RegExp(isRejected).test('no');
+
+    console.log('isRejected? ', isRejected);
+
+    this.state.isRejected = isRejected;
+
+    // Submit the form details, now we've done all our logic
+    this.submitInfo();
+
     const snippetsToShow = this.props.location.state.snippets;
 
     /* Build our list items from the relevant snippets */
@@ -119,7 +134,17 @@ class OutcomeMessage extends Component {
     return (
       <div className="outcome-message">
 
-        <ul>{renderedSnippets}</ul>
+        <section className="single-msg single-msg--copy-only bg--white apply-footer">
+          <div className="single-msg__outer-wrapper">
+            <div className="single-msg__copy_wrapper bg--white">
+              <div className="single-msg__copy">
+                <div className="single-msg__title text-align-center">
+                  <ul>{renderedSnippets}</ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* {Parser(this.props.messages[currentMessage])} */}
         <section className="single-msg single-msg--copy-only bg--white apply-footer">

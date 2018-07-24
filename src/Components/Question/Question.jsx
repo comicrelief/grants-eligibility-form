@@ -76,6 +76,7 @@ class Question extends Component {
         state: {
           responses: this.state.responses,
           snippets: this.state.snippets,
+          successes: this.state.successes,
         },
       });
     } else {
