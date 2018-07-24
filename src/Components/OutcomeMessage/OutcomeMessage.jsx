@@ -4,9 +4,12 @@
 
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-// import Parser from 'html-react-parser';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Snippets from './templates/snippets.json';
+import OutcomeHeading from './templates/outcome-headings.json';
+import OutcomeCopy from './templates/outcome-copy.json';
+
+const ReactMarkdown = require('react-markdown');
 
 /**
  * OutcomeMessage class
@@ -124,15 +127,27 @@ class OutcomeMessage extends Component {
     this.submitInfo();
 
     const snippetsToShow = this.props.location.state.snippets;
+    const thing = (isRejected ? 'fail' : 'success');
+    console.log('thing:', thing);
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
-      <li key={thisSnippet}>
-        {Snippets[thisSnippet].copy}
-      </li>));
+      <li key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
       <div className="outcome-message">
+
+        <section className="single-msg single-msg--copy-only bg--white apply-footer">
+          <div className="single-msg__outer-wrapper">
+            <div className="single-msg__copy_wrapper bg--white">
+              <div className="single-msg__copy">
+                <div className="single-msg__title text-align-center">
+                  <ReactMarkdown source={OutcomeHeading[thing].copy} className="outcome-heading" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="single-msg single-msg--copy-only bg--white apply-footer">
           <div className="single-msg__outer-wrapper">
@@ -146,24 +161,12 @@ class OutcomeMessage extends Component {
           </div>
         </section>
 
-        {/* {Parser(this.props.messages[currentMessage])} */}
         <section className="single-msg single-msg--copy-only bg--white apply-footer">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
-                  <h3>You can find more information in</h3>
-                  <h3>
-                    <a
-                      className="link link--dark-purple inline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://www.comicrelief.com/funding/applying-for-grants/guidance"
-                    >
-                    &#39;Guidance on applying&#39;
-                    </a>
-                    .
-                  </h3>
+                  <ReactMarkdown source={OutcomeCopy[thing].copy} className="outcome-copy" />
                 </div>
               </div>
             </div>
@@ -177,7 +180,6 @@ class OutcomeMessage extends Component {
 OutcomeMessage.propTypes = {
   resize: propTypes.func,
   location: ReactRouterPropTypes.location,
-  // messages: propTypes.array,
   history: propTypes.shape({
     push: propTypes.func,
   }),
@@ -187,7 +189,6 @@ OutcomeMessage.propTypes = {
 OutcomeMessage.defaultProps = {
   resize: propTypes.func,
   history: { push: null },
-  // messages: [m1, m2, m3, m4],
   location: {},
 };
 
