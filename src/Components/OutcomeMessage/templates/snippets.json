@@ -1,17 +1,24 @@
 {
-  "snippet1": {"copy": "Copy for snippet 1"},
-  "snippet2": {"copy": "Copy for snippet 2"},
-  "snippet3": {"copy": "Copy for snippet 3"},
-  "snippet4": {"copy": "Copy for snippet 4"},
-  "snippet5": {"copy": "Copy for snippet 5"},
-  "snippet6": {"copy": "Copy for snippet 6"},
-  "snippet7": {"copy": "Copy for snippet 7"},
-  "snippet8": {"copy": "Copy for snippet 8"},
-  "snippet9": {"copy": "Copy for snippet 9"},
-  "snippet10": {"copy": "Copy for snippet 10"},
-  "snippet11": {"copy": "Copy for snippet 11"},
-  "snippet12": {"copy": "Copy for snippet 12"},
-  "snippet13": {"copy": "Copy for snippet 13"},
-  "snippet14": {"copy": "Copy for snippet 14"},
-  "snippet15": {"copy": "Copy for snippet 15"}
+  "q1-yes": {"copy": "Answered YES to Q1"},
+  "q1-no": {"copy": "Answered NO to Q1"},
+
+  "q2-yes": {"copy": "Answered YES to Q2 "},
+
+  "q3-yes": {"copy": "Answered YES to Q3"},
+  "q3-no": {"copy": "Answered NO to Q3"},
+
+  "q4-yes": {"copy": "Answered YES to Q4"},
+  "q4-no":  {"copy": "Answered NO to Q4"},
+
+  "q5-yes": {"copy": "Answered YES to Q5"},
+  "q5-no":  {"copy": "Answered NO to Q5"},
+
+  "q6-yes": {"copy": "Answered YES to Q6"},
+  "q6-no":  {"copy": "Answered NO to Q6"},
+
+  "q7-yes": {"copy": "Answered YES to Q7"},
+  "q7-no":  {"copy": "Answered NO to Q7"},
+
+  "q8-yes": {"copy": "Answered YES to Q8"},
+  "q8-no":  {"copy": "Answered NO to Q8"}
 }

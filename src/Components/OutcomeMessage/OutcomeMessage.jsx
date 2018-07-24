@@ -113,13 +113,15 @@ class OutcomeMessage extends Component {
   render() {
     let isRejected = this.props.location.state.successes;
 
+    console.log('isRejected', isRejected);
+
     /* IE-friendly check to see if any of our submissions contain a 'failure' */
     isRejected = isRejected.map(i => '^' + i + '$').join('|');
     isRejected = new RegExp(isRejected).test('no');
 
     this.state.isRejected = isRejected;
 
-    // Submit the form details, now we've done all our logic
+    /* Submit the form details, now we've done all of our logic */
     this.submitInfo();
 
     const snippetsToShow = this.props.location.state.snippets;
@@ -127,12 +129,12 @@ class OutcomeMessage extends Component {
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
-      <li key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
+      <li className={thisSnippet} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
       <div className="outcome-message">
 
-        <section className="single-msg single-msg--copy-only bg--white apply-footer">
+        <section className="single-msg single-msg--copy-only bg--white">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
@@ -147,11 +149,12 @@ class OutcomeMessage extends Component {
           </div>
         </section>
 
-        <section className="single-msg single-msg--copy-only bg--white apply-footer">
+        <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
+                  <h3>How you answered:</h3>
                   <ul>{renderedSnippets}</ul>
                 </div>
               </div>
@@ -159,7 +162,7 @@ class OutcomeMessage extends Component {
           </div>
         </section>
 
-        <section className="single-msg single-msg--copy-only bg--white apply-footer">
+        <section className="single-msg single-msg--copy-only bg--white">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">

@@ -3,6 +3,6 @@
     "copy": "### Copy for fail message"
   },
   "success": {
-    "copy": "### Copy for success message: Nulla quis lorem ut libero [malesuada](https://www.google.com) feugiat. Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
+    "copy": "### Copy for success message: Nulla quis lorem ut libero [malesuada](https://www.google.com) feugiat."
   }
 }
