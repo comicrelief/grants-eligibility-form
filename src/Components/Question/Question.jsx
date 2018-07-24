@@ -94,10 +94,6 @@ class Question extends Component {
     stateCopy.success = true;
     /* Pass this as a 'success' as there's no fail criteria for this step */
     stateCopy.successes = (this.state.successes).concat('yes');
-
-    // TODO: pass the snippet value from the button to here:
-    // stateCopy.snippets = (this.state.snippets).concat(theseSnippets);
-
     this.setState(stateCopy);
 
     this.updatePath();
