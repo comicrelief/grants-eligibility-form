@@ -8,12 +8,6 @@ import propTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Snippets from './templates/snippets.json';
 
-// Import all of our template variants
-/* import m1 from './templates/m1.html'; */
-/* import m2 from './templates/m2.html'; */
-/* import m3 from './templates/m3.html'; */
-/* import m4 from './templates/m4.html'; */
-
 /**
  * OutcomeMessage class
  */
@@ -54,11 +48,9 @@ class OutcomeMessage extends Component {
   submitInfo() {
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
+    console.log();
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
-
-    // console.log('responses:', allResponses);
-    // console.log('responses.snippets:', allResponses.snippets);
 
     /* Construct json object only of values required by data contract */
     let postBody = {
@@ -116,26 +108,18 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    // console.log('copy', Snippets.snippet1.copy);
-    /* to remove, just to keep logic happy
-    let currentMessage = 1; */
-
-    const snippetsToShow = this.props.location.state.responses.snippets;
-
-    // currentMessage = currentMessage.toString();
+    const snippetsToShow = this.props.location.state.snippets;
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
-      <li>
+      <li key={thisSnippet}>
         {Snippets[thisSnippet].copy}
       </li>));
 
     return (
       <div className="outcome-message">
 
-        <ul>
-          {renderedSnippets}
-        </ul>
+        <ul>{renderedSnippets}</ul>
 
         {/* {Parser(this.props.messages[currentMessage])} */}
         <section className="single-msg single-msg--copy-only bg--white apply-footer">
@@ -176,7 +160,7 @@ OutcomeMessage.propTypes = {
 };
 
 OutcomeMessage.defaultProps = {
-  resize() { },
+  resize: propTypes.func,
   history: { push: null },
   // messages: [m1, m2, m3, m4],
   location: {},

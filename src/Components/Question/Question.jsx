@@ -32,10 +32,10 @@ class Question extends Component {
     this.state = {
       currentQuestion: 1,
       totalQuestions: 8,
-      responses: {
-        snippets: [],
-        successes: [],
-      },
+      snippets: [],
+      successes: [],
+      responses: {},
+      // success: false,
     };
   }
 
@@ -67,26 +67,34 @@ class Question extends Component {
   /* Update path to next question or outcome messaging */
   updatePath() {
     const nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
-    let newPath;
 
     if (nextQuestion > this.state.totalQuestions) {
-      newPath = '/outcome/';
+      console.log('any fails?', this.state);
 
       this.props.history.push({
-        pathname: newPath,
+        pathname: /outcome/,
         state: {
           responses: this.state.responses,
+          snippets: this.state.snippets,
         },
       });
     } else {
-      newPath = '/question/' + nextQuestion;
-      this.props.history.push({ pathname: newPath });
+      this.props.history.push({
+        pathname: '/question/' + nextQuestion,
+      });
     }
   }
 
   /* Handles 'submission' of the company input question */
   handleTextSubmit(event) {
     event.preventDefault();
+
+    const stateCopy = Object.assign({}, this.state);
+    stateCopy.success = true;
+    /* Pass this as a 'success' as there's no fail criteria for this step */
+    stateCopy.successes = (this.state.successes).concat('yes');
+    this.setState(stateCopy);
+
     this.updatePath();
   }
 
@@ -115,8 +123,8 @@ class Question extends Component {
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
-    stateCopy.responses.snippets = (this.state.responses.snippets).concat(theseSnippets);
-    stateCopy.responses.success = true;
+    stateCopy.snippets = (this.state.snippets).concat(theseSnippets);
+    stateCopy.successes = (this.state.successes).concat(thisValue);
 
     this.setState(stateCopy);
 
@@ -331,7 +339,7 @@ class Question extends Component {
 
 /* Define proptypes */
 Question.propTypes = {
-  resize: {},
+  resize: propTypes.func,
   history: propTypes.shape({
     push: propTypes.func,
   }),
@@ -367,10 +375,10 @@ Question.defaultProps = {
       title: 'Get started',
       buttons: [
         {
-          question_type: 'question-1', text: 'q1 yes', value: 'individual', snippets: ['snippet1'],
+          question_type: 'question-1', text: 'q1 yes', value: 'yes', snippets: ['snippet1'],
         },
         {
-          question_type: 'question-1', text: 'q1 no', value: 'organisation', snippets: ['snippet2'],
+          question_type: 'question-1', text: 'q1 no', value: 'no', snippets: ['snippet2'],
         }],
     },
     {
