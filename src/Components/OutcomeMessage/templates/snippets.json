@@ -16,9 +16,5 @@
   "q5-fail":  {"copy": "✗ You do want funding for one or more of our non-eligible areas"},
 
   "q6-success": {"copy": "✓ Your project will take place in one of our funded countries"},
-  "q6-fail":  {"copy": "✗ Your project won't take place in one of our funded countries"},
-
-  "q7-success": {"copy": "Q7: - to remove -"},
-
-  "q8-success": {"copy": "Q8: - to remove -"}
+  "q6-fail":  {"copy": "✗ Your project won't take place in one of our funded countries"}
 }

@@ -7,10 +7,10 @@
     ],
     "buttons": [
       {
-        "question_type": "question-1", "text": "Individual", "value": "fail", "snippets": ["q1-fail"]
+        "question_type": "individual-or-org", "text": "Individual", "value": "fail", "snippets": ["q1-fail"]
       },
       {
-        "question_type": "question-1", "text": "Organisation", "value": "success", "snippets": ["q1-success"]
+        "question_type": "individual-or-org", "text": "Organisation", "value": "success", "snippets": ["q1-success"]
       }]
   },
 
@@ -21,10 +21,10 @@
     ],
     "buttons": [
       {
-        "question_type": "question-2", "text": "Yes", "value": "fail", "snippets": ["q2-fail"]
+        "question_type": "yearly-submissions-only", "text": "Yes", "value": "fail", "snippets": ["q2-fail"]
       },
       {
-        "question_type": "question-2", "text": "No", "value": "success", "snippets": ["q2-success"]
+        "question_type": "yearly-submissions-only", "text": "No", "value": "success", "snippets": ["q2-success"]
       }]
   },
 
@@ -32,13 +32,13 @@
     "copy": ["### What was your organisation’s level of income in your last financial year?"],
     "buttons": [
       {
-        "question_type": "question-3", "text": "Under £250,000", "value": "check", "snippets": ["q3-check"]
+        "question_type": "income", "text": "Under £250,000", "value": "check", "snippets": ["q3-check"]
       },
       {
-        "question_type": "question-3", "text": "Between £250,000 to £10 million", "value": "success", "snippets": ["q3-success"]
+        "question_type": "income", "text": "Between £250,000 to £10 million", "value": "success", "snippets": ["q3-success"]
       },
       {
-        "question_type": "question-3", "text": "Over £10 million", "value": "fail", "snippets": ["q3-fail"]
+        "question_type": "income", "text": "Over £10 million", "value": "fail", "snippets": ["q3-fail"]
       }]
   },
 
@@ -49,10 +49,10 @@
     ],
     "buttons": [
       {
-        "question_type": "question-4", "text": "Yes", "value": "success", "snippets": ["q4-success"]
+        "question_type": "sport-for-change", "text": "Yes", "value": "success", "snippets": ["q4-success"]
       },
       {
-        "question_type": "question-4", "text": "No", "value": "fail", "snippets": ["q4-fail"]
+        "question_type": "sport-for-change", "text": "No", "value": "fail", "snippets": ["q4-fail"]
       }]
   },
 
@@ -63,10 +63,10 @@
     ],
     "buttons": [
       {
-        "question_type": "question-5", "text": "Yes", "value": "fail", "snippets": ["q5-fail"]
+        "question_type": "funding-areas", "text": "Yes", "value": "fail", "snippets": ["q5-fail"]
       },
       {
-        "question_type": "question-5", "text": "No", "value": "success", "snippets": ["q5-success"]
+        "question_type": "funding-areas", "text": "No", "value": "success", "snippets": ["q5-success"]
       }]
   },
 
@@ -78,10 +78,10 @@
     ],
     "buttons": [
       {
-        "question_type": "question-6", "text": "Yes", "value": "success", "snippets": ["q6-success"]
+        "question_type": "funding-location", "text": "Yes", "value": "success", "snippets": ["q6-success"]
       },
       {
-        "question_type": "question-6", "text": "No", "value": "fail", "snippets": ["q6-fail"]
+        "question_type": "funding-location", "text": "No", "value": "fail", "snippets": ["q6-fail"]
       }]
   },
 
@@ -99,7 +99,7 @@
     ],
     "buttons": [
       {
-        "question_type": "question-7", "text": "OK", "value": "success"
+        "question_type": "statement-1", "text": "OK", "value": "success"
       }]
   },
   "q8": {
@@ -113,7 +113,7 @@
     ],
     "buttons": [
       {
-        "question_type": "question-8", "text": "OK", "value": "success"
+        "question_type": "statement-2", "text": "OK", "value": "success"
       }]
   }
 }

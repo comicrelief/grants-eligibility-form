@@ -119,11 +119,17 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    let isRejected = this.props.location.state.successes;
-
     /* IE-friendly check to see if any of our submissions contain a 'failure' */
-    isRejected = isRejected.map(i => '^' + i + '$').join('|');
-    isRejected = new RegExp(isRejected).test('fail');
+    const allSuccesses = (this.props.location.state.successes).map(i => '^' + i + '$').join('|');
+
+    /* Check for failures and checks */
+    const isRejected = new RegExp(allSuccesses).test('fail');
+    const checksToDo = new RegExp(allSuccesses).test('check');
+
+    if (checksToDo) {
+      console.log('CHECKS TO DO', this.props.location.state);
+    }
+
     this.state.isRejected = isRejected;
 
     /* Submit the form details, now we've completed all of our logic */
@@ -178,6 +184,7 @@ class OutcomeMessage extends Component {
                     source={OutcomeCopy[failOrSuccess].copy}
                     className="outcome-copy"
                     renderers={{ link: this.markdownLinkRenderer }}
+
                   />
                 </div>
               </div>
