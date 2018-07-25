@@ -1,0 +1,86 @@
+{
+  "q1": {
+    "title": "# Get started",
+    "copy": "### Copy for for question 1",
+    "buttons": [
+      {
+        "question_type": "question-1", "text": "q1 yes", "value": "yes", "snippets": ["q1-yes"]
+      },
+      {
+        "question_type": "question-1", "text": "q1 no", "value": "no", "snippets": ["q1-no"]
+      }]
+  },
+
+  "q2": {
+    "copy": "### Copy for for question 2",
+    "text_input": [
+      {
+        "question_type": "question-2", "text": "q2 input", "value": "yes", "snippets": ["q2-yes"]
+      }]
+  },
+
+  "q3": {
+    "copy": "### Copy for for question 3",
+    "buttons": [
+      {
+        "question_type": "question-3", "text": "q3 yes", "value": "yes", "snippets": ["q3-yes"]
+      },
+      {
+        "question_type": "question-3", "text": "q3 no", "value": "no", "snippets": ["q3-no"]
+      }]
+  },
+
+  "q4": {
+    "copy": "### Copy for for question 4",
+    "buttons": [
+      {
+        "question_type": "question-4", "text": "q4 yes", "value": "yes", "snippets": ["q4-yes"]
+      },
+      {
+        "question_type": "question-4", "text": "q4 no", "value": "no", "snippets": ["q4-no"]
+      }]
+  },
+
+  "q5": {
+    "copy": "### Copy for for question 5",
+    "buttons": [
+      {
+        "question_type": "question-5", "text": "q5 yes", "value": "yes", "snippets": ["q5-yes"]
+      },
+      {
+        "question_type": "question-5", "text": "q5 no", "value": "no", "snippets": ["q5-no"]
+      }]
+  },
+
+  "q6": {
+    "copy": "### Copy for for question 6",
+    "buttons": [
+      {
+        "question_type": "question-6", "text": "q6 yes", "value": "yes", "snippets": ["q6-yes"]
+      },
+      {
+        "question_type": "question-6", "text": "q6 no", "value": "no", "snippets": ["q6-no"]
+      }]
+  },
+
+  "q7": {
+    "copy": "### Copy for for question 7",
+    "buttons": [
+      {
+        "question_type": "question-7", "text": "q7 yes", "value": "yes", "snippets": ["q7-yes"]
+      },
+      {
+        "question_type": "question-7", "text": "q7 no", "value": "no", "snippets": ["q7-no"]
+      }]
+  },
+  "q8": {
+    "copy": "### Copy for for question 8",
+    "buttons": [
+      {
+        "question_type": "question-8", "text": "q8 yes", "value": "yes", "snippets": ["q8-yes"]
+      },
+      {
+        "question_type": "question-8", "text": "q8 no", "value": "no", "snippets": ["q8-no"]
+      }]
+  }
+}

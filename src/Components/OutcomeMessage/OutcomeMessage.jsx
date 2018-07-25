@@ -113,15 +113,13 @@ class OutcomeMessage extends Component {
   render() {
     let isRejected = this.props.location.state.successes;
 
-    console.log('isRejected', isRejected);
-
     /* IE-friendly check to see if any of our submissions contain a 'failure' */
     isRejected = isRejected.map(i => '^' + i + '$').join('|');
     isRejected = new RegExp(isRejected).test('no');
 
     this.state.isRejected = isRejected;
 
-    /* Submit the form details, now we've done all of our logic */
+    /* Submit the form details, now we've completed all of our logic */
     this.submitInfo();
 
     const snippetsToShow = this.props.location.state.snippets;

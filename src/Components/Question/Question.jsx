@@ -1,17 +1,9 @@
 /* eslint-env browser */
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Parser from 'html-react-parser';
+import Questions from './templates/questions.json';
 
-// Import all of our template variants
-import q1 from './templates/q1.html';
-import q2 from './templates/q2.html';
-import q3 from './templates/q3.html';
-import q4 from './templates/q4.html';
-import q5 from './templates/q5.html';
-import q6 from './templates/q6.html';
-import q7 from './templates/q7.html';
-import q8 from './templates/q8.html';
+const ReactMarkdown = require('react-markdown');
 
 /**
  * Question class
@@ -34,8 +26,7 @@ class Question extends Component {
       totalQuestions: 8,
       snippets: [],
       successes: [],
-      responses: {},
-      // success: false,
+      responses: {}, // eslint-disable-line react/no-unused-state
     };
   }
 
@@ -65,18 +56,17 @@ class Question extends Component {
   }
 
   /* Update path to next question or outcome messaging */
-  updatePath() {
-    const nextQuestion = parseInt(this.state.currentQuestion, 10) + 1;
+  updatePath(inputState) {
+    const currentQuestion = parseInt(this.state.currentQuestion, 10);
+    const nextQuestion = currentQuestion + 1;
 
-    if (nextQuestion > this.state.totalQuestions) {
-      console.log('any fails?', this.state);
-
+    if (currentQuestion >= this.state.totalQuestions) {
       this.props.history.push({
         pathname: /outcome/,
         state: {
-          responses: this.state.responses,
-          snippets: this.state.snippets,
-          successes: this.state.successes,
+          responses: inputState.responses,
+          snippets: inputState.snippets,
+          successes: inputState.successes,
         },
       });
     } else {
@@ -87,11 +77,12 @@ class Question extends Component {
   }
 
   /* Handles 'submission' of the company input question */
-  handleTextSubmit(event) {
-    event.preventDefault();
+  handleTextSubmit(e) {
+    e.preventDefault();
 
     const stateCopy = Object.assign({}, this.state);
     stateCopy.success = true;
+
     /* Pass this as a 'success' as there's no fail criteria for this step */
     stateCopy.successes = (this.state.successes).concat('yes');
     this.setState(stateCopy);
@@ -100,7 +91,7 @@ class Question extends Component {
   }
 
   /* Allows the user to step back one question by updating the path
-  * which, in turn, updates the currentQuestion number in updateQuestionNumber func  */
+     which, in turn, updates the currentQuestion number in updateQuestionNumber func */
   previousQuestion() {
     const newPath = '/question/' + (this.state.currentQuestion - 1);
     this.props.history.push({ pathname: newPath });
@@ -113,30 +104,19 @@ class Question extends Component {
     const thisValue = thisButton.getAttribute('data-v');
     const thisQuestionType = thisButton.getAttribute('data-q');
     let theseSnippets = thisButton.getAttribute('data-s');
-    // Convert string to array
+
+    /* Convert string to array, if there's multiple snippets */
     theseSnippets = theseSnippets.split(',');
-
-    const theseResponses = this.state.responses;
-
-    /* Cache current question to use as array pointer */
-    // const thisQuestion = this.state.currentQuestion;
 
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
     stateCopy.snippets = (this.state.snippets).concat(theseSnippets);
     stateCopy.successes = (this.state.successes).concat(thisValue);
-
     this.setState(stateCopy);
 
-    /* Update the URL */
-    this.props.history.push({
-      state: {
-        responses: theseResponses,
-      },
-    });
-
-    this.updatePath();
+    /* Update the URL, passing our newly update state copy, so it'll work before a state update */
+    this.updatePath(stateCopy);
   }
 
   progressClassNames(stepNum, currentQ) {
@@ -201,9 +181,8 @@ class Question extends Component {
    * Render the user choices for this specific questions
    * @return {XML}
    */
-  renderInput() {
-    /* Access our zero-indexed question array */
-    const currentInput = this.props.questions[this.state.currentQuestion - 1].text_input;
+  renderTextInput() {
+    const currentInput = Questions['q' + this.state.currentQuestion].text_input;
 
     if (currentInput !== undefined) {
       return (
@@ -239,8 +218,7 @@ class Question extends Component {
    * @return {XML}
    */
   renderButtons() {
-    /* Access our zero-indexed question array */
-    const currentButtons = this.props.questions[this.state.currentQuestion - 1].buttons;
+    const currentButtons = Questions['q' + this.state.currentQuestion].buttons;
 
     if (currentButtons !== undefined) {
       return (
@@ -287,18 +265,20 @@ class Question extends Component {
    * @return {XML}
    */
   render() {
-    // Cache the current copy and user options from our zero-indexed array
-    const currentQuestion = this.props.questions[this.state.currentQuestion - 1];
+    const currentQuestionPointer = 'q' + this.state.currentQuestion;
 
     return (
       <div>
-        { currentQuestion.title !== undefined ?
+        { Questions[currentQuestionPointer].title !== undefined ?
           <header className="bg--red promo-header promo-header--default promo-header--no-image">
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
                   <h1 className="font--white text-align-center">
-                    { Parser(currentQuestion.title) }
+                    <ReactMarkdown
+                      source={Questions[currentQuestionPointer].title}
+                      className="text-align-center font--family-bold"
+                    />
                   </h1>
                 </div>
               </div>
@@ -323,8 +303,13 @@ class Question extends Component {
                 <div className="single-msg__copy">
                   <div className="single-msg__body">
                     <div className="cr-body">
-                      { Parser(currentQuestion.template) }
-                      { this.renderInput() }
+
+                      <ReactMarkdown
+                        source={Questions[currentQuestionPointer].copy}
+                        className="text-align-center font--family-bold"
+                      />
+
+                      { this.renderTextInput() }
                       { this.renderButtons() }
                     </div>
                   </div>
@@ -349,107 +334,12 @@ Question.propTypes = {
       question_number: propTypes.string,
     }),
   }),
-  questions: propTypes.arrayOf(propTypes.shape({
-    title: propTypes.string,
-    template: propTypes.string,
-    text_input: propTypes.arrayOf(propTypes.shape({
-      question_type: propTypes.string,
-      text: propTypes.string,
-      message: propTypes.string,
-    })),
-    buttons: propTypes.arrayOf(propTypes.shape({
-      question_type: propTypes.string,
-      text: propTypes.string,
-      value: propTypes.string,
-      snippets: propTypes.array,
-    })),
-  })),
 };
 
 Question.defaultProps = {
   resize() { },
   match: null,
   history: { push: null },
-  questions: [
-    {
-      template: q1,
-      title: 'Get started',
-      buttons: [
-        {
-          question_type: 'question-1', text: 'q1 yes', value: 'yes', snippets: ['q1-yes'],
-        },
-        {
-          question_type: 'question-1', text: 'q1 no', value: 'no', snippets: ['q1-no'],
-        }],
-    },
-    {
-      template: q2,
-      text_input: [{
-        question_type: 'question-2', text: 'q2 input', value: '', snippets: ['q2-yes'],
-      }],
-
-    },
-    {
-      template: q3,
-      buttons: [
-        {
-          question_type: 'question-3', text: 'q3 yes', value: 'yes', snippets: ['q3-yes'],
-        },
-        {
-          question_type: 'question-3', text: 'q3 no', value: 'no', snippets: ['q3-no'],
-        }],
-    },
-    {
-      template: q4,
-      buttons: [
-        {
-          question_type: 'question-4', text: 'q4 yes', value: 'yes', snippets: ['q4-yes'],
-        },
-        {
-          question_type: 'question-4', text: 'q4 no', value: 'no', snippets: ['q4-no'],
-        }],
-    },
-    {
-      template: q5,
-      buttons: [
-        {
-          question_type: 'question-5', text: 'q5 yes', value: 'yes', snippets: ['q5-yes'],
-        },
-        {
-          question_type: 'question-5', text: 'q5 no', value: 'no', snippets: ['q5-no'],
-        }],
-    },
-    {
-      template: q6,
-      buttons: [
-        {
-          question_type: 'question-6', text: 'q6 yes', value: 'yes', snippets: ['q6-yes'],
-        },
-        {
-          question_type: 'question-6', text: 'q6 no', value: 'no', snippets: ['q6-no'],
-        }],
-    },
-    {
-      template: q7,
-      buttons: [
-        {
-          question_type: 'question-7', text: 'q7 yes', value: 'yes', snippets: ['q7-yes'],
-        },
-        {
-          question_type: 'question-7', text: 'q7 no', value: 'no', snippets: ['q7-no'],
-        }],
-    },
-    {
-      template: q8,
-      buttons: [
-        {
-          question_type: 'question-8', text: 'q8 yes', value: 'yes', snippets: ['q8-yes'],
-        },
-        {
-          question_type: 'question-8', text: 'q8 no', value: 'no', snippets: ['q8-no'],
-        }],
-    },
-  ],
 };
 
 export default Question;
