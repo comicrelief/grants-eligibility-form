@@ -45,6 +45,14 @@ class OutcomeMessage extends Component {
       ? document.referrer : document.location.href;
     return url;
   }
+
+  /* Helper function to add custom rendered for Markdown links */
+  markdownLinkRenderer(props) {
+    return props.href.startsWith('/') ?
+      <a href={props.href}>{props.children}</a> :
+      <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">{props.children}</a>;
+  }
+
   /**
    * Handles submission to the message queues
    */
@@ -140,6 +148,7 @@ class OutcomeMessage extends Component {
                   <ReactMarkdown
                     source={OutcomeHeading[failOrSuccess].copy}
                     className="outcome-heading"
+                    renderers={{ link: this.markdownLinkRenderer }}
                   />
                 </div>
               </div>
@@ -168,6 +177,7 @@ class OutcomeMessage extends Component {
                   <ReactMarkdown
                     source={OutcomeCopy[failOrSuccess].copy}
                     className="outcome-copy"
+                    renderers={{ link: this.markdownLinkRenderer }}
                   />
                 </div>
               </div>

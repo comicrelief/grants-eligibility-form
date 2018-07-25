@@ -43,6 +43,13 @@ class Question extends Component {
     this.props.resize();
   }
 
+  /* Helper function to add custom rendered for Markdown links */
+  markdownLinkRenderer(props) {
+    return props.href.startsWith('/') ?
+      <a href={props.href}>{props.children}</a> :
+      <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">{props.children}</a>;
+  }
+
   /* Update the state to reflect our input field */
   handleTextChange(event) {
     const stateCopy = Object.assign({}, this.state);
@@ -317,15 +324,7 @@ class Question extends Component {
                           key={shortid.generate()}
                           source={thisCopy}
                           className="text-align-center font--family-bold"
-                          renderers={{
-                            link: props => (
-                              <a
-                                href={props.href}
-                                target="_blank"
-                              >
-                                {props.children}
-                              </a>),
-                          }}
+                          renderers={{ link: this.markdownLinkRenderer }}
                         />
                       ))}
 
@@ -342,6 +341,7 @@ class Question extends Component {
     );
   }
 }
+
 
 /* Define proptypes */
 Question.propTypes = {
