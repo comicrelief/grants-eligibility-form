@@ -115,14 +115,14 @@ class OutcomeMessage extends Component {
 
     /* IE-friendly check to see if any of our submissions contain a 'failure' */
     isRejected = isRejected.map(i => '^' + i + '$').join('|');
-    isRejected = new RegExp(isRejected).test('no');
-
+    isRejected = new RegExp(isRejected).test('fail');
     this.state.isRejected = isRejected;
 
     /* Submit the form details, now we've completed all of our logic */
     this.submitInfo();
 
     const snippetsToShow = this.props.location.state.snippets;
+
     const failOrSuccess = (isRejected ? 'fail' : 'success');
 
     /* Build our list items from the relevant snippets */

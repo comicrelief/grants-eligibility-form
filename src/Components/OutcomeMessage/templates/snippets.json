@@ -1,24 +1,24 @@
 {
-  "q1-yes": {"copy": "Answered YES to Q1"},
-  "q1-no": {"copy": "Answered NO to Q1"},
+  "q1-success": {"copy": "✓ You are an organisation"},
+  "q1-fail": {"copy": "✗ You are an individual"},
 
-  "q2-yes": {"copy": "Answered YES to Q2 "},
+  "q2-success": {"copy": "✓ You haven't submitted an expression of interest within the last 12 months"},
+  "q2-fail": {"copy": "✗ You have submitted an expression of interest within the last 12 months"},
 
-  "q3-yes": {"copy": "Answered YES to Q3"},
-  "q3-no": {"copy": "Answered NO to Q3"},
+  "q3-check": {"copy": "??? Your organisation's income is under £250,000"},
+  "q3-success": {"copy": "✓ Your organisation's income is between £250,000 and £10 million"},
+  "q3-fail": {"copy": "✗ Your organisation's income is over £10 million"},
 
-  "q4-yes": {"copy": "Answered YES to Q4"},
-  "q4-no":  {"copy": "Answered NO to Q4"},
+  "q4-success": {"copy": "✓ Your project will use sport as a tool for social change"},
+  "q4-fail":  {"copy": "✗ Your project won't use sport as a tool for social change"},
 
-  "q5-yes": {"copy": "Answered YES to Q5"},
-  "q5-no":  {"copy": "Answered NO to Q5"},
+  "q5-success": {"copy": "✓ You don't want funding for any of our non-eligible areas"},
+  "q5-fail":  {"copy": "✗ You do want funding for one or more of our non-eligible areas"},
 
-  "q6-yes": {"copy": "Answered YES to Q6"},
-  "q6-no":  {"copy": "Answered NO to Q6"},
+  "q6-success": {"copy": "✓ Your project will take place in one of our funded countries"},
+  "q6-fail":  {"copy": "✗ Your project won't take place in one of our funded countries"},
 
-  "q7-yes": {"copy": "Answered YES to Q7"},
-  "q7-no":  {"copy": "Answered NO to Q7"},
+  "q7-success": {"copy": "Q7: - to remove -"},
 
-  "q8-yes": {"copy": "Answered YES to Q8"},
-  "q8-no":  {"copy": "Answered NO to Q8"}
+  "q8-success": {"copy": "Q8: - to remove -"}
 }

@@ -5,6 +5,9 @@ import Questions from './templates/questions.json';
 
 const ReactMarkdown = require('react-markdown');
 
+const shortid = require('shortid');
+
+
 /**
  * Question class
  */
@@ -84,7 +87,7 @@ class Question extends Component {
     stateCopy.success = true;
 
     /* Pass this as a 'success' as there's no fail criteria for this step */
-    stateCopy.successes = (this.state.successes).concat('yes');
+    stateCopy.successes = (this.state.successes).concat('success');
     this.setState(stateCopy);
 
     this.updatePath();
@@ -105,14 +108,18 @@ class Question extends Component {
     const thisQuestionType = thisButton.getAttribute('data-q');
     let theseSnippets = thisButton.getAttribute('data-s');
 
-    /* Convert string to array, if there's multiple snippets */
-    theseSnippets = theseSnippets.split(',');
-
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisValue;
-    stateCopy.snippets = (this.state.snippets).concat(theseSnippets);
     stateCopy.successes = (this.state.successes).concat(thisValue);
+
+    /* Not all buttons need an associated snippet; check before doing anything */
+    if (theseSnippets !== null) {
+      /* Convert string to array, if there's multiple snippets */
+      theseSnippets = theseSnippets.split(',');
+      stateCopy.snippets = (this.state.snippets).concat(theseSnippets);
+    } else console.log('No associated snippet to add');
+
     this.setState(stateCopy);
 
     /* Update the URL, passing our newly update state copy, so it'll work before a state update */
@@ -304,10 +311,23 @@ class Question extends Component {
                   <div className="single-msg__body">
                     <div className="cr-body">
 
-                      <ReactMarkdown
-                        source={Questions[currentQuestionPointer].copy}
-                        className="text-align-center font--family-bold"
-                      />
+                      {/* Render each element in our copy arrays separately */}
+                      {Questions[currentQuestionPointer].copy.map(thisCopy => (
+                        <ReactMarkdown
+                          key={shortid.generate()}
+                          source={thisCopy}
+                          className="text-align-center font--family-bold"
+                          renderers={{
+                            link: props => (
+                              <a
+                                href={props.href}
+                                target="_blank"
+                              >
+                                {props.children}
+                              </a>),
+                          }}
+                        />
+                      ))}
 
                       { this.renderTextInput() }
                       { this.renderButtons() }
