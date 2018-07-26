@@ -41,9 +41,8 @@ class OutcomeMessage extends Component {
    * Helper function to determine parent page url the form is embedded into
    */
   getParentUrl() {
-    const url = (window.location !== window.parent.location)
+    return (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
-    return url;
   }
 
   /* Helper function to add custom rendered for Markdown links */
@@ -123,12 +122,21 @@ class OutcomeMessage extends Component {
     const allSuccesses = (this.props.location.state.successes).map(i => '^' + i + '$').join('|');
 
     /* Check for failures and checks */
-    const isRejected = new RegExp(allSuccesses).test('fail');
+    let isRejected = new RegExp(allSuccesses).test('fail');
     const checksToDo = new RegExp(allSuccesses).test('check');
+    const theseResponses = this.props.location.state.responses;
+    console.log('pre-check reject?:', isRejected);
 
+    /* Only run if any of the users choices require additional logic */
     if (checksToDo) {
-      console.log('CHECKS TO DO', this.props.location.state);
+      /* This check represents our 'under 250k' choice */
+      if (theseResponses.income === 'check') {
+        const sportCheck = theseResponses['sport-for-change'] === 'check';
+        isRejected = sportCheck || isRejected;
+      }
     }
+
+    console.log('post-check reject?:', isRejected);
 
     this.state.isRejected = isRejected;
 
@@ -184,7 +192,6 @@ class OutcomeMessage extends Component {
                     source={OutcomeCopy[failOrSuccess].copy}
                     className="outcome-copy"
                     renderers={{ link: this.markdownLinkRenderer }}
-
                   />
                 </div>
               </div>

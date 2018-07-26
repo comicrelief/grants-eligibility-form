@@ -52,7 +52,7 @@
         "question_type": "sport-for-change", "text": "Yes", "value": "success", "snippets": ["q4-success"]
       },
       {
-        "question_type": "sport-for-change", "text": "No", "value": "fail", "snippets": ["q4-fail"]
+        "question_type": "sport-for-change", "text": "No", "value": "check", "snippets": ["q4-fail"]
       }]
   },
 
