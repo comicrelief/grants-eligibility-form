@@ -48,13 +48,6 @@ class OutcomeMessage extends Component {
       ? document.referrer : document.location.href;
   }
 
-  /* Helper function to add custom rendered for Markdown links */
-  markdownLinkRenderer(props) {
-    return props.href.startsWith('/') ?
-      <a href={props.href}>{props.children}</a> :
-      <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">{props.children}</a>;
-  }
-
   /**
    * Handles submission to the message queues
    */
@@ -167,7 +160,7 @@ class OutcomeMessage extends Component {
                       key={shortid.generate()}
                       source={thisHeading}
                       className="outcome-heading"
-                      renderers={{ link: this.markdownLinkRenderer }}
+                      renderers={{ link: this.props.markdownLinkRenderer }}
                     />
                   ))}
                 </div>
@@ -214,6 +207,7 @@ class OutcomeMessage extends Component {
 
 OutcomeMessage.propTypes = {
   resize: propTypes.func,
+  markdownLinkRenderer: propTypes.func,
   location: ReactRouterPropTypes.location,
   history: propTypes.shape({
     push: propTypes.func,
@@ -223,6 +217,7 @@ OutcomeMessage.propTypes = {
 
 OutcomeMessage.defaultProps = {
   resize: propTypes.func,
+  markdownLinkRenderer() { },
   history: { push: null },
   location: {},
 };

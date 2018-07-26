@@ -28,6 +28,13 @@ class App extends Component {
     }, 350);
   }
 
+  /* Helper function to add custom rendered for Markdown links */
+  markdownLinkRenderer(props) {
+    return props.href.startsWith('/') ?
+      <a href={props.href}>{props.children}</a> :
+      <a href={props.href} target="_blank" rel="nofollow noopener noreferrer">{props.children}</a>;
+  }
+
   /**
    * Render the App
    * @return {XML}
@@ -39,11 +46,19 @@ class App extends Component {
           <Route exact path="/" render={props => <Home {...props} resize={this.resize} />} />
           <Route
             path="/question/:question_number"
-            render={props => <Question {...props} resize={this.resize} />}
+            render={props => (<Question
+              {...props}
+              resize={this.resize}
+              markdownLinkRenderer={this.markdownLinkRenderer}
+            />)}
           />
           <Route
             path="/outcome/"
-            render={props => <OutcomeMessage {...props} resize={this.resize} />}
+            render={props => (<OutcomeMessage
+              {...props}
+              resize={this.resize}
+              markdownLinkRenderer={this.markdownLinkRenderer}
+            />)}
           />
           <Route
             path="/error"
