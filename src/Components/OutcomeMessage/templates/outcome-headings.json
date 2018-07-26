@@ -1,4 +1,8 @@
 {
-  "fail": {"copy": "# Copy for fail heading"},
-  "success": {"copy": "# Copy for success heading"}
+  "fail": {
+    "copy": ["## Fail heading", "### Fail subheading"]
+  },
+  "success": {
+    "copy": ["# Success heading", "## Success subheading"]
+  }
 }

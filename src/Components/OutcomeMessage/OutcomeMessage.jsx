@@ -11,6 +11,9 @@ import OutcomeCopy from './templates/outcome-copy.json';
 
 const ReactMarkdown = require('react-markdown');
 
+const shortid = require('shortid');
+
+
 /**
  * OutcomeMessage class
  */
@@ -159,11 +162,14 @@ class OutcomeMessage extends Component {
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
-                  <ReactMarkdown
-                    source={OutcomeHeading[failOrSuccess].copy}
-                    className="outcome-heading"
-                    renderers={{ link: this.markdownLinkRenderer }}
-                  />
+                  {OutcomeHeading[failOrSuccess].copy.map(thisHeading => (
+                    <ReactMarkdown
+                      key={shortid.generate()}
+                      source={thisHeading}
+                      className="outcome-heading"
+                      renderers={{ link: this.markdownLinkRenderer }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -188,11 +194,14 @@ class OutcomeMessage extends Component {
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
-                  <ReactMarkdown
-                    source={OutcomeCopy[failOrSuccess].copy}
-                    className="outcome-copy"
-                    renderers={{ link: this.markdownLinkRenderer }}
-                  />
+                  {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
+                    <ReactMarkdown
+                      key={shortid.generate()}
+                      source={thisCopy}
+                      className="outcome-heading"
+                      renderers={{ link: this.markdownLinkRenderer }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

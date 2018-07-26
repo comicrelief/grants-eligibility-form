@@ -1,8 +1,8 @@
 {
   "fail": {
-    "copy": "### Copy for fail message"
+    "copy": ["### Copy for fail message", "#### Subcopy for fail message"]
   },
   "success": {
-    "copy": "### Copy for success message: Nulla quis lorem ut libero [malesuada](https://www.google.com) feugiat."
+    "copy": ["### Copy for success message: Nulla quis lorem ut libero [malesuada](https://www.google.com) feugiat.", "#### Subcopy for fail message"]
   }
 }
