@@ -13,7 +13,6 @@ const ReactMarkdown = require('react-markdown');
 
 const shortid = require('shortid');
 
-
 /**
  * OutcomeMessage class
  */
@@ -192,7 +191,7 @@ class OutcomeMessage extends Component {
                       key={shortid.generate()}
                       source={thisCopy}
                       className="outcome-heading"
-                      renderers={{ link: this.markdownLinkRenderer }}
+                      renderers={{ link: this.props.markdownLinkRenderer }}
                     />
                   ))}
                 </div>
