@@ -2,21 +2,20 @@
   "q1": {
     "title": "# Get started",
     "copy": [
-      "### Are you applying on behalf of on organisation or as an individual?",
-      "### A second line"
+      "### Are you applying on behalf of an organisation?"
     ],
     "buttons": [
       {
-        "question_type": "individual-or-org", "text": "Individual", "value": "fail", "snippets": ["q1-fail"]
+        "question_type": "individual-or-org", "text": "Yes", "value": "success", "snippets": ["q1-success"]
       },
       {
-        "question_type": "individual-or-org", "text": "Organisation", "value": "success", "snippets": ["q1-success"]
+        "question_type": "individual-or-org", "text": "No", "value": "fail", "snippets": ["q1-fail"]
       }]
   },
 
   "q2": {
     "copy": [
-      "### To give as many organisations a fair chance as possible, we ask that organisations only submit one expression of interest per year.",
+      "### To give as many organisations a fair chance as possible, we ask that they only submit one expression of interest per year.",
       "#### Have you submitted an expression of interest with us in the last 12 months?"
     ],
     "buttons": [
@@ -45,7 +44,7 @@
   "q4": {
     "copy": [
       "### Will your project use sport as a tool for social change?",
-      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Projects taking approach should be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits. "
+      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Projects taking approachshould be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
     ],
     "buttons": [
       {
@@ -57,8 +56,14 @@
   },
 
   "q5": {
-    "copy": ["### We don’t usually fund:",
-    "* Fundraising appeals ", "* Individual study", "* Religious activities", "* Political campaigning", "* One-off events", "* Institutional care",
+    "copy": [
+      "### We don’t usually fund:",
+      "* Fundraising appeals ",
+      "* Individual study",
+      "* Religious activities",
+      "* Political campaigning",
+      "* One-off events",
+      "* Institutional care",
       "### Do you want funding for any of the above?"
     ],
     "buttons": [
@@ -73,7 +78,7 @@
   "q6": {
     "copy": [
       "### The countries we will fund activities in are as follows:",
-      "### Ghana, Kenya, Malawi, Nigeria, Sierra Leone, South Africa, Rwanda, Tanzania, Uganda, Zambia, Zimbabwe, Bangladesh, India, Nepal and the UK. ",
+      "### Ghana, Kenya, Malawi, Nigeria, Sierra Leone, South Africa, Rwanda, Tanzania, Uganda, Zambia, Zimbabwe, Bangladesh, India, Nepal and the UK.",
       "### Will your project take place in one of these countries?"
     ],
     "buttons": [
@@ -94,8 +99,8 @@
       "## Capital Costs",
       "### Capital costs must make up less than 30% of the total amount applied for",
       "## Direct Funding",
-      "### We will prioritise funding applications direct from in-country delivery organisations. If you are not a direct delivery partner we expect to see clear evidence of how the you are adding value, clear partnership roles and responsibilities, and defined power relationships. ",
-      "### Please click on ok to proceed to the next question. "
+      "### We will prioritise funding applications direct from in-country delivery organisations. If you are not a direct delivery partner we expect to see clear evidence of how the you are adding value, clear partnership roles and responsibilities, and defined power relationships.",
+      "### Please click on ok to proceed to the next question."
     ],
     "buttons": [
       {
@@ -105,11 +110,25 @@
   "q8": {
     "copy": [
       "## Our hallmarks",
-      "### Organisations applying must be working to one of our [strategic themes](https://www.comicrelief/link-goes-here) and will be assessed against their fit to the following hallmarks:",
-      "## 1. Mission aligned",
-      "### We seek to build a family of partners pulling toward our shared aspiration for a just world free of poverty and working toward meaningful change in our issues areas.",
-      "## 2. Ready to accelerate",
-      "### Our..."
+      "#### Organisations applying must be working to one of our [strategic themes](https://www.comicrelief/link-goes-here) and will be assessed against their fit to the following hallmarks:",
+
+      "### 1. Mission-aligned",
+      "#### We seek to build a family of partners pulling toward our shared aspiration for a just world free of poverty and working toward meaningful change in our issues areas.",
+
+      "### 2. Ready to accelerate",
+      "#### Our partners have the foundations in place and are seeking long term funding to deliver and scale their solutions. We don’t fund long established large players and small or start up organisationsare funded through cascade grant making: we focus on medium sized partners (£250,000 -£10m annual turnover) for which our funding can make the biggest difference.",
+
+      "### 3. People Centred",
+      "#### Charity partners should demonstrate a commitment to putting the people they seek to serve at the heart of their decision making. This means that we work with partners closest to the problems and with demonstrable input and accountably from those they work on behalf of.",
+
+      "### 4. Risk Aware",
+      "#### We seek partners who have robust governance and financial management in place, and are best in class in safeguarding their staff and beneficiaries.",
+
+      "### 5. Learning Led",
+      "#### We want to work with organisations who have a culture which values evidence, is committed to continual improvement and sharing what they learn on the journey to impact.",
+
+      "### 6. Storytellers",
+      "#### We believe that telling stories can change the world, and want to build partnerships which allow us to tell compelling stories about the issues we work on."
     ],
     "buttons": [
       {

@@ -41,6 +41,7 @@ class Question extends Component {
   componentDidUpdate() {
     this.updateQuestionNumber();
     this.props.resize();
+    console.log('currState', this.state);
   }
 
   /* Update the state to reflect our input field */
