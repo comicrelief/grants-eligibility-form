@@ -1,8 +1,16 @@
 {
   "fail": {
-    "copy": ["### Copy for fail message", "#### Subcopy for fail message"]
+    "copy": [
+      "### You can read more about our core criteria [here](https://www.comicrelief/link-tbc)."
+    ]
   },
   "success": {
-    "copy": ["### Copy for success message: Nulla quis lorem ut libero [malesuada](https://www.google.com) feugiat.", "#### Subcopy for fail message"]
+    "copy": [
+      "#### Our funding fits across our key themes of Children Survive & Thrive, New Approaches to Mental Health, Gender Justice, A Safe Place to Be for the Most Vulnerable. ",
+      "#### You can see which funding opportunities are open [here](https://www.comicrelief/link-tbc).",
+      "#### The following are some websites which you can use to look for other funding opportunities:",
+      "#### [Site 1](https://askjeeves.net)",
+      "#### [Site 2](https://www.bing.com)"
+    ]
   }
 }
