@@ -7,7 +7,6 @@ const ReactMarkdown = require('react-markdown');
 
 const shortid = require('shortid');
 
-
 /**
  * Question class
  */
@@ -282,12 +281,10 @@ class Question extends Component {
             <div className="promo-header__content">
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
-                  <h1 className="font--white text-align-center">
-                    <ReactMarkdown
-                      source={Questions[currentQuestionPointer].title}
-                      className="text-align-center font--family-bold"
-                    />
-                  </h1>
+                  <ReactMarkdown
+                    source={Questions[currentQuestionPointer].title}
+                    className="text-align-center font--white font--family-bold question-title"
+                  />
                 </div>
               </div>
             </div>
@@ -317,7 +314,7 @@ class Question extends Component {
                         <ReactMarkdown
                           key={shortid.generate()}
                           source={thisCopy}
-                          className="text-align-center font--family-bold"
+                          className="text-align-center font--family-bold question-copy"
                           renderers={{ link: this.props.markdownLinkRenderer }}
                         />
                       ))}

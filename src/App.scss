@@ -349,3 +349,26 @@ ul.progress-indicator {
     }
   }
 }
+
+.font--white * { color: $colour-white; }
+.font--black * { color: $colour-black; }
+
+.single-msg.single-msg--copy-only .single-msg__copy_wrapper .single-msg__copy .single-msg__body {
+  .question-copy * { margin-bottom: 20px; }
+}
+
+#grants-form .question-3 .buttons button.btn {
+  margin: 15px auto;
+  display: block;
+}
+
+.question-copy ul {
+  padding-left: 0;
+  display: inline-block;
+  margin: auto;
+  li {
+    &:before {
+      left: 0;
+    }
+  }
+}

@@ -58,12 +58,7 @@
   "q5": {
     "copy": [
       "### We don’t usually fund:",
-      "* Fundraising appeals ",
-      "* Individual study",
-      "* Religious activities",
-      "* Political campaigning",
-      "* One-off events",
-      "* Institutional care",
+      "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care ",
       "### Do you want funding for any of the above?"
     ],
     "buttons": [
@@ -128,7 +123,7 @@
       "#### We want to work with organisations who have a culture which values evidence, is committed to continual improvement and sharing what they learn on the journey to impact.",
 
       "### 6. Storytellers",
-      "#### We believe that telling stories can change the world, and want to build partnerships which allow us to tell compelling stories about the issues we work on."
+      "#### "
     ],
     "buttons": [
       {
