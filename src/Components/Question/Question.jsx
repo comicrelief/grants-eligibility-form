@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import Questions from './templates/questions.json';
 
 const ReactMarkdown = require('react-markdown');
-
 const shortid = require('shortid');
 
 /**
@@ -104,13 +103,15 @@ class Question extends Component {
   handleButtonChoice(e) {
     /* Get this response's attrs and values */
     const thisButton = e.target;
+
     const thisValue = thisButton.getAttribute('data-v');
     const thisQuestionType = thisButton.getAttribute('data-q');
     let theseSnippets = thisButton.getAttribute('data-s');
+    const thisButtonText = thisButton.textContent || thisButton.innerText;
 
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
-    stateCopy.responses[thisQuestionType] = thisValue;
+    stateCopy.responses[thisQuestionType] = thisButtonText;
     stateCopy.successes = (this.state.successes).concat(thisValue);
 
     /* Not all buttons need an associated snippet; check before doing anything */

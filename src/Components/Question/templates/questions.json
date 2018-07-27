@@ -6,10 +6,10 @@
     ],
     "buttons": [
       {
-        "question_type": "individual-or-org", "text": "Yes", "value": "success", "snippets": ["q1-success"]
+        "question_type": "organisation", "text": "Yes", "value": "success", "snippets": ["q1-success"]
       },
       {
-        "question_type": "individual-or-org", "text": "No", "value": "fail", "snippets": ["q1-fail"]
+        "question_type": "organisation", "text": "No", "value": "fail", "snippets": ["q1-fail"]
       }]
   },
 
@@ -20,10 +20,10 @@
     ],
     "buttons": [
       {
-        "question_type": "yearly-submissions-only", "text": "Yes", "value": "fail", "snippets": ["q2-fail"]
+        "question_type": "interest-in-12-months", "text": "Yes", "value": "fail", "snippets": ["q2-fail"]
       },
       {
-        "question_type": "yearly-submissions-only", "text": "No", "value": "success", "snippets": ["q2-success"]
+        "question_type": "interest-in-12-months", "text": "No", "value": "success", "snippets": ["q2-success"]
       }]
   },
 
@@ -63,10 +63,10 @@
     ],
     "buttons": [
       {
-        "question_type": "funding-areas", "text": "Yes", "value": "fail", "snippets": ["q5-fail"]
+        "question_type": "activity-we-dont-fund", "text": "Yes", "value": "fail", "snippets": ["q5-fail"]
       },
       {
-        "question_type": "funding-areas", "text": "No", "value": "success", "snippets": ["q5-success"]
+        "question_type": "activity-we-dont-fund", "text": "No", "value": "success", "snippets": ["q5-success"]
       }]
   },
 
@@ -78,10 +78,10 @@
     ],
     "buttons": [
       {
-        "question_type": "funding-location", "text": "Yes", "value": "success", "snippets": ["q6-success"]
+        "question_type": "location-we-fund", "text": "Yes", "value": "success", "snippets": ["q6-success"]
       },
       {
-        "question_type": "funding-location", "text": "No", "value": "fail", "snippets": ["q6-fail"]
+        "question_type": "location-we-fund", "text": "No", "value": "fail", "snippets": ["q6-fail"]
       }]
   },
 
