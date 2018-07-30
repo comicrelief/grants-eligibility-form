@@ -127,7 +127,6 @@ class OutcomeMessage extends Component {
 
     console.log('pre-check reject?:', isRejected);
 
-
     /* Only run if any of the users choices require additional logic */
     if (checksToDo) {
       /* This check represents our 'under 250k' choice */

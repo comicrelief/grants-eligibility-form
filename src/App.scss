@@ -24,7 +24,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
-$question-num: 8;
+$question-num: 7;
 
 html, body {
   background-color: #F0F0F0;
@@ -288,7 +288,7 @@ ul.progress-indicator {
   .question-copy * { margin-bottom: 20px; }
 }
 
-#grants-form .question-3 .buttons button.btn {
+#grants-form .question-2 .buttons button.btn {
   margin: 15px auto;
   display: block;
 }

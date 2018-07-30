@@ -13,48 +13,34 @@
   },
 
   "q2": {
-    "copy": [
-      "### To give as many organisations a fair chance as possible, we ask that they only submit one expression of interest per year.",
-      "#### Have you submitted an expression of interest with us in the last 12 months?"
-    ],
+    "copy": ["### What was your organisation’s level of income in your last financial year?"],
     "buttons": [
       {
-        "question_type": "interest-in-12-months", "text": "Yes", "value": "fail", "snippets": ["q2-fail"]
+        "question_type": "income", "text": "Under £250,000", "value": "check", "snippets": ["q2-check"]
       },
       {
-        "question_type": "interest-in-12-months", "text": "No", "value": "success", "snippets": ["q2-success"]
+        "question_type": "income", "text": "Between £250,000 to £10 million", "value": "success", "snippets": ["q2-success"]
+      },
+      {
+        "question_type": "income", "text": "Over £10 million", "value": "fail", "snippets": ["q2-fail"]
       }]
   },
 
   "q3": {
-    "copy": ["### What was your organisation’s level of income in your last financial year?"],
-    "buttons": [
-      {
-        "question_type": "income", "text": "Under £250,000", "value": "check", "snippets": ["q3-check"]
-      },
-      {
-        "question_type": "income", "text": "Between £250,000 to £10 million", "value": "success", "snippets": ["q3-success"]
-      },
-      {
-        "question_type": "income", "text": "Over £10 million", "value": "fail", "snippets": ["q3-fail"]
-      }]
-  },
-
-  "q4": {
     "copy": [
       "### Will your project use sport as a tool for social change?",
       "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Projects taking approachshould be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
     ],
     "buttons": [
       {
-        "question_type": "sport-for-change", "text": "Yes", "value": "success", "snippets": ["q4-success"]
+        "question_type": "sport-for-change", "text": "Yes", "value": "success", "snippets": ["q3-success"]
       },
       {
-        "question_type": "sport-for-change", "text": "No", "value": "check", "snippets": ["q4-fail"]
+        "question_type": "sport-for-change", "text": "No", "value": "check", "snippets": ["q3-fail"]
       }]
   },
 
-  "q5": {
+  "q4": {
     "copy": [
       "### We don’t usually fund:",
       "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care ",
@@ -62,14 +48,14 @@
     ],
     "buttons": [
       {
-        "question_type": "activity-we-dont-fund", "text": "Yes", "value": "fail", "snippets": ["q5-fail"]
+        "question_type": "activity-we-dont-fund", "text": "Yes", "value": "fail", "snippets": ["q4-fail"]
       },
       {
-        "question_type": "activity-we-dont-fund", "text": "No", "value": "success", "snippets": ["q5-success"]
+        "question_type": "activity-we-dont-fund", "text": "No", "value": "success", "snippets": ["q4-success"]
       }]
   },
 
-  "q6": {
+  "q5": {
     "copy": [
       "### The countries we will fund activities in are as follows:",
       "#### Ghana, Kenya, Malawi, Nigeria, Sierra Leone, South Africa, Rwanda, Tanzania, Uganda, Zambia, Zimbabwe, Bangladesh, India, Nepal and the UK.",
@@ -77,14 +63,14 @@
     ],
     "buttons": [
       {
-        "question_type": "location-we-fund", "text": "Yes", "value": "success", "snippets": ["q6-success"]
+        "question_type": "location-we-fund", "text": "Yes", "value": "success", "snippets": ["q5-success"]
       },
       {
-        "question_type": "location-we-fund", "text": "No", "value": "fail", "snippets": ["q6-fail"]
+        "question_type": "location-we-fund", "text": "No", "value": "fail", "snippets": ["q5-fail"]
       }]
   },
 
-  "q7": {
+  "q6": {
     "copy": [
       "## About your funding amount",
       "#### When considering the amount of funding applied for we will consider the following: ",
@@ -101,7 +87,7 @@
         "question_type": "statement-1", "text": "OK", "value": "success"
       }]
   },
-  "q8": {
+  "q7": {
     "copy": [
       "## Our hallmarks",
       "Organisations applying must be working to one of our [strategic themes](https://www.comicrelief/link-goes-here) and will be assessed against their fit to the following hallmarks:",

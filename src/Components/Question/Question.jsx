@@ -24,7 +24,7 @@ class Question extends Component {
 
     this.state = {
       currentQuestion: 1,
-      totalQuestions: 8,
+      totalQuestions: 7,
       responses: {}, // eslint-disable-line react/no-unused-state
       snippets: {}, // eslint-disable-line react/no-unused-state
       successes: {}, // eslint-disable-line react/no-unused-state
@@ -34,12 +34,14 @@ class Question extends Component {
   componentDidMount() {
     this.updateQuestionNumber();
     this.props.resize();
+    this._div.scrollTop = 0
   }
 
   componentDidUpdate() {
     this.updateQuestionNumber();
     this.props.resize();
     console.log('currState', this.state);
+    ReactDOM.findDOMNode(this).scrollTop = 0;
   }
 
   /* Update the state to reflect our input field */
@@ -170,12 +172,7 @@ class Question extends Component {
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'no-circle step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-          </span>
-        </li>
-        <li className={'step-8 progress-indicator--' + this.progressClassNames(8, currQ)}>
+        <li className={'step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Finish</span>
