@@ -34,14 +34,12 @@ class Question extends Component {
   componentDidMount() {
     this.updateQuestionNumber();
     this.props.resize();
-    this._div.scrollTop = 0
   }
 
   componentDidUpdate() {
     this.updateQuestionNumber();
     this.props.resize();
     console.log('currState', this.state);
-    ReactDOM.findDOMNode(this).scrollTop = 0;
   }
 
   /* Update the state to reflect our input field */
@@ -61,6 +59,7 @@ class Question extends Component {
 
   /* Update path to next question or outcome messaging */
   updatePath(inputState) {
+    window.scrollTo(0, 0);
     const currentQuestion = parseInt(this.state.currentQuestion, 10);
     const nextQuestion = currentQuestion + 1;
 
