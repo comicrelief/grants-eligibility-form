@@ -41,6 +41,8 @@ body::after{
     url($london-169) url($london-34) url($core-169) url($core-34) url($sss-169) url($sss-34) url($vawg-34) url($vawg-169)
 }
 
+$question-num: 8;
+
 html, body {
   background-color: #F0F0F0;
 }
@@ -315,7 +317,8 @@ ul.progress-indicator {
   margin: 10px 0 60px;
   li {
     padding: 0;
-    width: 14%;
+    width: calc(100% / #{$question-num});
+
     
     &:before {
       content: none;
@@ -346,6 +349,19 @@ ul.progress-indicator {
       border: 0;
       border-radius: 0;
       height: 3px;
+    }
+  }
+
+  // Balance-out removal of 'previous Q' button on Q1
+  &.step-1 {
+    padding-bottom: 37px;
+
+    @include breakpoint($screen-md) {
+      padding-bottom: 72px;
+    }
+
+    @include breakpoint($screen-md) {
+      padding-bottom: 77px;
     }
   }
 }

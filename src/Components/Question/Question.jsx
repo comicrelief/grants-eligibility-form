@@ -140,12 +140,16 @@ class Question extends Component {
     const total = this.state.totalQuestions;
 
     return (
-      <ul className={'progress-indicator progress-indicator__steps-' + total}>
-
-        <li className={'step-2 progress-indicator--' + this.progressClassNames(2, currQ)}>
+      <ul className={'progress-indicator progress-indicator__steps-' + total + ' step-' + currQ}>
+        <li className={'step-1 progress-indicator--' + this.progressClassNames(1, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">About</span>
+            <span className="progress-bar__title">Start</span>
+          </span>
+        </li>
+        <li className={'no-circle step-2 progress-indicator--' + this.progressClassNames(2, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
         <li className={'no-circle step-3 progress-indicator--' + this.progressClassNames(3, currQ)}>
@@ -158,10 +162,9 @@ class Question extends Component {
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'step-5 progress-indicator--' + this.progressClassNames(5, currQ)}>
+        <li className={'no-circle step-5 progress-indicator--' + this.progressClassNames(5, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">Finance</span>
           </span>
         </li>
         <li className={'no-circle step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
@@ -169,16 +172,15 @@ class Question extends Component {
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        {/* To keep the question numbers balanced and avoid having to totally rework styles */}
-        <li className={'no-circle step-6.5 progress-indicator--' + this.progressClassNames(6.5, currQ)}>
+        <li className={'no-circle step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
           </span>
         </li>
-        <li className={'step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
+        <li className={'step-8 progress-indicator--' + this.progressClassNames(8, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">Project</span>
+            <span className="progress-bar__title">Finish</span>
           </span>
         </li>
       </ul>
@@ -255,17 +257,19 @@ class Question extends Component {
    * @return {XML}
    */
   renderPreviousButton() {
-    return (
-      <p>
-        <button
-          key={'back-to-question-' + this.state.currentQuestion}
-          className="link-dark-purple link previous-question"
-          onClick={this.previousQuestion}
-        >
-          Go back to previous question
-        </button>
-      </p>
-    );
+    if (this.state.currentQuestion > 1) {
+      return (
+        <p>
+          <button
+            key={'back-to-question-' + this.state.currentQuestion}
+            className="link-dark-purple link previous-question"
+            onClick={this.previousQuestion}
+          >
+            Go back to previous question
+          </button>
+        </p>
+      );
+    } return null;
   }
 
   /**
