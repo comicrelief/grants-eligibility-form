@@ -24,23 +24,6 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
-/* Image paths as variables */
-$london-169 : "./images/outcome-images/london-together-169.jpg";
-$london-34 : "./images/outcome-images/london-together-34.jpg";
-$core-169 : "./images/outcome-images/core-strength-169.jpg";
-$core-34 : "./images/outcome-images/core-strength-34.jpg";
-$sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
-$sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
-$vawg-34 :  "./images/outcome-images/vawg-34.jpg";
-$vawg-169 :   "./images/outcome-images/vawg-169.jpg";
-
-/* Pre-load bg images */
-body::after{
-  position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-  content:
-    url($london-169) url($london-34) url($core-169) url($core-34) url($sss-169) url($sss-34) url($vawg-34) url($vawg-169)
-}
-
 $question-num: 8;
 
 html, body {
@@ -197,17 +180,6 @@ ul.list li {
     }
   }
 
-/*  .question-8 .buttons {
-    button.btn {
-      display: block;
-      margin: 10px 0 0;
-      
-      @include breakpoint($screen-md) {
-        margin: 15px auto;
-      }
-    } 
-  }*/
- 
   .single-msg.outcome  {
     .single-msg__copy_wrapper,
     .single-msg__image {
@@ -238,63 +210,6 @@ ul.list li {
   text-align: center;
   @include breakpoint($screen-md) {
     text-align: left;
-  }
-}
-
-/* Outcome Message images  */
-.outcome-image {
-  background-position: top center;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  height: auto;
-  padding: 28% 0;
- 
-  .single-msg--copy-left & {
-    background-position: top center;
-  }
-
-  @include breakpoint($screen-md) {
-    background-position: top center;
-    background-size: 100% auto;
-    height: auto;
-    padding: 21% 16%;
-    // Represents our 'ineligible' rows
-    .single-msg--copy-left & {
-      background-position: center center;
-      padding: 16% 16%;
-    }
-  }
-}
-
-.outcome-image--london {
-  @extend .outcome-image;
-  background-image: url($london-169);
-  @include breakpoint($screen-md) {
-    background-image: url($london-34);
-  }
-}
-
-.outcome-image--core {
-  @extend .outcome-image;
-  background-image: url($core-169);
-  @include breakpoint($screen-md) {
-    background-image: url($core-34);
-  }
-}
-   
-.outcome-image--sss {
-  @extend .outcome-image;
-  background-image: url($sss-169);
-  @include breakpoint($screen-md) {
-    background-image: url($sss-34);
-  }
-}
-
-.outcome-image--vawg {
-  @extend .outcome-image;
-  background-image: url($vawg-169);
-  @include breakpoint($screen-md) {
-    background-image: url($vawg-34);
   }
 }
 
