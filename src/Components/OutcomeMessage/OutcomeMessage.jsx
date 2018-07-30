@@ -10,7 +10,6 @@ import OutcomeHeading from './templates/outcome-headings.json';
 import OutcomeCopy from './templates/outcome-copy.json';
 
 const ReactMarkdown = require('react-markdown');
-
 const shortid = require('shortid');
 
 /**
@@ -113,16 +112,14 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    /* Check for failures and checks */
-
     /* Cache our success values */
     let successValues = Object.values(this.props.location.state.successes);
+
     /* Format to a regex pattern */
     successValues = (successValues).map(i => '^' + i + '$').join('|');
 
     let isRejected = new RegExp(successValues).test('fail');
     const checksToDo = new RegExp(successValues).test('check');
-
     const theseResponses = this.props.location.state.responses;
 
     console.log('pre-check reject?:', isRejected);
@@ -153,7 +150,6 @@ class OutcomeMessage extends Component {
 
     return (
       <div className="outcome-message">
-
         <section className="single-msg single-msg--copy-only bg--white">
           <div className="single-msg__outer-wrapper">
             <div className="single-msg__copy_wrapper bg--white">
@@ -218,7 +214,6 @@ OutcomeMessage.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }),
-
 };
 
 OutcomeMessage.defaultProps = {

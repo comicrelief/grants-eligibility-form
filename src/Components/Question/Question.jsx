@@ -25,9 +25,11 @@ class Question extends Component {
     this.state = {
       currentQuestion: 1,
       totalQuestions: 7,
-      responses: {}, // eslint-disable-line react/no-unused-state
-      snippets: {}, // eslint-disable-line react/no-unused-state
-      successes: {}, // eslint-disable-line react/no-unused-state
+      /* eslint-disable react/no-unused-state */
+      responses: {},
+      snippets: {},
+      successes: {},
+      /* eslint-enable react/no-unused-state */
     };
   }
 
