@@ -307,3 +307,10 @@ ul.progress-indicator {
 a.link {
   font-size: inherit !important;
 }
+
+.cr-body ul {
+  padding-left: 0;
+  li {
+    padding: 0 10px;
+  }
+}

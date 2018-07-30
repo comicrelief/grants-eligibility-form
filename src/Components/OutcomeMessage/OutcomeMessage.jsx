@@ -173,8 +173,10 @@ class OutcomeMessage extends Component {
             <div className="single-msg__copy_wrapper bg--white">
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
-                  <h3>How you answered:</h3>
-                  <ul>{renderedSnippets}</ul>
+                  <div className="cr-body">
+                    <h3>How you answered:</h3>
+                    <ul>{renderedSnippets}</ul>
+                  </div>
                 </div>
               </div>
             </div>

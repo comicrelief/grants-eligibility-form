@@ -1,14 +1,14 @@
 {
   "fail": {
     "copy": [
-      "# Looks like you don’t meet with our core criteria. ",
-      "## Based on the answers you gave us it looks like you don’t meet with our core criteria."
+      "## Looks like you don’t meet with our core criteria. ",
+      "### Based on the answers you gave us it looks like you don’t meet with our core criteria."
     ]
   },
   "success": {
     "copy": [
-      "# Looks like you meet with our core criteria!",
-      "## Based on the answers you gave us it looks like you meet with our core criteria."
+      "## Looks like you meet with our core criteria!",
+      "### Based on the answers you gave us it looks like you meet with our core criteria."
     ]
   }
 }
