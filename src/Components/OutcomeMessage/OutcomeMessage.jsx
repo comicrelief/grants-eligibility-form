@@ -113,14 +113,20 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    /* IE-friendly check to see if any of our submissions contain a 'failure' */
-    const allSuccesses = (this.props.location.state.successes).map(i => '^' + i + '$').join('|');
-
     /* Check for failures and checks */
-    let isRejected = new RegExp(allSuccesses).test('fail');
-    const checksToDo = new RegExp(allSuccesses).test('check');
+
+    /* Cache our success values */
+    let successValues = Object.values(this.props.location.state.successes);
+    /* Format to a regex pattern */
+    successValues = (successValues).map(i => '^' + i + '$').join('|');
+
+    let isRejected = new RegExp(successValues).test('fail');
+    const checksToDo = new RegExp(successValues).test('check');
+
     const theseResponses = this.props.location.state.responses;
+
     console.log('pre-check reject?:', isRejected);
+
 
     /* Only run if any of the users choices require additional logic */
     if (checksToDo) {
@@ -138,7 +144,7 @@ class OutcomeMessage extends Component {
     /* Submit the form details, now we've completed all of our logic */
     this.submitInfo();
 
-    const snippetsToShow = this.props.location.state.snippets;
+    const snippetsToShow = Object.values(this.props.location.state.snippets);
 
     const failOrSuccess = (isRejected ? 'fail' : 'success');
 

@@ -25,9 +25,9 @@ class Question extends Component {
     this.state = {
       currentQuestion: 1,
       totalQuestions: 8,
-      snippets: [],
-      successes: [],
       responses: {}, // eslint-disable-line react/no-unused-state
+      snippets: {}, // eslint-disable-line react/no-unused-state
+      successes: {}, // eslint-disable-line react/no-unused-state
     };
   }
 
@@ -106,19 +106,17 @@ class Question extends Component {
 
     const thisValue = thisButton.getAttribute('data-v');
     const thisQuestionType = thisButton.getAttribute('data-q');
-    let theseSnippets = thisButton.getAttribute('data-s');
+    const thisSnippet = thisButton.getAttribute('data-s');
     const thisButtonText = thisButton.textContent || thisButton.innerText;
 
     /* Store the user's response to the question */
     const stateCopy = Object.assign({}, this.state);
     stateCopy.responses[thisQuestionType] = thisButtonText;
-    stateCopy.successes = (this.state.successes).concat(thisValue);
+    stateCopy.successes[thisQuestionType] = thisValue;
 
-    /* Not all buttons need an associated snippet; check before doing anything */
-    if (theseSnippets !== null) {
-      /* Convert string to array, if there's multiple snippets */
-      theseSnippets = theseSnippets.split(',');
-      stateCopy.snippets = (this.state.snippets).concat(theseSnippets);
+    /* Not all buttons need an associated snip pet; check before doing anything */
+    if (thisSnippet !== null) {
+      stateCopy.snippets[thisQuestionType] = thisSnippet;
     } else console.log('No associated snippet to add');
 
     this.setState(stateCopy);
