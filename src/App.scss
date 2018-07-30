@@ -275,7 +275,7 @@ ul.progress-indicator {
       padding-bottom: 72px;
     }
 
-    @include breakpoint($screen-md) {
+    @include breakpoint($screen-lg) {
       padding-bottom: 77px;
     }
   }
@@ -311,7 +311,7 @@ a.link {
 .cr-body ul {
   padding-left: 0;
   li {
-    padding: 0 20px;
+    // padding: 0 20px;
     margin-bottom: 0 !important;
   }
 }
