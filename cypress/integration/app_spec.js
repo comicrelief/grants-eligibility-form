@@ -34,23 +34,23 @@ describe('Grants form tests', () => {
       })
 
       /* Submit a 'success' value for Q3 */
-      cy.get('.question-3 .cr-body').should('contain', 'sport')
+      cy.get('.question-3 .cr-body').should('contain', 'activities')
       cy.get('.question-3 .buttons .btn:nth-child(1)')
         .should('contain', 'Yes').then(($btn) => {
           ($btn).click()
       })
 
       /* Submit a 'success' value for Q4 */
-      cy.get('.question-4 .cr-body').should('contain', 'don’t usually fund:')
-      cy.get('.question-4 .buttons .btn:nth-child(2)')
-        .should('contain', 'No').then(($btn) => {
+      cy.get('.question-4 .cr-body').should('contain', 'sport')
+      cy.get('.question-4 .buttons .btn:nth-child(1)')
+        .should('contain', 'Yes').then(($btn) => {
           ($btn).click()
       })
 
       /* Submit a 'success' value for Q5 */
-      cy.get('.question-5 .cr-body').should('contain', 'countries we will fund')
-      cy.get('.question-5 .buttons .btn:nth-child(1)')
-        .should('contain', 'Yes').then(($btn) => {
+      cy.get('.question-5 .cr-body').should('contain', 'We don’t usually fund')
+      cy.get('.question-5 .buttons .btn:nth-child(2)')
+        .should('contain', 'No').then(($btn) => {
           ($btn).click()
       })
 
@@ -92,23 +92,23 @@ describe('Grants form tests', () => {
       })
 
       /* Submit a 'success' value for Q3 */
-      cy.get('.question-3 .cr-body').should('contain', 'sport')
-      cy.get('.question-3 .buttons .btn:nth-child(2)')
-        .should('contain', 'No').then(($btn) => {
+      cy.get('.question-3 .cr-body').should('contain', 'countries')
+      cy.get('.question-3 .buttons .btn:nth-child(1)')
+        .should('contain', 'Yes').then(($btn) => {
         ($btn).click()
       })
 
       /* Submit a 'success' value for Q4 */
-      cy.get('.question-4 .cr-body').should('contain', 'don’t usually fund:')
+      cy.get('.question-4 .cr-body').should('contain', 'sport')
       cy.get('.question-4 .buttons .btn:nth-child(2)')
         .should('contain', 'No').then(($btn) => {
         ($btn).click()
       })
 
       /* Submit a 'success' value for Q5 */
-      cy.get('.question-5 .cr-body').should('contain', 'countries we will fund')
-      cy.get('.question-5 .buttons .btn:nth-child(1)')
-        .should('contain', 'Yes').then(($btn) => {
+      cy.get('.question-5 .cr-body').should('contain', 'We don’t usually fund')
+      cy.get('.question-5 .buttons .btn:nth-child(2)')
+        .should('contain', 'No').then(($btn) => {
         ($btn).click()
       })
 
