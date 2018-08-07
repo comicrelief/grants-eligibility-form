@@ -157,7 +157,7 @@ class Question extends Component {
         <li className={'no-circle step-3 progress-indicator--' + this.progressClassNames(3, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">Sport</span>
+            <span className="progress-bar__title">Country</span>
           </span>
         </li>
         <li className={'no-circle step-4 progress-indicator--' + this.progressClassNames(4, currQ)}>
@@ -175,10 +175,16 @@ class Question extends Component {
         <li className={'no-circle step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">Criteria</span>
+            <span className="progress-bar__title">St1</span>
           </span>
         </li>
-        <li className={'step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
+        <li className={'no-circle step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
+          <span className="progress-indicator__step-link">
+            <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">St2</span>
+          </span>
+        </li>
+        <li className={'step-8 progress-indicator--' + this.progressClassNames(8, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Result</span>
@@ -301,6 +307,9 @@ class Question extends Component {
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
                   { this.renderProgress() }
+                  <p className="text-align-center mobile-progress">
+                    Question {this.state.currentQuestion} of {this.state.totalQuestions}
+                  </p>
                 </div>
               </div>
             </div>

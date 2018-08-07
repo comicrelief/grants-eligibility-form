@@ -24,7 +24,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
 
-$question-num: 7;
+$question-num: 8;
 
 /*2018 CR colours*/
 $colour-red: #e52631;
@@ -286,20 +286,21 @@ ul.progress-indicator {
     }
   }
 
-  // Balance-out removal of 'previous Q' button on Q1
-  &.step-1 {
     padding-bottom: 37px;
+    display: none;
 
     @include breakpoint($screen-md) {
-      padding-bottom: 72px;
+      padding-bottom: 50px;
+      display: block;
     }
-
-    @include breakpoint($screen-lg) {
-      padding-bottom: 77px;
-    }
-  }
 }
 
+.mobile-progress {
+  display: block;
+  @include breakpoint($screen-md) {
+    display: none;
+  }
+}
 .font--white * { color: $colour-white; }
 .font--black * { color: $colour-black; }
 
@@ -353,3 +354,4 @@ header.promo-header.bg--blue {
     }
   }
 }
+
