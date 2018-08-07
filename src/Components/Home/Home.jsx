@@ -36,7 +36,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <header className="bg--red promo-header promo-header--default  promo-header--no-image">
+        <header className="bg--blue promo-header promo-header--default  promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
@@ -52,11 +52,10 @@ class Home extends Component {
                 <div className="single-msg__copy">
                   <div className="single-msg__body">
                     <div className="cr-body text-align-center">
-                      <h3>You can use this checker to find out whether you meet with
-                        our core criteria which all expressions of interest are assessed against.
+                      <h3>Use our checker to find out whether you meet the basic
+                        eligibility criteria for Comic Relief applicants
                       </h3>
-                      <h3>We&apos;ll use your answers to a few questions about your organisation and
-                        project to do this.
+                      <h3>Next we’ll ask you a few questions about your organisation and its work.
                       </h3>
                       <div className="buttons text-align-center">
                         <button

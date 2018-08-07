@@ -26,6 +26,16 @@
 
 $question-num: 7;
 
+/*2018 CR colours*/
+$colour-red: #e52631;
+$colour-purple: #78368c;
+$colour-orange: #fc7b39;
+$colour-yellow: #ffc700;
+$colour-green: #79ac2b;
+$colour-blue: #2a72b7;
+$colour-magenta: #c6037c;
+$colour-light-blue: #5ec2ea;
+
 html, body {
   background-color: #F0F0F0;
 }
@@ -68,6 +78,15 @@ main {
   }
 }
 
+.btn--red {
+   background-color: $colour-red;
+ }
+
+.btn--blue {
+  background-color: $colour-blue;
+  color: white;
+}
+
 .buttons {
   margin: 30px 0 0;
 
@@ -77,7 +96,7 @@ main {
       margin-bottom: 0;
     }
     ~ button.btn {
-      @extend .btn--royal-blue;
+      @extend .btn--blue;
       + button.btn {
        @extend .btn--black-ghost;
       }
@@ -311,7 +330,26 @@ a.link {
 .cr-body ul {
   padding-left: 0;
   li {
-    // padding: 0 20px;
     margin-bottom: 0 !important;
+  }
+}
+
+header.promo-header.bg--blue {
+  background-color: $colour-blue;
+}
+
+.previous-question-btn {
+  text-align: center;
+  margin-top: 30px;
+
+  .previous-question {
+    position: relative;
+    margin-left:22px;
+    &:before {
+      position: absolute;
+      top: 10px;
+      left: -22px;
+      content: "\21A9";
+    }
   }
 }

@@ -151,32 +151,37 @@ class Question extends Component {
         <li className={'no-circle step-2 progress-indicator--' + this.progressClassNames(2, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Size</span>
           </span>
         </li>
         <li className={'no-circle step-3 progress-indicator--' + this.progressClassNames(3, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Sport</span>
           </span>
         </li>
         <li className={'no-circle step-4 progress-indicator--' + this.progressClassNames(4, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Topic</span>
           </span>
         </li>
         <li className={'no-circle step-5 progress-indicator--' + this.progressClassNames(5, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Criteria</span>
           </span>
         </li>
         <li className={'no-circle step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
+            <span className="progress-bar__title">Criteria</span>
           </span>
         </li>
         <li className={'step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">Finish</span>
+            <span className="progress-bar__title">Result</span>
           </span>
         </li>
       </ul>
@@ -255,13 +260,13 @@ class Question extends Component {
   renderPreviousButton() {
     if (this.state.currentQuestion > 1) {
       return (
-        <p>
+        <p className="previous-question-btn">
           <button
             key={'back-to-question-' + this.state.currentQuestion}
             className="link-dark-purple link previous-question"
             onClick={this.previousQuestion}
           >
-            Go back to previous question
+            Back to previous question
           </button>
         </p>
       );
@@ -296,7 +301,6 @@ class Question extends Component {
               <div className="promo-header__content-inner promo-header__content-inner--centre">
                 <div className="cr-body">
                   { this.renderProgress() }
-                  { this.renderPreviousButton() }
                 </div>
               </div>
             </div>
@@ -322,6 +326,9 @@ class Question extends Component {
 
                       { this.renderTextInput() }
                       { this.renderButtons() }
+
+                      { this.renderPreviousButton() }
+
                     </div>
                   </div>
                 </div>
