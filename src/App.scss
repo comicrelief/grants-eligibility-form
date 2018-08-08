@@ -15,6 +15,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/progress-indicator/_progress-indicator";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/just-in-time-block/_just-in-time";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
@@ -23,6 +24,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/just-in-time-block/_just-in-time-block";
 
 $question-num: 8;
 
@@ -355,3 +357,6 @@ header.promo-header.bg--blue {
   }
 }
 
+.form__row--just-in-time-block .show-link {
+  display: inline !important;
+}

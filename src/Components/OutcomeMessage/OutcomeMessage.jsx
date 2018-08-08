@@ -19,9 +19,44 @@ class OutcomeMessage extends Component {
   constructor(props) {
     super(props);
 
+    this.handleJustInTime = this.handleJustInTime.bind(this);
+
     this.state = {
       isRejected: false,
+      jitOpen: false,
     };
+  }
+
+  componentWillMount() {
+    console.log('I only run once?');
+
+    /* Cache our success values */
+    let successValues = Object.values(this.props.location.state.successes);
+
+    /* Format to a regex pattern */
+    successValues = (successValues).map(i => '^' + i + '$').join('|');
+
+    let isRejected = new RegExp(successValues).test('fail');
+    const checksToDo = new RegExp(successValues).test('check');
+    const theseResponses = this.props.location.state.responses;
+
+    console.log('pre-check reject?:', isRejected);
+
+    /* Only run if any of the users choices require additional logic */
+    if (checksToDo) {
+      /* This check represents our 'under 250k' choice */
+      if (theseResponses.income === 'check') {
+        const sportCheck = theseResponses['sport-for-change'] === 'check';
+        isRejected = sportCheck || isRejected;
+      }
+    }
+
+    console.log('post-check reject?:', isRejected);
+
+    this.state.isRejected = isRejected;
+
+    /* Submit the form details, now we've completed all of our logic */
+    this.submitInfo();
   }
 
   componentDidMount() {
@@ -44,6 +79,17 @@ class OutcomeMessage extends Component {
   getParentUrl() {
     return (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
+  }
+
+  handleJustInTime(e) {
+    e.preventDefault();
+    console.log('handleJustInTime', e);
+    const thisID = e.target.id;
+    console.log('id', thisID, this.state.jitOpen);
+
+    const stateCopy = Object.assign({}, this.state);
+    stateCopy.success = !(this.state.jitOpen);
+    this.setState(stateCopy);
   }
 
   /**
@@ -112,37 +158,9 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    /* Cache our success values */
-    let successValues = Object.values(this.props.location.state.successes);
-
-    /* Format to a regex pattern */
-    successValues = (successValues).map(i => '^' + i + '$').join('|');
-
-    let isRejected = new RegExp(successValues).test('fail');
-    const checksToDo = new RegExp(successValues).test('check');
-    const theseResponses = this.props.location.state.responses;
-
-    console.log('pre-check reject?:', isRejected);
-
-    /* Only run if any of the users choices require additional logic */
-    if (checksToDo) {
-      /* This check represents our 'under 250k' choice */
-      if (theseResponses.income === 'check') {
-        const sportCheck = theseResponses['sport-for-change'] === 'check';
-        isRejected = sportCheck || isRejected;
-      }
-    }
-
-    console.log('post-check reject?:', isRejected);
-
-    this.state.isRejected = isRejected;
-
-    /* Submit the form details, now we've completed all of our logic */
-    this.submitInfo();
-
     const snippetsToShow = Object.values(this.props.location.state.snippets);
 
-    const failOrSuccess = (isRejected ? 'fail' : 'success');
+    const failOrSuccess = (this.state.isRejected ? 'fail' : 'success');
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
@@ -175,8 +193,34 @@ class OutcomeMessage extends Component {
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
                   <div className="cr-body">
-                    <h3>How you answered:</h3>
-                    <ul>{renderedSnippets}</ul>
+
+                    <div className="form__row form__row--just-in-time-block">
+                      <div className="form__fieldset">
+                        <a
+                          href="#show"
+                          aria-expanded="true"
+                          className="link toggle-link show-link"
+                          aria-label="click to open"
+                          id="show"
+                          onClick={this.handleJustInTime}
+                        >
+                            How you answered:
+                        </a>
+                        <a
+                          href="#hide"
+                          className="link toggle-link close-link"
+                          aria-label="click to close"
+                          aria-expanded="false"
+                          id="hide"
+                          onClick={this.handleJustInTime}
+                        >
+                          How you answered:
+                        </a>
+                        <div className="just-in-time--content">
+                          <ul>{renderedSnippets}</ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

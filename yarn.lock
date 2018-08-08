@@ -3,8 +3,8 @@
 
 
 "@comicrelief/pattern-lab@^7.31.4":
-  version "7.38.0"
-  resolved "https://registry.yarnpkg.com/@comicrelief/pattern-lab/-/pattern-lab-7.38.0.tgz#cfa0eb2a33c90a6aebc44c82e81aaf4fa8048075"
+  version "7.47.7"
+  resolved "https://registry.yarnpkg.com/@comicrelief/pattern-lab/-/pattern-lab-7.47.7.tgz#fe03ed18e81af54e600b991d28faefc5fa136bc1"
   dependencies:
     susy "^2.2.12"
 
@@ -7131,8 +7131,8 @@ supports-color@^5.3.0:
     has-flag "^3.0.0"
 
 susy@^2.2.12:
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/susy/-/susy-2.2.12.tgz#644c2441ed00d293287e8d49a016dbf919215953"
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/susy/-/susy-2.2.14.tgz#4551690ff063dd2049197dd8885bae5341a969f8"
 
 susy@^3.0.3:
   version "3.0.3"
