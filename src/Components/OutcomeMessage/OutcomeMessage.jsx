@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Snippets from './templates/snippets.json';
-import OutcomeHeading from './templates/outcome-headings.json';
 import OutcomeCopy from './templates/outcome-copy.json';
 
 const ReactMarkdown = require('react-markdown');
@@ -195,7 +194,7 @@ class OutcomeMessage extends Component {
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
-                {OutcomeHeading[failOrSuccess].heading.map(thisHeading => (
+                {OutcomeCopy[failOrSuccess].heading.map(thisHeading => (
                   <ReactMarkdown
                     key={shortid.generate()}
                     source={thisHeading}
@@ -216,7 +215,7 @@ class OutcomeMessage extends Component {
                   <div className="cr-body outcome-subheading text-align-center">
 
                     {/* Render the subheading */}
-                    {OutcomeHeading[failOrSuccess].subheading.map(thisHeading => (
+                    {OutcomeCopy[failOrSuccess].subheading.map(thisHeading => (
                       <ReactMarkdown
                         key={shortid.generate()}
                         source={thisHeading}
