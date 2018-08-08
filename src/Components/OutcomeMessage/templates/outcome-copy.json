@@ -1,20 +1,20 @@
 {
   "fail": {
     "heading": [
-      "# Looks like you don’t meet with our core criteria. "
+      "# Looks like you’re not eligible"
     ],
     "subheading": [
       "### Based on the answers you gave us you **don’t meet the basic eligibility criteria** for Comic Relief applicants."
     ],
     "copy1": [
-      "### fail copy 1"
+      "[Take the checker again](/)"
     ],
     "copy2": [
-      "### fail copy 2"
+      "You may find the following resources helpful when looking for funding opportunities (link)"
     ],
     "button": {
-      "link": "http://www.google.com",
-      "text": "fail button text"
+      "link": "http://www.comicrelief.com/link-tbc",
+      "text": "You can read more about our criteria here"
     }
   },
 
