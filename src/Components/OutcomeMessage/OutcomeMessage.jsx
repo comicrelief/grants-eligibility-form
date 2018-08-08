@@ -165,7 +165,7 @@ class OutcomeMessage extends Component {
             id="show"
             onClick={this.handleJustInTime}
           >
-            How you answered:
+            See how you answered:
           </a>
           { this.state.jitOpen ?
             <div className="just-in-time--content">
@@ -192,58 +192,76 @@ class OutcomeMessage extends Component {
       <li className={thisSnippet} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div className="outcome-message">
-        <section className="single-msg single-msg--copy-only bg--white">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  {OutcomeHeading[failOrSuccess].copy.map(thisHeading => (
-                    <ReactMarkdown
-                      key={shortid.generate()}
-                      source={thisHeading}
-                      className="outcome-heading"
-                      renderers={{ link: this.props.markdownLinkRenderer }}
-                    />
-                  ))}
-                </div>
+      <div>
+        <header className="bg--blue promo-header promo-header--default  promo-header--no-image">
+          <div className="promo-header__content">
+            <div className="promo-header__content-inner promo-header__content-inner--centre">
+              <div className="cr-body">
+                {OutcomeHeading[failOrSuccess].heading.map(thisHeading => (
+                  <ReactMarkdown
+                    key={shortid.generate()}
+                    source={thisHeading}
+                    className="font--white"
+                    renderers={{ link: this.props.markdownLinkRenderer }}
+                  />
+                ))}
               </div>
             </div>
           </div>
-        </section>
+        </header>
 
-        <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  <div className="cr-body">
-                    {this.renderJit(renderedSnippets)}
+        <div className="outcome-message">
+          <section className="single-msg single-msg--copy-only bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__title text-align-center">
+                    {OutcomeHeading[failOrSuccess].subheading.map(thisHeading => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisHeading}
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                ))}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="single-msg single-msg--copy-only bg--white">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
-                    <ReactMarkdown
-                      key={shortid.generate()}
-                      source={thisCopy}
-                      className="outcome-heading"
-                      renderers={{ link: this.props.markdownLinkRenderer }}
-                    />
-                  ))}
+          <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__title text-align-center">
+                    <div className="cr-body">
+                      {this.renderJit(renderedSnippets)}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          <section className="single-msg single-msg--copy-only bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__title text-align-center">
+                    {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisCopy}
+                        className="outcome-heading"
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                  ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     );
   }
