@@ -4,16 +4,16 @@
       "# Looks like you don’t meet with our core criteria. "
     ],
     "subheading": [
-      "### Based on the answers you gave us it looks like you don’t meet with our core criteria."
+      "### Based on the answers you gave us you **don’t meet the basic eligibility criteria** for Comic Relief applicants."
     ]
   },
 
   "success": {
     "heading": [
-      "# Looks like you meet with our core criteria!"
+      "# You could be eligible!"
     ],
     "subheading": [
-      "### Based on the answers you gave us it looks like you meet with our core criteria"
+      "### Based on the answers you gave you meet the **basic eligibility criteria** for Comic Relief applicants."
     ]
   }
 }

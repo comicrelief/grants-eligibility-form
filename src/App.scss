@@ -67,7 +67,7 @@ main {
       font-family: inherit;
       font-size: inherit;
       line-height: 25px;
-      
+
       &:before {
         position: absolute;
         top: 0;
@@ -81,8 +81,8 @@ main {
 }
 
 .btn--red {
-   background-color: $colour-red;
- }
+  background-color: $colour-red;
+}
 
 .btn--blue {
   background-color: $colour-blue;
@@ -100,7 +100,7 @@ main {
     ~ button.btn {
       @extend .btn--blue;
       + button.btn {
-       @extend .btn--black-ghost;
+        @extend .btn--black-ghost;
       }
     }
   }
@@ -131,7 +131,7 @@ main {
   }
 
   input[type="text"] {
-   font-size: 16px; 
+    font-size: 16px;
   }
 
   .btn {
@@ -205,7 +205,7 @@ ul.list li {
     .single-msg__copy_wrapper,
     .single-msg__image {
       margin-left: 0;
-      margin-right: 0; 
+      margin-right: 0;
     }
   }
 
@@ -255,7 +255,7 @@ ul.progress-indicator {
     padding: 0;
     width: calc(100% / #{$question-num});
 
-    
+
     &:before {
       content: none;
     }
@@ -276,10 +276,10 @@ ul.progress-indicator {
     }
 
     &.progress-indicator--todo.no-circle .progress-indicator__step.progress-indicator__circle {
-        background-color: transparent;
-        border: 0;
+      background-color: transparent;
+      border: 0;
     }
-    
+
     &.progress-indicator--done.no-circle .progress-indicator__circle {
       margin-top: 6px;
       border: 0;
@@ -288,13 +288,13 @@ ul.progress-indicator {
     }
   }
 
-    padding-bottom: 37px;
-    display: none;
+  padding-bottom: 37px;
+  display: none;
 
-    @include breakpoint($screen-md) {
-      padding-bottom: 50px;
-      display: block;
-    }
+  @include breakpoint($screen-md) {
+    padding-bottom: 50px;
+    display: block;
+  }
 }
 
 .mobile-progress {
@@ -333,7 +333,7 @@ a.link {
 .cr-body ul {
   padding-left: 0;
   li {
-    margin-bottom: 0 !important;
+    // margin-bottom: 0 !important;
   }
 }
 
@@ -359,15 +359,76 @@ header.promo-header.bg--blue {
 
 /* A more Router-friendly approach to the JIT block */
 .form__row--just-in-time-block {
+  margin-top: 30px;
   .toggle-link.show-link {
     display: inline !important;
-      &.active:after {
-        transform: rotate(0);
-        bottom: -4px;
-      }
+    &.active:after {
+      transform: rotate(0);
+      bottom: -4px;
+    }
   }
   .just-in-time--content {
     max-height: none;
   }
 }
 
+
+
+.snippets {
+    @include span(8);
+    @include push(2);
+}
+
+.outcome-copy2 {
+  @include span(10);
+  @include push(1);
+}
+
+.outcome-copy1 {
+  @include span(12);
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.outcome-button {
+  clear: both;
+  margin-bottom: 80px;
+
+}
+
+.snippets {
+  ul {
+    text-align: left;
+
+    li {
+      margin-bottom: 20px;
+      &:before {
+        text-align: center;
+        left: -5px;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        font-weight: 800;
+        font-size: 30px;
+        top: 3px;
+      }
+    }
+  }
+
+  .fail:before {
+    content: "X";
+    color: $colour-red;
+  }
+
+  .success:before {
+    content: "\2713";
+    color: $colour-green;
+  }
+  .check:before {
+    content: "?";
+  }
+}
+
+.outcome-copy {
+  margin-top: 140px;
+}

@@ -1,16 +1,31 @@
 {
   "fail": {
-    "copy": [
-      "### You can read more about our core criteria [here](https://www.comicrelief/link-tbc)."
-    ]
+    "copy1": [
+      "### fail copy 1"
+    ],
+    "copy2": [
+      "### fail copy 2"
+    ],
+    "button": {
+      "link": "http://www.google.com",
+      "text": "fail button text"
+    }
   },
+
   "success": {
-    "copy": [
-      "#### Our funding fits across our key themes of Children Survive & Thrive, New Approaches to Mental Health, Gender Justice, A Safe Place to Be for the Most Vulnerable. ",
-      "#### You can see which funding opportunities are open [here](https://www.comicrelief/link-tbc).",
-      "#### The following are some websites which you can use to look for other funding opportunities:",
-      "#### [Site 1](https://askjeeves.net)",
-      "#### [Site 2](https://www.bing.com)"
-    ]
+    "copy1": [
+      "### We fund work across four programme areas: Children Survive & Thrive, Global Mental Health matters, Fighting for Gender Justice and A Safe Place to Be. Specific funding opportunities may have additional eligibility criteria, you’ll find them listed in the detailed information about it. "
+    ],
+    "copy2": [
+      "### **Important information for applying:**",
+      "When considering the amount of funding applied for we will consider the following:",
+      "**Proportion of income:** The amount applied for per year must be less than 35% of your income on your most recent set of signed annual accounts",
+      "**Capital costs** must make up less than 30% of the total amount applied for in your application. Read more about our approach here.",
+      "**Direct Funding**: We prioritise funding applications direct from in-country delivery organisations. If you are not a direct delivery partner we expect to see clear evidence of how the you are adding value, clear partnership roles and responsibilities, and defined power relationships"
+    ],
+    "button": {
+      "link": "http://www.google.com",
+      "text": "success button text"
+    }
   }
 }

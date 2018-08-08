@@ -28,8 +28,6 @@ class OutcomeMessage extends Component {
   }
 
   componentWillMount() {
-    console.log('I only run once?');
-
     /* Cache our success values */
     let successValues = Object.values(this.props.location.state.successes);
 
@@ -189,7 +187,7 @@ class OutcomeMessage extends Component {
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
-      <li className={thisSnippet} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
+      <li className={thisSnippet + ' ' + Snippets[thisSnippet].value} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
       <div className="outcome-wrapper">
@@ -215,47 +213,56 @@ class OutcomeMessage extends Component {
             <div className="single-msg__outer-wrapper">
               <div className="single-msg__copy_wrapper bg--white">
                 <div className="single-msg__copy">
-                  <div className="single-msg__title text-align-center">
+                  <div className="cr-body outcome-subheading text-align-center">
+
+                    {/* Render the subheading */}
                     {OutcomeHeading[failOrSuccess].subheading.map(thisHeading => (
                       <ReactMarkdown
                         key={shortid.generate()}
                         source={thisHeading}
                         renderers={{ link: this.props.markdownLinkRenderer }}
                       />
-                ))}
+                    ))}
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
-            <div className="single-msg__outer-wrapper">
-              <div className="single-msg__copy_wrapper bg--white">
-                <div className="single-msg__copy">
-                  <div className="single-msg__title text-align-center">
-                    <div className="cr-body snippets">
-                      {this.renderJit(renderedSnippets)}
-                    </div>
+                  {/* Render the snippets */}
+                  <div className="cr-body snippets text-align-center">
+                    {this.renderJit(renderedSnippets)}
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section className="single-msg single-msg--copy-only bg--white">
-            <div className="single-msg__outer-wrapper">
-              <div className="single-msg__copy_wrapper bg--white">
-                <div className="single-msg__copy">
-                  <div className="single-msg__title text-align-center">
-                    {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
+                  {/* Render the first copy field */}
+                  <div className="cr-body outcome-copy1 text-align-center">
+                    {OutcomeCopy[failOrSuccess].copy1.map(thisCopy => (
                       <ReactMarkdown
                         key={shortid.generate()}
                         source={thisCopy}
                         renderers={{ link: this.props.markdownLinkRenderer }}
                       />
-                  ))}
+                    ))}
                   </div>
+
+                  {/* Render the button field */}
+                  <div className="cr-body outcome-button text-align-center">
+                    <a
+                      className="btn btn--red"
+                      href={OutcomeCopy[failOrSuccess].button.link}
+                      target="_blank"
+                    >
+                      {OutcomeCopy[failOrSuccess].button.text}
+                    </a>
+                  </div>
+
+                  {/* Render the second copy field */}
+                  <div className="cr-body outcome-copy2">
+                    {OutcomeCopy[failOrSuccess].copy2.map(thisCopy => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisCopy}
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                      ))}
+                  </div>
+
                 </div>
               </div>
             </div>
