@@ -42,8 +42,8 @@ class OutcomeMessage extends Component {
     /* Only run if any of the users choices require additional logic */
     if (checksToDo) {
       /* This check represents our 'under 250k' choice */
-      if (theseResponses.income === 'check') {
-        const sportCheck = theseResponses['sport-for-change'] === 'check';
+      if (theseResponses.income === 'Under £250,000') {
+        const sportCheck = theseResponses['sport-for-change'] === 'No';
         isRejected = sportCheck || isRejected;
       }
     }
@@ -189,7 +189,7 @@ class OutcomeMessage extends Component {
       <li className={thisSnippet + ' ' + Snippets[thisSnippet].value} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div className="outcome-wrapper">
+      <div className={'outcome-wrapper outcome-' + failOrSuccess}>
         <header className="bg--blue promo-header promo-header--default promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">

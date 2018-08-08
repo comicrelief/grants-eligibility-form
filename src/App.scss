@@ -424,8 +424,20 @@ header.promo-header.bg--blue {
     content: "\2713";
     color: $colour-green;
   }
-  .check:before {
-    content: "?";
+
+  /*Switch depending on the overall outcome to reflect logic*/
+  .outcome-success & {
+    .check:before {
+      content: "\2713";
+      color: $colour-green;
+    }
+  }
+
+  .outcome-fail & {
+    .check:before {
+      content: "X";
+      color: $colour-red;
+    }
   }
 }
 
