@@ -82,14 +82,14 @@ class OutcomeMessage extends Component {
   }
 
   handleJustInTime(e) {
+    // Stop the hash from messing with React Router
     e.preventDefault();
-    console.log('handleJustInTime', e);
-    const thisID = e.target.id;
-    console.log('id', thisID, this.state.jitOpen);
 
-    const stateCopy = Object.assign({}, this.state);
-    stateCopy.success = !(this.state.jitOpen);
-    this.setState(stateCopy);
+    // Toggle class so we can update styling slightly
+    document.getElementById(e.target.id).classList.toggle('active');
+
+    // Toggle component state used by renderer
+    this.setState({ jitOpen: !(this.state.jitOpen) });
   }
 
   /**
@@ -153,6 +153,31 @@ class OutcomeMessage extends Component {
     return xhr;
   }
 
+  renderJit(renderedSnippets) {
+    return (
+      <div className="form__row form__row--just-in-time-block">
+        <div className="form__fieldset">
+          <a
+            href="#show"
+            aria-expanded="true"
+            className="link toggle-link show-link"
+            aria-label="click to open"
+            id="show"
+            onClick={this.handleJustInTime}
+          >
+            How you answered:
+          </a>
+          { this.state.jitOpen ?
+            <div className="just-in-time--content">
+              <ul>{renderedSnippets}</ul>
+            </div>
+            : null
+          }
+        </div>
+      </div>
+    );
+  }
+
   /**
    * Render the OutcomeMessage
    * @return {XML}
@@ -193,34 +218,7 @@ class OutcomeMessage extends Component {
               <div className="single-msg__copy">
                 <div className="single-msg__title text-align-center">
                   <div className="cr-body">
-
-                    <div className="form__row form__row--just-in-time-block">
-                      <div className="form__fieldset">
-                        <a
-                          href="#show"
-                          aria-expanded="true"
-                          className="link toggle-link show-link"
-                          aria-label="click to open"
-                          id="show"
-                          onClick={this.handleJustInTime}
-                        >
-                            How you answered:
-                        </a>
-                        <a
-                          href="#hide"
-                          className="link toggle-link close-link"
-                          aria-label="click to close"
-                          aria-expanded="false"
-                          id="hide"
-                          onClick={this.handleJustInTime}
-                        >
-                          How you answered:
-                        </a>
-                        <div className="just-in-time--content">
-                          <ul>{renderedSnippets}</ul>
-                        </div>
-                      </div>
-                    </div>
+                    {this.renderJit(renderedSnippets)}
                   </div>
                 </div>
               </div>

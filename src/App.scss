@@ -357,6 +357,17 @@ header.promo-header.bg--blue {
   }
 }
 
-.form__row--just-in-time-block .show-link {
-  display: inline !important;
+/* A more Router-friendly approach to the JIT block */
+.form__row--just-in-time-block {
+  .toggle-link.show-link {
+    display: inline !important;
+      &.active:after {
+        transform: rotate(0);
+        bottom: -4px;
+      }
+  }
+  .just-in-time--content {
+    max-height: none;
+  }
 }
+
