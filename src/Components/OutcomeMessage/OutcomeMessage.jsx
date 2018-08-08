@@ -192,8 +192,8 @@ class OutcomeMessage extends Component {
       <li className={thisSnippet} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div>
-        <header className="bg--blue promo-header promo-header--default  promo-header--no-image">
+      <div className="outcome-wrapper">
+        <header className="bg--blue promo-header promo-header--default promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
@@ -234,7 +234,7 @@ class OutcomeMessage extends Component {
               <div className="single-msg__copy_wrapper bg--white">
                 <div className="single-msg__copy">
                   <div className="single-msg__title text-align-center">
-                    <div className="cr-body">
+                    <div className="cr-body snippets">
                       {this.renderJit(renderedSnippets)}
                     </div>
                   </div>
@@ -252,7 +252,6 @@ class OutcomeMessage extends Component {
                       <ReactMarkdown
                         key={shortid.generate()}
                         source={thisCopy}
-                        className="outcome-heading"
                         renderers={{ link: this.props.markdownLinkRenderer }}
                       />
                   ))}

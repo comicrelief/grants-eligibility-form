@@ -68,8 +68,9 @@ describe('Grants form tests', () => {
         ($btn).click()
       })
       /* Check failure outcome */
-      cy.get('.outcome-message .outcome-heading').should('contain', 'Looks like you don’t meet with our core criteria.')
-      cy.get('.outcome-message .cr-body')
+      cy.get('.outcome-wrapper .promo-header').should('contain', 'Looks like you don’t meet with our core criteria.')
+      cy.get('.outcome-wrapper .snippets .show-link').click()
+      cy.get('.outcome-wrapper .snippets .just-in-time--content')
         .should('contain', 'You are an individual')
       
     })
@@ -126,8 +127,11 @@ describe('Grants form tests', () => {
         ($btn).click()
       })
       /* Check failure outcome */
-      cy.get('.outcome-message .outcome-heading').should('contain', 'Looks like you meet with our core criteria!')
-      cy.get('.outcome-message .cr-body').should('contain', 'Your organisation\'s income is between £250,000 and £10 million')
+      cy.get('.outcome-wrapper .promo-header').should('contain', 'Looks like you meet with our core criteria!')
+      cy.get('.outcome-wrapper .snippets .show-link').click()
+
+
+      cy.get('.outcome-wrapper .snippets .just-in-time--content').should('contain', 'Your organisation\'s income is between £250,000 and £10 million')
         .should('contain', 'Your project won\'t use sport as a tool for social change')
 
     })
