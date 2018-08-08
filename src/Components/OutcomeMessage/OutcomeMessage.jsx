@@ -19,9 +19,44 @@ class OutcomeMessage extends Component {
   constructor(props) {
     super(props);
 
+    this.handleJustInTime = this.handleJustInTime.bind(this);
+
     this.state = {
       isRejected: false,
+      jitOpen: false,
     };
+  }
+
+  componentWillMount() {
+    console.log('I only run once?');
+
+    /* Cache our success values */
+    let successValues = Object.values(this.props.location.state.successes);
+
+    /* Format to a regex pattern */
+    successValues = (successValues).map(i => '^' + i + '$').join('|');
+
+    let isRejected = new RegExp(successValues).test('fail');
+    const checksToDo = new RegExp(successValues).test('check');
+    const theseResponses = this.props.location.state.responses;
+
+    console.log('pre-check reject?:', isRejected);
+
+    /* Only run if any of the users choices require additional logic */
+    if (checksToDo) {
+      /* This check represents our 'under 250k' choice */
+      if (theseResponses.income === 'check') {
+        const sportCheck = theseResponses['sport-for-change'] === 'check';
+        isRejected = sportCheck || isRejected;
+      }
+    }
+
+    console.log('post-check reject?:', isRejected);
+
+    this.state.isRejected = isRejected;
+
+    /* Submit the form details, now we've completed all of our logic */
+    this.submitInfo();
   }
 
   componentDidMount() {
@@ -44,6 +79,17 @@ class OutcomeMessage extends Component {
   getParentUrl() {
     return (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
+  }
+
+  handleJustInTime(e) {
+    // Stop the hash from messing with React Router
+    e.preventDefault();
+
+    // Toggle class so we can update styling slightly
+    document.getElementById(e.target.id).classList.toggle('active');
+
+    // Toggle component state used by renderer
+    this.setState({ jitOpen: !(this.state.jitOpen) });
   }
 
   /**
@@ -107,101 +153,114 @@ class OutcomeMessage extends Component {
     return xhr;
   }
 
+  renderJit(renderedSnippets) {
+    return (
+      <div className="form__row form__row--just-in-time-block">
+        <div className="form__fieldset">
+          <a
+            href="#show"
+            aria-expanded="true"
+            className="link toggle-link show-link"
+            aria-label="click to open"
+            id="show"
+            onClick={this.handleJustInTime}
+          >
+            See how you answered:
+          </a>
+          { this.state.jitOpen ?
+            <div className="just-in-time--content">
+              <ul>{renderedSnippets}</ul>
+            </div>
+            : null
+          }
+        </div>
+      </div>
+    );
+  }
+
   /**
    * Render the OutcomeMessage
    * @return {XML}
    */
   render() {
-    /* Cache our success values */
-    let successValues = Object.values(this.props.location.state.successes);
-
-    /* Format to a regex pattern */
-    successValues = (successValues).map(i => '^' + i + '$').join('|');
-
-    let isRejected = new RegExp(successValues).test('fail');
-    const checksToDo = new RegExp(successValues).test('check');
-    const theseResponses = this.props.location.state.responses;
-
-    console.log('pre-check reject?:', isRejected);
-
-    /* Only run if any of the users choices require additional logic */
-    if (checksToDo) {
-      /* This check represents our 'under 250k' choice */
-      if (theseResponses.income === 'check') {
-        const sportCheck = theseResponses['sport-for-change'] === 'check';
-        isRejected = sportCheck || isRejected;
-      }
-    }
-
-    console.log('post-check reject?:', isRejected);
-
-    this.state.isRejected = isRejected;
-
-    /* Submit the form details, now we've completed all of our logic */
-    this.submitInfo();
-
     const snippetsToShow = Object.values(this.props.location.state.snippets);
 
-    const failOrSuccess = (isRejected ? 'fail' : 'success');
+    const failOrSuccess = (this.state.isRejected ? 'fail' : 'success');
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
       <li className={thisSnippet} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div className="outcome-message">
-        <section className="single-msg single-msg--copy-only bg--white">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  {OutcomeHeading[failOrSuccess].copy.map(thisHeading => (
-                    <ReactMarkdown
-                      key={shortid.generate()}
-                      source={thisHeading}
-                      className="outcome-heading"
-                      renderers={{ link: this.props.markdownLinkRenderer }}
-                    />
-                  ))}
-                </div>
+      <div className="outcome-wrapper">
+        <header className="bg--blue promo-header promo-header--default promo-header--no-image">
+          <div className="promo-header__content">
+            <div className="promo-header__content-inner promo-header__content-inner--centre">
+              <div className="cr-body">
+                {OutcomeHeading[failOrSuccess].heading.map(thisHeading => (
+                  <ReactMarkdown
+                    key={shortid.generate()}
+                    source={thisHeading}
+                    className="font--white"
+                    renderers={{ link: this.props.markdownLinkRenderer }}
+                  />
+                ))}
               </div>
             </div>
           </div>
-        </section>
+        </header>
 
-        <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  <div className="cr-body">
-                    <h3>How you answered:</h3>
-                    <ul>{renderedSnippets}</ul>
+        <div className="outcome-message">
+          <section className="single-msg single-msg--copy-only bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__title text-align-center">
+                    {OutcomeHeading[failOrSuccess].subheading.map(thisHeading => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisHeading}
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                ))}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="single-msg single-msg--copy-only bg--white">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
-                    <ReactMarkdown
-                      key={shortid.generate()}
-                      source={thisCopy}
-                      className="outcome-heading"
-                      renderers={{ link: this.props.markdownLinkRenderer }}
-                    />
-                  ))}
+          <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__title text-align-center">
+                    <div className="cr-body snippets">
+                      {this.renderJit(renderedSnippets)}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          <section className="single-msg single-msg--copy-only bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="single-msg__title text-align-center">
+                    {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisCopy}
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                  ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     );
   }

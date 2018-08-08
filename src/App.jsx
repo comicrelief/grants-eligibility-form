@@ -60,7 +60,7 @@ class App extends Component {
             />)}
           />
           <Route
-            path="/outcome/"
+            path="/outcome"
             render={props => (<OutcomeMessage
               {...props}
               resize={this.resize}
