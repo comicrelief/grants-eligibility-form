@@ -24,7 +24,7 @@ class Question extends Component {
 
     this.state = {
       currentQuestion: 1,
-      totalQuestions: 7,
+      totalQuestions: 5,
       /* eslint-disable react/no-unused-state */
       responses: {},
       snippets: {},
@@ -172,19 +172,7 @@ class Question extends Component {
             <span className="progress-bar__title">Criteria</span>
           </span>
         </li>
-        <li className={'no-circle step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">St1</span>
-          </span>
-        </li>
-        <li className={'no-circle step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">St2</span>
-          </span>
-        </li>
-        <li className={'step-8 progress-indicator--' + this.progressClassNames(8, currQ)}>
+        <li className={'step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Result</span>
