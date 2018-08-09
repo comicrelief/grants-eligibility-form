@@ -375,8 +375,6 @@ header.promo-header.bg--blue {
   }
 }
 
-
-
 .snippets {
     @include span(8);
     @include push(2);
@@ -448,30 +446,37 @@ header.promo-header.bg--blue {
   margin-top: 140px;
 }
 
-.single-msg.single-msg--copy-only .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
-  margin-bottom: 0;
-  li {
-    margin-bottom: 10px;
-    font-size: 24px;
+.single-msg.single-msg--copy-only {
+  .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
+    margin-bottom: 0;
+    li {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
   }
-}
 
-.question-3 {
-  @include breakpoint($screen-md) {
-
+  &.question-3 {
+    .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul li {
+      font-size: 18px;
+      padding: 0 0 0 20px;
+      @include breakpoint($screen-md) {
+        font-size: 24px;
+        padding: 0 0 0 30px;
+      }
+    }
     .question-copy--1,
     .question-copy--2 {
-      width: 30%;
+      width: 50%;
+      margin-bottom: 30px;
       float: left;
       text-align: left;
-      margin-bottom: 30px;
     }
 
     .question-copy--1 {
-      margin-left: 20%;
+      margin-left: 0;
     }
     .question-copy--2 {
-      margin-right: 20%;
+      margin-right: 0;
     }
     .question-copy--3 {
       margin-top: 30px;
@@ -479,6 +484,18 @@ header.promo-header.bg--blue {
     .buttons {
       clear: both;
     }
-  }
 
+    @include breakpoint($screen-md) {
+      .question-copy--1,
+      .question-copy--2 {
+        width: 30%;
+      }
+      .question-copy--1 {
+        margin-left: 20%;
+      }
+      .question-copy--2 {
+        margin-right: 20%;
+      }
+    }
+  }
 }
