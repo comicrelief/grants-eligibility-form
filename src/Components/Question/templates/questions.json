@@ -1,19 +1,19 @@
 {
   "q1": {
     "copy": [
-      "### Are you applying on behalf of an organisation?"
+      "### Are you applying on behalf of an organisation or as an individual?"
     ],
     "buttons": [
       {
-        "question_type": "organisation", "text": "Yes", "value": "success", "snippets": ["q1-success"]
+        "question_type": "organisation", "text": "Organisation", "value": "success", "snippets": ["q1-success"]
       },
       {
-        "question_type": "organisation", "text": "No, I’m applying as an individual", "value": "fail", "snippets": ["q1-fail"]
+        "question_type": "organisation", "text": "Individual", "value": "fail", "snippets": ["q1-fail"]
       }]
   },
 
   "q2": {
-    "copy": ["### What was your organisation’s level of income in your last financial year?"],
+    "copy": ["### What was your organisation’s income in its last financial year?"],
     "buttons": [
       {
         "question_type": "income", "text": "Under £250,000", "value": "check", "snippets": ["q2-check"]
@@ -30,7 +30,7 @@
     "copy": [
       "### The countries we will fund activities in are as follows:",
       "#### Ghana, Kenya, Malawi, Nigeria, Sierra Leone, South Africa, Rwanda, Tanzania, Uganda, Zambia, Zimbabwe, Bangladesh, India, Nepal and the UK.",
-      "### Will your project take place in one of these countries?"
+      "### Is your organisation working in at least one of these countries?"
     ],
     "buttons": [
       {
@@ -43,8 +43,8 @@
 
   "q4": {
     "copy": [
-      "### Will your project use sport as a tool for social change?",
-      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Projects taking approachshould be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
+      "### Does your organisation use sport as a tool for social change?",
+      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Organisations taking this approach should be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
     ],
     "buttons": [
       {
@@ -57,9 +57,8 @@
 
   "q5": {
     "copy": [
-      "### We don’t usually fund:",
-      "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care ",
-      "### Do you want funding for any of the above?"
+      "### Are you looking for funding for any of the following activities?",
+      "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care "
     ],
     "buttons": [
       {

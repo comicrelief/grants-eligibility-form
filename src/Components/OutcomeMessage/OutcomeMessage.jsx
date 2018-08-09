@@ -101,11 +101,15 @@ class OutcomeMessage extends Component {
 
     /* Construct json object only of values required by data contract */
     let postBody = {
-      organisation: allResponses.company_name,
       success: isSuccessful,
       transSourceURL: 'https://www.comicrelief.com/eligibility-checker',
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
+      organisation: allResponses.organisation,
+      income: allResponses.income,
+      locationWeFund: allResponses['location-we-fund'],
+      sportForChange: allResponses['sport-for-change'],
+      activityWeDontFund: allResponses['activity-we-dont-fund'],
     };
 
     postBody = JSON.stringify(postBody);
