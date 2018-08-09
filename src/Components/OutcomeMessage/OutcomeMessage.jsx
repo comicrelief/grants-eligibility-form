@@ -23,6 +23,7 @@ class OutcomeMessage extends Component {
     this.state = {
       isRejected: false,
       jitOpen: false,
+      removeSportIcon: false,
     };
   }
 
@@ -41,10 +42,13 @@ class OutcomeMessage extends Component {
 
     /* Only run if any of the users choices require additional logic */
     if (checksToDo) {
+      const sportCheck = theseResponses['sport-for-change'] === 'No';
       /* This check represents our 'under 250k' choice */
       if (theseResponses.income === 'Under £250,000') {
-        const sportCheck = theseResponses['sport-for-change'] === 'No';
         isRejected = sportCheck || isRejected;
+      } else
+      if (theseResponses.income === 'Between £250,000 to £10 million' && sportCheck) {
+        this.setState({ removeSportIcon: true });
       }
     }
 
@@ -193,7 +197,7 @@ class OutcomeMessage extends Component {
       <li className={thisSnippet + ' ' + Snippets[thisSnippet].value} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div className={'outcome-wrapper outcome-' + failOrSuccess}>
+      <div className={'outcome-wrapper outcome-' + failOrSuccess + ' remove-sport-icon--' + this.state.removeSportIcon}>
         <header className="bg--blue promo-header promo-header--default promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
@@ -258,7 +262,6 @@ class OutcomeMessage extends Component {
                     : null
                   }
 
-
                   {/* Render the second copy field if it exists */}
                   {OutcomeCopy[failOrSuccess].copy2 ?
                     <div className="cr-body outcome-copy2">
@@ -272,7 +275,6 @@ class OutcomeMessage extends Component {
                     </div>
                     : null
                   }
-
                 </div>
               </div>
             </div>

@@ -119,39 +119,6 @@ main {
   text-align: center;
 }
 
-.text-input {
-  position: relative;
-  margin: 30px 0;
-
-  label {
-    position: absolute;
-    top: 0;
-    left: -9999px;
-    text-indent: -9999px;
-  }
-
-  input[type="text"] {
-    font-size: 16px;
-  }
-
-  .btn {
-    border: 0;
-    border-radius: 0;
-    padding: 16px 40px;
-    vertical-align: top;
-  }
-
-  .organisation-name__submit {
-    width: 100%;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    @include breakpoint($screen-md) {
-      width: auto;
-    }
-  }
-}
-
 ul.list li {
   p &,
   h3 &,
@@ -181,18 +148,6 @@ ul.list li {
   }
 }
 
-.apply-footer.single-msg.single-msg--copy-only .single-msg__copy_wrapper {
-  @include span(12);
-
-  @include breakpoint($screen-md) {
-    @include span(12);
-  }
-
-  @include breakpoint($screen-lg) {
-    @include span(12);
-  }
-}
-
 #grants-form {
   .buttons {
     margin-top:30px;
@@ -211,10 +166,6 @@ ul.list li {
 
   .bg--grey {
     background-color: #F0F0F0;
-  }
-
-  .no-margin {
-    margin: 0;
   }
 }
 
@@ -376,8 +327,13 @@ header.promo-header.bg--blue {
 }
 
 .snippets {
-    @include span(8);
-    @include push(2);
+
+  @include span(12);
+
+  @include breakpoint($screen-md) {
+    @include span(10);
+    @include push(1);
+  }
 }
 
 .outcome-copy2 {
@@ -438,6 +394,13 @@ header.promo-header.bg--blue {
     .check:before {
       content: "X";
       color: $colour-red;
+    }
+  }
+
+  /* Super niche style */
+  .remove-sport-icon--true & {
+    .q4-fail:before {
+      content: none;
     }
   }
 }

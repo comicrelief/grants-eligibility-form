@@ -53,7 +53,7 @@ class Home extends Component {
                   <div className="single-msg__body">
                     <div className="cr-body text-align-center">
                       <h3>We’re going to ask you
-                        <strong>five questions about your organisation</strong> and
+                         <strong> five questions about your organisation</strong> and
                         its work to find out
                         whether you meet the basic eligibility criteria for Comic Relief applicants.
                       </h3>
