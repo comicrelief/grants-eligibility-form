@@ -7,15 +7,8 @@
       "### Based on the answers you gave us you **don’t meet the basic eligibility criteria** for Comic Relief applicants."
     ],
     "copy1": [
-      "[Take the checker again](/)"
-    ],
-    "copy2": [
-      "You may find the following resources helpful when looking for funding opportunities (link)"
-    ],
-    "button": {
-      "link": "http://www.comicrelief.com/link-tbc",
-      "text": "You can read more about our criteria here"
-    }
+      "[Read more about this](http://www.comicrelief.com/link-tbc) or [Take the checker again](/)"
+    ]
   },
 
   "success": {
@@ -41,7 +34,7 @@
     ],
     "button": {
       "link": "https://www.comicrelief.com/funding/applying-for-grants/open-initiatives",
-      "text": "See available funding opportunities here"
+      "text": "See available opportunities"
     }
   }
 }

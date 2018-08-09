@@ -244,27 +244,34 @@ class OutcomeMessage extends Component {
                     ))}
                   </div>
 
-                  {/* Render the button field */}
-                  <div className="cr-body outcome-button text-align-center">
-                    <a
-                      className="btn btn--red"
-                      href={OutcomeCopy[failOrSuccess].button.link}
-                      target="_blank"
-                    >
-                      {OutcomeCopy[failOrSuccess].button.text}
-                    </a>
-                  </div>
+                  {/* Render the button field if it exists */}
+                  {OutcomeCopy[failOrSuccess].button ?
+                    <div className="cr-body outcome-button text-align-center">
+                      <a
+                        className="btn btn--red"
+                        href={OutcomeCopy[failOrSuccess].button.link}
+                        target="_blank"
+                      >
+                        {OutcomeCopy[failOrSuccess].button.text}
+                      </a>
+                    </div>
+                    : null
+                  }
 
-                  {/* Render the second copy field */}
-                  <div className="cr-body outcome-copy2">
-                    {OutcomeCopy[failOrSuccess].copy2.map(thisCopy => (
-                      <ReactMarkdown
-                        key={shortid.generate()}
-                        source={thisCopy}
-                        renderers={{ link: this.props.markdownLinkRenderer }}
-                      />
+
+                  {/* Render the second copy field if it exists */}
+                  {OutcomeCopy[failOrSuccess].copy2 ?
+                    <div className="cr-body outcome-copy2">
+                      {OutcomeCopy[failOrSuccess].copy2.map(thisCopy => (
+                        <ReactMarkdown
+                          key={shortid.generate()}
+                          source={thisCopy}
+                          renderers={{ link: this.props.markdownLinkRenderer }}
+                        />
                       ))}
-                  </div>
+                    </div>
+                    : null
+                  }
 
                 </div>
               </div>

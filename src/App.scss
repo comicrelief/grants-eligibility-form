@@ -235,17 +235,20 @@ ul.list li {
 }
 
 /* Making the button resemble a link */
-button.previous-question {
-  background: none;
-  border: none;
-  padding: 7px 0;
-  cursor: pointer;
-  outline: inherit;
-  font-size: inherit;
-  line-height: 14px;
-  border-bottom: 4px solid rgba(41, 2, 44, 0.5);
-  @extend .inline;
-  @extend .link--dark-purple;
+a, button {
+  &.previous-question {
+    background: none;
+    border: none;
+    padding: 7px 0;
+    cursor: pointer;
+    outline: inherit;
+    font-size: inherit;
+    line-height: 14px;
+    border-bottom: 4px solid rgba(41, 2, 44, 0.5);
+    display: inline-block;
+    @extend .inline;
+    @extend .link--dark-purple;
+  }
 }
 
 ul.progress-indicator {
@@ -443,4 +446,39 @@ header.promo-header.bg--blue {
 
 .outcome-copy {
   margin-top: 140px;
+}
+
+.single-msg.single-msg--copy-only .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
+  margin-bottom: 0;
+  li {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+}
+
+.question-3 {
+  @include breakpoint($screen-md) {
+
+    .question-copy--1,
+    .question-copy--2 {
+      width: 30%;
+      float: left;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .question-copy--1 {
+      margin-left: 20%;
+    }
+    .question-copy--2 {
+      margin-right: 20%;
+    }
+    .question-copy--3 {
+      margin-top: 30px;
+    }
+    .buttons {
+      clear: both;
+    }
+  }
+
 }

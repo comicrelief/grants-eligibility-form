@@ -29,7 +29,9 @@
   "q3": {
     "copy": [
       "### The countries we will fund activities in are as follows:",
-      "#### Ghana, Kenya, Malawi, Nigeria, Sierra Leone, South Africa, Rwanda, Tanzania, Uganda, Zambia, Zimbabwe, Bangladesh, India, Nepal and the UK.",
+      "* Bangladesh \n* Ghana \n* India \n* Kenya \n* Malawi \n* Nepal \n* Nigeria \n* Rwanda",
+      "* Sierra Leone \n* South Africa \n* Tanzania \n* Uganda \n* UK \n* Zambia \n* Zimbabwe",
+
       "### Is your organisation working in at least one of these countries?"
     ],
     "buttons": [
