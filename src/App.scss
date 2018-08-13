@@ -303,9 +303,16 @@ header.promo-header.bg--blue {
     margin-left:22px;
     &:before {
       position: absolute;
-      top: 10px;
+      top: 5px;
       left: -22px;
-      content: "\21A9";
+      content: '\2303';
+      margin-left: 4px;
+      overflow: hidden;
+      line-height: 19px;
+      font-size: 25px;
+      color: inherit;
+      font-weight: bold;
+      transform: rotate(270deg)
     }
   }
 }
