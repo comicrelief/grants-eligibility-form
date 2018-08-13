@@ -148,25 +148,25 @@ class Question extends Component {
             <span className="progress-bar__title">Start</span>
           </span>
         </li>
-        <li className={'no-circle step-2 progress-indicator--' + this.progressClassNames(2, currQ)}>
+        <li className={'step-2 progress-indicator--' + this.progressClassNames(2, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Size</span>
           </span>
         </li>
-        <li className={'no-circle step-3 progress-indicator--' + this.progressClassNames(3, currQ)}>
+        <li className={'step-3 progress-indicator--' + this.progressClassNames(3, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Country</span>
           </span>
         </li>
-        <li className={'no-circle step-4 progress-indicator--' + this.progressClassNames(4, currQ)}>
+        <li className={'step-4 progress-indicator--' + this.progressClassNames(4, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Topic</span>
           </span>
         </li>
-        <li className={'no-circle step-5 progress-indicator--' + this.progressClassNames(5, currQ)}>
+        <li className={'step-5 progress-indicator--' + this.progressClassNames(5, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Criteria</span>

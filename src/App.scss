@@ -209,7 +209,6 @@ ul.progress-indicator {
     padding: 0;
     width: calc(100% / #{$question-num});
 
-
     &:before {
       content: none;
     }
