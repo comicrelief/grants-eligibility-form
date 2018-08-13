@@ -313,7 +313,7 @@ header.promo-header.bg--blue {
 
 /* A more Router-friendly approach to the JIT block */
 .form__row--just-in-time-block {
-  margin-top: 30px;
+  margin-top: 10px;
   font-size: 18px;
   .toggle-link.show-link {
     display: inline !important;
@@ -327,15 +327,6 @@ header.promo-header.bg--blue {
   }
 }
 
-.snippets {
-
-  @include span(12);
-
-  @include breakpoint($screen-md) {
-    @include span(10);
-    @include push(1);
-  }
-}
 
 .outcome-copy2 {
   @include span(10);
@@ -344,7 +335,7 @@ header.promo-header.bg--blue {
 
 .outcome-copy1 {
   @include span(12);
-  margin-top: 60px;
+  margin-top: 35px;
   margin-bottom: 30px;
 }
 
@@ -355,8 +346,16 @@ header.promo-header.bg--blue {
 }
 
 .snippets {
+
+  @include span(12);
+  @include breakpoint($screen-md) {
+    @include span(10);
+    @include push(1);
+  }
+
   ul {
     text-align: left;
+    margin-bottom: 0;
 
     li {
       margin-bottom: 20px;
@@ -370,6 +369,9 @@ header.promo-header.bg--blue {
         background-position: 0 0;
         background-size: 100%;
         background-repeat: no-repeat;
+      }
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
@@ -386,7 +388,6 @@ header.promo-header.bg--blue {
   .outcome-success & {
     .check:before {
       background-image: url("./images/outcome-images/icon-tick.png");
-
     }
   }
 
@@ -399,7 +400,7 @@ header.promo-header.bg--blue {
   /* Super niche style */
   .remove-sport-icon--true & {
     .q4-fail:before {
-      content: none;
+      background-image: url("./images/outcome-images/icon-tick.png");
     }
   }
 }

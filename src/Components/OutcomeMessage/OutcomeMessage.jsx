@@ -37,6 +37,8 @@ class OutcomeMessage extends Component {
     successValues = (successValues).map(i => '^' + i + '$').join('|');
 
     let isRejected = new RegExp(successValues).test('fail');
+    this.setState({ jitOpen: isRejected });
+
     const checksToDo = new RegExp(successValues).test('check');
     const theseResponses = this.props.location.state.responses;
 
