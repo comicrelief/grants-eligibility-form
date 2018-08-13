@@ -29,7 +29,9 @@ class OutcomeMessage extends Component {
 
   componentWillMount() {
     /* Cache our success values */
-    let successValues = Object.values(this.props.location.state.successes);
+    const theseSuccesses = this.props.location.state.successes;
+    /* IE11 friendly-alternative to 'values */
+    let successValues = Object.keys(theseSuccesses).map(itm => theseSuccesses[itm]);
 
     /* Format to a regex pattern */
     successValues = (successValues).map(i => '^' + i + '$').join('|');
@@ -130,7 +132,7 @@ class OutcomeMessage extends Component {
 
     const thisDomain = window.location.href;
 
-    if (thisDomain.includes('localhost')) {
+    if (thisDomain.indexOf('localhost') >= 0) {
       console.log('Simulated local submit', postBody);
     } else {
       xhr.send(postBody);
@@ -188,7 +190,9 @@ class OutcomeMessage extends Component {
    * @return {XML}
    */
   render() {
-    const snippetsToShow = Object.values(this.props.location.state.snippets);
+    /* IE11 friendly-alternative to 'values */
+    const allSnippets = this.props.location.state.snippets;
+    const snippetsToShow = Object.keys(allSnippets).map(itm => allSnippets[itm]);
 
     const failOrSuccess = (this.state.isRejected ? 'fail' : 'success');
 
