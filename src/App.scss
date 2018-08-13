@@ -62,7 +62,7 @@ main {
 
     li {
       position: relative;
-      padding: 0 0 0 30px;
+      padding: 0 0 0 35px;
       list-style: none;
       font-family: inherit;
       font-size: inherit;
@@ -297,7 +297,7 @@ header.promo-header.bg--blue {
 
 .previous-question-btn {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 35px;
 
   .previous-question {
     position: relative;
@@ -314,6 +314,7 @@ header.promo-header.bg--blue {
 /* A more Router-friendly approach to the JIT block */
 .form__row--just-in-time-block {
   margin-top: 30px;
+  font-size: 18px;
   .toggle-link.show-link {
     display: inline !important;
     &.active:after {
@@ -360,40 +361,38 @@ header.promo-header.bg--blue {
     li {
       margin-bottom: 20px;
       &:before {
-        text-align: center;
-        left: -5px;
+        left: 0;
         padding: 0;
-        width: 30px;
-        height: 30px;
-        font-weight: 800;
-        font-size: 30px;
-        top: 3px;
+        width: 25px;
+        height: 25px;
+        top: -3px;
+        content: " ";
+        background-position: 0 0;
+        background-size: 100%;
+        background-repeat: no-repeat;
       }
     }
   }
 
   .fail:before {
-    content: "X";
-    color: $colour-red;
+    background-image: url("./images/outcome-images/icon-cross.png");
   }
 
   .success:before {
-    content: "\2713";
-    color: $colour-green;
+    background-image: url("./images/outcome-images/icon-tick.png");
   }
 
   /*Switch depending on the overall outcome to reflect logic*/
   .outcome-success & {
     .check:before {
-      content: "\2713";
-      color: $colour-green;
+      background-image: url("./images/outcome-images/icon-tick.png");
+
     }
   }
 
   .outcome-fail & {
     .check:before {
-      content: "X";
-      color: $colour-red;
+      background-image: url("./images/outcome-images/icon-cross.png");
     }
   }
 
@@ -424,7 +423,7 @@ header.promo-header.bg--blue {
       padding: 0 0 0 20px;
       @include breakpoint($screen-md) {
         font-size: 24px;
-        padding: 0 0 0 30px;
+        padding: 0 0 0 35px;
       }
     }
     .question-copy--1,
