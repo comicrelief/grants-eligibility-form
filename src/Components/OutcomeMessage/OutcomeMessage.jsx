@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Snippets from './templates/snippets.json';
-import OutcomeHeading from './templates/outcome-headings.json';
 import OutcomeCopy from './templates/outcome-copy.json';
 
 const ReactMarkdown = require('react-markdown');
@@ -24,12 +23,11 @@ class OutcomeMessage extends Component {
     this.state = {
       isRejected: false,
       jitOpen: false,
+      removeSportIcon: false,
     };
   }
 
   componentWillMount() {
-    console.log('I only run once?');
-
     /* Cache our success values */
     let successValues = Object.values(this.props.location.state.successes);
 
@@ -44,10 +42,13 @@ class OutcomeMessage extends Component {
 
     /* Only run if any of the users choices require additional logic */
     if (checksToDo) {
+      const sportCheck = theseResponses['sport-for-change'] === 'No';
       /* This check represents our 'under 250k' choice */
-      if (theseResponses.income === 'check') {
-        const sportCheck = theseResponses['sport-for-change'] === 'check';
+      if (theseResponses.income === 'Under £250,000') {
         isRejected = sportCheck || isRejected;
+      } else
+      if (theseResponses.income === 'Between £250,000 to £10 million' && sportCheck) {
+        this.setState({ removeSportIcon: true });
       }
     }
 
@@ -104,11 +105,15 @@ class OutcomeMessage extends Component {
 
     /* Construct json object only of values required by data contract */
     let postBody = {
-      organisation: allResponses.company_name,
       success: isSuccessful,
       transSourceURL: 'https://www.comicrelief.com/eligibility-checker',
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
+      organisation: allResponses.organisation,
+      income: allResponses.income,
+      locationWeFund: allResponses['location-we-fund'],
+      sportForChange: allResponses['sport-for-change'],
+      activityWeDontFund: allResponses['activity-we-dont-fund'],
     };
 
     postBody = JSON.stringify(postBody);
@@ -189,15 +194,15 @@ class OutcomeMessage extends Component {
 
     /* Build our list items from the relevant snippets */
     const renderedSnippets = snippetsToShow.map(thisSnippet => (
-      <li className={thisSnippet} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
+      <li className={thisSnippet + ' ' + Snippets[thisSnippet].value} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div className="outcome-wrapper">
+      <div className={'outcome-wrapper outcome-' + failOrSuccess + ' remove-sport-icon--' + this.state.removeSportIcon}>
         <header className="bg--blue promo-header promo-header--default promo-header--no-image">
           <div className="promo-header__content">
             <div className="promo-header__content-inner promo-header__content-inner--centre">
               <div className="cr-body">
-                {OutcomeHeading[failOrSuccess].heading.map(thisHeading => (
+                {OutcomeCopy[failOrSuccess].heading.map(thisHeading => (
                   <ReactMarkdown
                     key={shortid.generate()}
                     source={thisHeading}
@@ -215,47 +220,61 @@ class OutcomeMessage extends Component {
             <div className="single-msg__outer-wrapper">
               <div className="single-msg__copy_wrapper bg--white">
                 <div className="single-msg__copy">
-                  <div className="single-msg__title text-align-center">
-                    {OutcomeHeading[failOrSuccess].subheading.map(thisHeading => (
+                  <div className="cr-body outcome-subheading text-align-center">
+
+                    {/* Render the subheading */}
+                    {OutcomeCopy[failOrSuccess].subheading.map(thisHeading => (
                       <ReactMarkdown
                         key={shortid.generate()}
                         source={thisHeading}
                         renderers={{ link: this.props.markdownLinkRenderer }}
                       />
-                ))}
+                    ))}
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section className="single-msg single-msg--copy-only single-msg--no-padding bg--white">
-            <div className="single-msg__outer-wrapper">
-              <div className="single-msg__copy_wrapper bg--white">
-                <div className="single-msg__copy">
-                  <div className="single-msg__title text-align-center">
-                    <div className="cr-body snippets">
-                      {this.renderJit(renderedSnippets)}
-                    </div>
+                  {/* Render the snippets */}
+                  <div className="cr-body snippets text-align-center">
+                    {this.renderJit(renderedSnippets)}
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section className="single-msg single-msg--copy-only bg--white">
-            <div className="single-msg__outer-wrapper">
-              <div className="single-msg__copy_wrapper bg--white">
-                <div className="single-msg__copy">
-                  <div className="single-msg__title text-align-center">
-                    {OutcomeCopy[failOrSuccess].copy.map(thisCopy => (
+                  {/* Render the first copy field */}
+                  <div className="cr-body outcome-copy1 text-align-center">
+                    {OutcomeCopy[failOrSuccess].copy1.map(thisCopy => (
                       <ReactMarkdown
                         key={shortid.generate()}
                         source={thisCopy}
                         renderers={{ link: this.props.markdownLinkRenderer }}
                       />
-                  ))}
+                    ))}
                   </div>
+
+                  {/* Render the button field if it exists */}
+                  {OutcomeCopy[failOrSuccess].button ?
+                    <div className="cr-body outcome-button text-align-center">
+                      <a
+                        className="btn btn--red"
+                        href={OutcomeCopy[failOrSuccess].button.link}
+                        target="_blank"
+                      >
+                        {OutcomeCopy[failOrSuccess].button.text}
+                      </a>
+                    </div>
+                    : null
+                  }
+
+                  {/* Render the second copy field if it exists */}
+                  {OutcomeCopy[failOrSuccess].copy2 ?
+                    <div className="cr-body outcome-copy2">
+                      {OutcomeCopy[failOrSuccess].copy2.map(thisCopy => (
+                        <ReactMarkdown
+                          key={shortid.generate()}
+                          source={thisCopy}
+                          renderers={{ link: this.props.markdownLinkRenderer }}
+                        />
+                      ))}
+                    </div>
+                    : null
+                  }
                 </div>
               </div>
             </div>

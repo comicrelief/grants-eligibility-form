@@ -24,7 +24,7 @@ class Question extends Component {
 
     this.state = {
       currentQuestion: 1,
-      totalQuestions: 7,
+      totalQuestions: 5,
       /* eslint-disable react/no-unused-state */
       responses: {},
       snippets: {},
@@ -172,19 +172,7 @@ class Question extends Component {
             <span className="progress-bar__title">Criteria</span>
           </span>
         </li>
-        <li className={'no-circle step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">St1</span>
-          </span>
-        </li>
-        <li className={'no-circle step-7 progress-indicator--' + this.progressClassNames(7, currQ)}>
-          <span className="progress-indicator__step-link">
-            <span className="progress-indicator__step progress-indicator__circle" />
-            <span className="progress-bar__title">St2</span>
-          </span>
-        </li>
-        <li className={'step-8 progress-indicator--' + this.progressClassNames(8, currQ)}>
+        <li className={'step-6 progress-indicator--' + this.progressClassNames(6, currQ)}>
           <span className="progress-indicator__step-link">
             <span className="progress-indicator__step progress-indicator__circle" />
             <span className="progress-bar__title">Result</span>
@@ -269,11 +257,23 @@ class Question extends Component {
         <p className="previous-question-btn">
           <button
             key={'back-to-question-' + this.state.currentQuestion}
-            className="link-dark-purple link previous-question"
+            className="link--dark-purple link previous-question"
             onClick={this.previousQuestion}
           >
             Back to previous question
           </button>
+        </p>
+      );
+    } else if (this.state.currentQuestion === 1) {
+      return (
+        <p className="previous-question-btn">
+          <a
+            key={'back-to-question-' + this.state.currentQuestion}
+            className="link--dark-purple link previous-question "
+            href="/"
+          >
+          Back
+          </a>
         </p>
       );
     } return null;
@@ -324,11 +324,11 @@ class Question extends Component {
                     <div className="cr-body">
 
                       {/* Render each element in our copy arrays separately */}
-                      {Questions[currentQuestionPointer].copy.map(thisCopy => (
+                      {Questions[currentQuestionPointer].copy.map((thisCopy, index) => (
                         <ReactMarkdown
                           key={shortid.generate()}
                           source={thisCopy}
-                          className="text-align-center font--family-bold question-copy"
+                          className={'text-align-center font--family-bold question-copy question-copy--' + index}
                           renderers={{ link: this.props.markdownLinkRenderer }}
                         />
                       ))}

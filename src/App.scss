@@ -67,7 +67,7 @@ main {
       font-family: inherit;
       font-size: inherit;
       line-height: 25px;
-      
+
       &:before {
         position: absolute;
         top: 0;
@@ -81,8 +81,8 @@ main {
 }
 
 .btn--red {
-   background-color: $colour-red;
- }
+  background-color: $colour-red;
+}
 
 .btn--blue {
   background-color: $colour-blue;
@@ -100,7 +100,7 @@ main {
     ~ button.btn {
       @extend .btn--blue;
       + button.btn {
-       @extend .btn--black-ghost;
+        @extend .btn--black-ghost;
       }
     }
   }
@@ -117,39 +117,6 @@ main {
 
 .text-align-center {
   text-align: center;
-}
-
-.text-input {
-  position: relative;
-  margin: 30px 0;
-
-  label {
-    position: absolute;
-    top: 0;
-    left: -9999px;
-    text-indent: -9999px;
-  }
-
-  input[type="text"] {
-   font-size: 16px; 
-  }
-
-  .btn {
-    border: 0;
-    border-radius: 0;
-    padding: 16px 40px;
-    vertical-align: top;
-  }
-
-  .organisation-name__submit {
-    width: 100%;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    @include breakpoint($screen-md) {
-      width: auto;
-    }
-  }
 }
 
 ul.list li {
@@ -181,18 +148,6 @@ ul.list li {
   }
 }
 
-.apply-footer.single-msg.single-msg--copy-only .single-msg__copy_wrapper {
-  @include span(12);
-
-  @include breakpoint($screen-md) {
-    @include span(12);
-  }
-
-  @include breakpoint($screen-lg) {
-    @include span(12);
-  }
-}
-
 #grants-form {
   .buttons {
     margin-top:30px;
@@ -205,16 +160,12 @@ ul.list li {
     .single-msg__copy_wrapper,
     .single-msg__image {
       margin-left: 0;
-      margin-right: 0; 
+      margin-right: 0;
     }
   }
 
   .bg--grey {
     background-color: #F0F0F0;
-  }
-
-  .no-margin {
-    margin: 0;
   }
 }
 
@@ -235,17 +186,20 @@ ul.list li {
 }
 
 /* Making the button resemble a link */
-button.previous-question {
-  background: none;
-  border: none;
-  padding: 7px 0;
-  cursor: pointer;
-  outline: inherit;
-  font-size: inherit;
-  line-height: 14px;
-  border-bottom: 4px solid rgba(41, 2, 44, 0.5);
-  @extend .inline;
-  @extend .link--dark-purple;
+a, button {
+  &.previous-question {
+    background: none;
+    border: none;
+    padding: 7px 0;
+    cursor: pointer;
+    outline: inherit;
+    font-size: inherit;
+    line-height: 14px;
+    border-bottom: 4px solid rgba(41, 2, 44, 0.5);
+    display: inline-block;
+    @extend .inline;
+    @extend .link--dark-purple;
+  }
 }
 
 ul.progress-indicator {
@@ -255,7 +209,7 @@ ul.progress-indicator {
     padding: 0;
     width: calc(100% / #{$question-num});
 
-    
+
     &:before {
       content: none;
     }
@@ -276,10 +230,10 @@ ul.progress-indicator {
     }
 
     &.progress-indicator--todo.no-circle .progress-indicator__step.progress-indicator__circle {
-        background-color: transparent;
-        border: 0;
+      background-color: transparent;
+      border: 0;
     }
-    
+
     &.progress-indicator--done.no-circle .progress-indicator__circle {
       margin-top: 6px;
       border: 0;
@@ -288,13 +242,13 @@ ul.progress-indicator {
     }
   }
 
-    padding-bottom: 37px;
-    display: none;
+  padding-bottom: 37px;
+  display: none;
 
-    @include breakpoint($screen-md) {
-      padding-bottom: 50px;
-      display: block;
-    }
+  @include breakpoint($screen-md) {
+    padding-bottom: 50px;
+    display: block;
+  }
 }
 
 .mobile-progress {
@@ -333,7 +287,7 @@ a.link {
 .cr-body ul {
   padding-left: 0;
   li {
-    margin-bottom: 0 !important;
+    // margin-bottom: 0 !important;
   }
 }
 
@@ -359,15 +313,152 @@ header.promo-header.bg--blue {
 
 /* A more Router-friendly approach to the JIT block */
 .form__row--just-in-time-block {
+  margin-top: 30px;
   .toggle-link.show-link {
     display: inline !important;
-      &.active:after {
-        transform: rotate(0);
-        bottom: -4px;
-      }
+    &.active:after {
+      transform: rotate(0);
+      bottom: -4px;
+    }
   }
   .just-in-time--content {
     max-height: none;
   }
 }
 
+.snippets {
+
+  @include span(12);
+
+  @include breakpoint($screen-md) {
+    @include span(10);
+    @include push(1);
+  }
+}
+
+.outcome-copy2 {
+  @include span(10);
+  @include push(1);
+}
+
+.outcome-copy1 {
+  @include span(12);
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.outcome-button {
+  clear: both;
+  margin-bottom: 80px;
+
+}
+
+.snippets {
+  ul {
+    text-align: left;
+
+    li {
+      margin-bottom: 20px;
+      &:before {
+        text-align: center;
+        left: -5px;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        font-weight: 800;
+        font-size: 30px;
+        top: 3px;
+      }
+    }
+  }
+
+  .fail:before {
+    content: "X";
+    color: $colour-red;
+  }
+
+  .success:before {
+    content: "\2713";
+    color: $colour-green;
+  }
+
+  /*Switch depending on the overall outcome to reflect logic*/
+  .outcome-success & {
+    .check:before {
+      content: "\2713";
+      color: $colour-green;
+    }
+  }
+
+  .outcome-fail & {
+    .check:before {
+      content: "X";
+      color: $colour-red;
+    }
+  }
+
+  /* Super niche style */
+  .remove-sport-icon--true & {
+    .q4-fail:before {
+      content: none;
+    }
+  }
+}
+
+.outcome-copy {
+  margin-top: 140px;
+}
+
+.single-msg.single-msg--copy-only {
+  .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
+    margin-bottom: 0;
+    li {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+  }
+
+  &.question-3 {
+    .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul li {
+      font-size: 18px;
+      padding: 0 0 0 20px;
+      @include breakpoint($screen-md) {
+        font-size: 24px;
+        padding: 0 0 0 30px;
+      }
+    }
+    .question-copy--1,
+    .question-copy--2 {
+      width: 50%;
+      margin-bottom: 30px;
+      float: left;
+      text-align: left;
+    }
+
+    .question-copy--1 {
+      margin-left: 0;
+    }
+    .question-copy--2 {
+      margin-right: 0;
+    }
+    .question-copy--3 {
+      margin-top: 30px;
+    }
+    .buttons {
+      clear: both;
+    }
+
+    @include breakpoint($screen-md) {
+      .question-copy--1,
+      .question-copy--2 {
+        width: 30%;
+      }
+      .question-copy--1 {
+        margin-left: 20%;
+      }
+      .question-copy--2 {
+        margin-right: 20%;
+      }
+    }
+  }
+}

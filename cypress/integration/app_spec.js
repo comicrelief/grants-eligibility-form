@@ -18,11 +18,11 @@ describe('Grants form tests', () => {
 
     it('should reject my application if I am not an organisation', () => {
       cy.get('.btn').click()
-      cy.get('.question-1 .cr-body').should('contain', 'organisation')
+      cy.get('.question-1 .cr-body').should('contain', 'Individual')
 
       /* Submit a 'fail' value for Q1 */
       cy.get('.buttons .btn:nth-child(2)')
-        .should('contain', 'No').then(($btn) => {
+        .should('contain', 'Individual').then(($btn) => {
         ($btn).click()
       })
 
@@ -48,30 +48,17 @@ describe('Grants form tests', () => {
       })
 
       /* Submit a 'success' value for Q5 */
-      cy.get('.question-5 .cr-body').should('contain', 'We don’t usually fund')
+      cy.get('.question-5 .cr-body').should('contain', 'following activities?')
       cy.get('.question-5 .buttons .btn:nth-child(2)')
         .should('contain', 'No').then(($btn) => {
           ($btn).click()
       })
 
-      /* Submit a 'success' value for Q6 */
-      cy.get('.question-6 .cr-body').should('contain', 'About your funding amount')
-      cy.get('.question-6 .buttons .btn:nth-child(1)')
-        .should('contain', 'OK').then(($btn) => {
-          ($btn).click()
-      })
-
-      /* Submit a 'success' value for Q7 */
-      cy.get('.question-7 .cr-body').should('contain', 'Our hallmarks')
-      cy.get('.question-7 .buttons .btn:nth-child(1)')
-        .should('contain', 'OK').then(($btn) => {
-        ($btn).click()
-      })
       /* Check failure outcome */
-      cy.get('.outcome-wrapper .promo-header').should('contain', 'Looks like you don’t meet with our core criteria.')
+      cy.get('.outcome-wrapper .promo-header').should('contain', 'not eligible')
       cy.get('.outcome-wrapper .snippets .show-link').click()
       cy.get('.outcome-wrapper .snippets .just-in-time--content')
-        .should('contain', 'You are an individual')
+        .should('contain', 'applying as an individual')
       
     })
 
@@ -81,7 +68,7 @@ describe('Grants form tests', () => {
       /* Submit a 'success' value for Q1 */
       cy.get('.question-1 .cr-body').should('contain', 'organisation')
       cy.get('.buttons .btn:nth-child(1)')
-        .should('contain', 'Yes').then(($btn) => {
+        .should('contain', 'Organisation').then(($btn) => {
         ($btn).click()
       })
 
@@ -107,32 +94,18 @@ describe('Grants form tests', () => {
       })
 
       /* Submit a 'success' value for Q5 */
-      cy.get('.question-5 .cr-body').should('contain', 'We don’t usually fund')
+      cy.get('.question-5 .cr-body').should('contain', 'following activities?')
       cy.get('.question-5 .buttons .btn:nth-child(2)')
         .should('contain', 'No').then(($btn) => {
         ($btn).click()
       })
 
-      /* Submit a 'success' value for Q6 */
-      cy.get('.question-6 .cr-body').should('contain', 'About your funding amount')
-      cy.get('.question-6 .buttons .btn:nth-child(1)')
-        .should('contain', 'OK').then(($btn) => {
-        ($btn).click()
-      })
-
-      /* Submit a 'success' value for Q7 */
-      cy.get('.question-7 .cr-body').should('contain', 'Our hallmarks')
-      cy.get('.question-7 .buttons .btn:nth-child(1)')
-        .should('contain', 'OK').then(($btn) => {
-        ($btn).click()
-      })
       /* Check failure outcome */
-      cy.get('.outcome-wrapper .promo-header').should('contain', 'Looks like you meet with our core criteria!')
+      cy.get('.outcome-wrapper .promo-header').should('contain', 'be eligible')
       cy.get('.outcome-wrapper .snippets .show-link').click()
 
-
-      cy.get('.outcome-wrapper .snippets .just-in-time--content').should('contain', 'Your organisation\'s income is between £250,000 and £10 million')
-        .should('contain', 'Your project won\'t use sport as a tool for social change')
+      cy.get('.outcome-wrapper .snippets .just-in-time--content').should('contain', 'between £250,000 and £10 million')
+        .should('contain', 'doesn’t use sport')
 
     })
   })

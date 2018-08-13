@@ -52,10 +52,10 @@ class Home extends Component {
                 <div className="single-msg__copy">
                   <div className="single-msg__body">
                     <div className="cr-body text-align-center">
-                      <h3>Use our checker to find out whether you meet the basic
-                        eligibility criteria for Comic Relief applicants
-                      </h3>
-                      <h3>Next we’ll ask you a few questions about your organisation and its work.
+                      <h3>We’re going to ask you
+                         <strong> five questions about your organisation</strong> and
+                        its work to find out
+                        whether you meet the basic eligibility criteria for Comic Relief applicants.
                       </h3>
                       <div className="buttons text-align-center">
                         <button

@@ -1,19 +1,19 @@
 {
   "q1": {
     "copy": [
-      "### Are you applying on behalf of an organisation?"
+      "### Are you applying on behalf of an organisation or as an individual?"
     ],
     "buttons": [
       {
-        "question_type": "organisation", "text": "Yes", "value": "success", "snippets": ["q1-success"]
+        "question_type": "organisation", "text": "Organisation", "value": "success", "snippets": ["q1-success"]
       },
       {
-        "question_type": "organisation", "text": "No, I’m applying as an individual", "value": "fail", "snippets": ["q1-fail"]
+        "question_type": "organisation", "text": "Individual", "value": "fail", "snippets": ["q1-fail"]
       }]
   },
 
   "q2": {
-    "copy": ["### What was your organisation’s level of income in your last financial year?"],
+    "copy": ["### What was your organisation’s income in its last financial year?"],
     "buttons": [
       {
         "question_type": "income", "text": "Under £250,000", "value": "check", "snippets": ["q2-check"]
@@ -29,8 +29,10 @@
   "q3": {
     "copy": [
       "### The countries we will fund activities in are as follows:",
-      "#### Ghana, Kenya, Malawi, Nigeria, Sierra Leone, South Africa, Rwanda, Tanzania, Uganda, Zambia, Zimbabwe, Bangladesh, India, Nepal and the UK.",
-      "### Will your project take place in one of these countries?"
+      "* Bangladesh \n* Ghana \n* India \n* Kenya \n* Malawi \n* Nepal \n* Nigeria \n* Rwanda",
+      "* Sierra Leone \n* South Africa \n* Tanzania \n* Uganda \n* UK \n* Zambia \n* Zimbabwe",
+
+      "### Is your organisation working in at least one of these countries?"
     ],
     "buttons": [
       {
@@ -43,8 +45,8 @@
 
   "q4": {
     "copy": [
-      "### Will your project use sport as a tool for social change?",
-      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Projects taking approachshould be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
+      "### Does your organisation use sport as a tool for social change?",
+      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Organisations taking this approach should be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
     ],
     "buttons": [
       {
@@ -57,9 +59,8 @@
 
   "q5": {
     "copy": [
-      "### We don’t usually fund:",
-      "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care ",
-      "### Do you want funding for any of the above?"
+      "### Are you looking for funding for any of the following activities?",
+      "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care "
     ],
     "buttons": [
       {
@@ -67,52 +68,6 @@
       },
       {
         "question_type": "activity-we-dont-fund", "text": "No", "value": "success", "snippets": ["q5-success"]
-      }]
-  },
-
-  "q6": {
-    "copy": [
-      "## About your funding amount",
-      "#### When considering the amount of funding applied for we will consider the following: ",
-      "### Proportion of turnover",
-      "#### The amount applied for per year must be less than 35% of your income on your most recently submitted accounts",
-      "### Capital Costs",
-      "#### Capital costs must make up less than 30% of the total amount applied for",
-      "### Direct Funding",
-      "#### We will prioritise funding applications direct from in-country delivery organisations. If you are not a direct delivery partner we expect to see clear evidence of how the you are adding value, clear partnership roles and responsibilities, and defined power relationships.",
-      "#### Please click on ok to proceed to the next question."
-    ],
-    "buttons": [
-      {
-        "question_type": "statement-1", "text": "OK", "value": "success"
-      }]
-  },
-  "q7": {
-    "copy": [
-      "## Our hallmarks",
-      "Organisations applying must be working to one of our [strategic themes](https://www.comicrelief/link-goes-here) and will be assessed against their fit to the following hallmarks:",
-
-      "### 1. Mission-aligned",
-      " We seek to build a family of partners pulling toward our shared aspiration for a just world free of poverty and working toward meaningful change in our issues areas.",
-
-      "### 2. Ready to accelerate",
-      "Our partners have the foundations in place and are seeking long term funding to deliver and scale their solutions. We don’t fund long established large players and small or start up organisationsare funded through cascade grant making: we focus on medium sized partners (£250,000 -£10m annual turnover) for which our funding can make the biggest difference.",
-
-      "### 3. People Centred",
-      "Charity partners should demonstrate a commitment to putting the people they seek to serve at the heart of their decision making. This means that we work with partners closest to the problems and with demonstrable input and accountably from those they work on behalf of.",
-
-      "### 4. Risk Aware",
-      "We seek partners who have robust governance and financial management in place, and are best in class in safeguarding their staff and beneficiaries.",
-
-      "### 5. Learning Led",
-      "We want to work with organisations who have a culture which values evidence, is committed to continual improvement and sharing what they learn on the journey to impact.",
-
-      "### 6. Storytellers",
-      "We believe that telling stories can change the world, and want to build partnerships which allow us to tell compelling stories about the issues we work on. "
-    ],
-    "buttons": [
-      {
-        "question_type": "statement-2", "text": "OK", "value": "success"
       }]
   }
 }
