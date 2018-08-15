@@ -1,7 +1,7 @@
 {
   "q1-success": {"copy": "You said that you are applying on behalf of an organisation.", "value":"success"},
 
-  "q1-fail": {"copy": "You said you that are applying as an individual. We only accept applications from organisations.", "value":"fail"},
+  "q1-fail": {"copy": "You said that you are applying as an individual. We only accept applications from organisations.", "value":"fail"},
 
 
   "q2-check": {"copy": "You said that your organisation’s income in its last financial year was under £250,000. We only accept applications from organisations of this size where at least two thirds of funded activities would use sport as a tool for social change.", "value":"check"},
