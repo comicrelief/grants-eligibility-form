@@ -24,6 +24,7 @@ class OutcomeMessage extends Component {
       isRejected: false,
       jitOpen: false,
       removeSportIcon: false,
+      submitted: false,
     };
   }
 
@@ -109,7 +110,7 @@ class OutcomeMessage extends Component {
 
     /* Construct json object only of values required by data contract */
     let postBody = {
-      success: isSuccessful,
+      success: (isSuccessful ? 1 : 0),
       transSourceURL: 'https://www.comicrelief.com/eligibility-checker',
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
@@ -136,7 +137,8 @@ class OutcomeMessage extends Component {
 
     if (thisDomain.indexOf('localhost') >= 0) {
       console.log('Simulated local submit', postBody);
-    } else {
+    } else if (this.state.submitted === false) {
+      this.setState({ submitted: true });
       xhr.send(postBody);
     }
   }
