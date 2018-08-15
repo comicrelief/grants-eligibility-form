@@ -62,7 +62,7 @@ main {
 
     li {
       position: relative;
-      padding: 0 0 0 30px;
+      padding: 0 0 0 35px;
       list-style: none;
       font-family: inherit;
       font-size: inherit;
@@ -209,7 +209,6 @@ ul.progress-indicator {
     padding: 0;
     width: calc(100% / #{$question-num});
 
-
     &:before {
       content: none;
     }
@@ -286,9 +285,6 @@ a.link {
 
 .cr-body ul {
   padding-left: 0;
-  li {
-    // margin-bottom: 0 !important;
-  }
 }
 
 header.promo-header.bg--blue {
@@ -297,23 +293,32 @@ header.promo-header.bg--blue {
 
 .previous-question-btn {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 35px;
 
   .previous-question {
     position: relative;
     margin-left:22px;
+    overflow: visible;
+
     &:before {
       position: absolute;
-      top: 10px;
+      top: 5px;
       left: -22px;
-      content: "\21A9";
+      content: '\2303';
+      margin-left: 4px;
+      line-height: 19px;
+      font-size: 25px;
+      color: inherit;
+      font-weight: bold;
+      transform: rotate(270deg);
     }
   }
 }
 
 /* A more Router-friendly approach to the JIT block */
 .form__row--just-in-time-block {
-  margin-top: 30px;
+  margin-top: 10px;
+  font-size: 18px;
   .toggle-link.show-link {
     display: inline !important;
     &.active:after {
@@ -326,15 +331,6 @@ header.promo-header.bg--blue {
   }
 }
 
-.snippets {
-
-  @include span(12);
-
-  @include breakpoint($screen-md) {
-    @include span(10);
-    @include push(1);
-  }
-}
 
 .outcome-copy2 {
   @include span(10);
@@ -343,7 +339,7 @@ header.promo-header.bg--blue {
 
 .outcome-copy1 {
   @include span(12);
-  margin-top: 60px;
+  margin-top: 35px;
   margin-bottom: 30px;
 }
 
@@ -354,53 +350,61 @@ header.promo-header.bg--blue {
 }
 
 .snippets {
+
+  @include span(12);
+  @include breakpoint($screen-md) {
+    @include span(10);
+    @include push(1);
+  }
+
   ul {
     text-align: left;
+    margin-bottom: 0;
 
     li {
       margin-bottom: 20px;
       &:before {
-        text-align: center;
-        left: -5px;
+        left: 0;
         padding: 0;
-        width: 30px;
-        height: 30px;
-        font-weight: 800;
-        font-size: 30px;
-        top: 3px;
+        width: 25px;
+        height: 25px;
+        top: -3px;
+        content: " ";
+        background-position: 0 0;
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
 
   .fail:before {
-    content: "X";
-    color: $colour-red;
+    background-image: url("./images/outcome-images/icon-cross.png");
   }
 
   .success:before {
-    content: "\2713";
-    color: $colour-green;
+    background-image: url("./images/outcome-images/icon-tick.png");
   }
 
   /*Switch depending on the overall outcome to reflect logic*/
   .outcome-success & {
     .check:before {
-      content: "\2713";
-      color: $colour-green;
+      background-image: url("./images/outcome-images/icon-tick.png");
     }
   }
 
   .outcome-fail & {
     .check:before {
-      content: "X";
-      color: $colour-red;
+      background-image: url("./images/outcome-images/icon-cross.png");
     }
   }
 
   /* Super niche style */
   .remove-sport-icon--true & {
     .q4-fail:before {
-      content: none;
+      background-image: url("./images/outcome-images/icon-tick.png");
     }
   }
 }
@@ -412,6 +416,7 @@ header.promo-header.bg--blue {
 .single-msg.single-msg--copy-only {
   .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
     margin-bottom: 0;
+    text-align: left;
     li {
       margin-bottom: 10px;
       font-size: 24px;
@@ -424,7 +429,7 @@ header.promo-header.bg--blue {
       padding: 0 0 0 20px;
       @include breakpoint($screen-md) {
         font-size: 24px;
-        padding: 0 0 0 30px;
+        padding: 0 0 0 35px;
       }
     }
     .question-copy--1,

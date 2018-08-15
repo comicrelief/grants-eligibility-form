@@ -30,7 +30,7 @@ class App extends Component {
 
   /* Helper function to add custom rendered for Markdown links */
   markdownLinkRenderer(props) {
-    return props.href.startsWith('/') ?
+    return (props.href.indexOf('/') === 0) ?
       <a className="link link--dark-purple" href={props.href}>{props.children}</a> :
       <a
         className="link link--dark-purple"

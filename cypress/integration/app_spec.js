@@ -56,7 +56,6 @@ describe('Grants form tests', () => {
 
       /* Check failure outcome */
       cy.get('.outcome-wrapper .promo-header').should('contain', 'not eligible')
-      cy.get('.outcome-wrapper .snippets .show-link').click()
       cy.get('.outcome-wrapper .snippets .just-in-time--content')
         .should('contain', 'applying as an individual')
       
