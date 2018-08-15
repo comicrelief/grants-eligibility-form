@@ -298,18 +298,19 @@ header.promo-header.bg--blue {
   .previous-question {
     position: relative;
     margin-left:22px;
+    overflow: visible;
+
     &:before {
       position: absolute;
       top: 5px;
       left: -22px;
       content: '\2303';
       margin-left: 4px;
-      overflow: hidden;
       line-height: 19px;
       font-size: 25px;
       color: inherit;
       font-weight: bold;
-      transform: rotate(270deg)
+      transform: rotate(270deg);
     }
   }
 }
@@ -415,6 +416,7 @@ header.promo-header.bg--blue {
 .single-msg.single-msg--copy-only {
   .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
     margin-bottom: 0;
+    text-align: left;
     li {
       margin-bottom: 10px;
       font-size: 24px;
