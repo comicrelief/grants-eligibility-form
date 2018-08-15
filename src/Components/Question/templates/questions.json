@@ -1,0 +1,73 @@
+{
+  "q1": {
+    "copy": [
+      "### Are you applying on behalf of an organisation or as an individual?"
+    ],
+    "buttons": [
+      {
+        "question_type": "organisation", "text": "Organisation", "value": "success", "snippets": ["q1-success"]
+      },
+      {
+        "question_type": "organisation", "text": "Individual", "value": "fail", "snippets": ["q1-fail"]
+      }]
+  },
+
+  "q2": {
+    "copy": ["### What was your organisation’s income in its last financial year?"],
+    "buttons": [
+      {
+        "question_type": "income", "text": "Under £250,000", "value": "check", "snippets": ["q2-check"]
+      },
+      {
+        "question_type": "income", "text": "Between £250,000 to £10 million", "value": "success", "snippets": ["q2-success"]
+      },
+      {
+        "question_type": "income", "text": "Over £10 million", "value": "fail", "snippets": ["q2-fail"]
+      }]
+  },
+
+  "q3": {
+    "copy": [
+      "### The countries we will fund activities in are as follows:",
+      "* Bangladesh \n* Ghana \n* India \n* Kenya \n* Malawi \n* Nepal \n* Nigeria \n* Rwanda",
+      "* Sierra Leone \n* South Africa \n* Tanzania \n* Uganda \n* UK \n* Zambia \n* Zimbabwe",
+
+      "### Is your organisation working in at least one of these countries?"
+    ],
+    "buttons": [
+      {
+        "question_type": "location-we-fund", "text": "Yes", "value": "success", "snippets": ["q3-success"]
+      },
+      {
+        "question_type": "location-we-fund", "text": "No", "value": "fail", "snippets": ["q3-fail"]
+      }]
+  },
+
+  "q4": {
+    "copy": [
+      "### Does your organisation use sport as a tool for social change?",
+      "#### Comic Relief defines Sport for Change as bringing about positive social change for individuals and communities through the intentional use of sport and physical activity. Organisations taking this approach should be able to demonstrate wider social outcomes and won’t just focus on increasing participation in sport for the physical health benefits."
+    ],
+    "buttons": [
+      {
+        "question_type": "sport-for-change", "text": "Yes", "value": "success", "snippets": ["q4-success"]
+      },
+      {
+        "question_type": "sport-for-change", "text": "No", "value": "check", "snippets": ["q4-fail"]
+      }]
+  },
+
+  "q5": {
+    "copy": [
+      "### Are you looking for funding for any of the following activities?",
+      "\n* Fundraising appeals \n* Individual study \n* Religious activities \n* Political campaigning \n* One-off events \n* Institutional care "
+    ],
+    "buttons": [
+      {
+        "question_type": "activity-we-dont-fund", "text": "Yes", "value": "fail", "snippets": ["q5-fail"]
+      },
+      {
+        "question_type": "activity-we-dont-fund", "text": "No", "value": "success", "snippets": ["q5-success"]
+      }]
+  }
+}

@@ -4,51 +4,73 @@
 
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Parser from 'html-react-parser';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import Snippets from './templates/snippets.json';
+import OutcomeCopy from './templates/outcome-copy.json';
 
-// Import all of our template variants
-import m1 from './templates/m1.html';
-import m2 from './templates/m2.html';
-import m3 from './templates/m3.html';
-import m4 from './templates/m4.html';
-import m5 from './templates/m5.html';
-import m6 from './templates/m6.html';
-import m7 from './templates/m7.html';
-
-import m8 from './templates/m8.html'; // to remove
-import m9 from './templates/m9.html'; // to remove
-
-import m10 from './templates/m10.html';
-
-import m11 from './templates/m11.html'; // to remove
-import m12 from './templates/m12.html'; // to remove
-
-import m13 from './templates/m13.html';
-import m14 from './templates/m14.html';
-import m15 from './templates/m15.html';
-import m16 from './templates/m16.html';
-import m17 from './templates/m17.html';
-import m18 from './templates/m18.html';
+const ReactMarkdown = require('react-markdown');
+const shortid = require('shortid');
 
 /**
  * OutcomeMessage class
  */
 class OutcomeMessage extends Component {
-  /**
-   * Trigger our submission when this component mounts, at the end of the journey
-   */
+  constructor(props) {
+    super(props);
+
+    this.handleJustInTime = this.handleJustInTime.bind(this);
+
+    this.state = {
+      isRejected: false,
+      jitOpen: false,
+      removeSportIcon: false,
+      submitted: false,
+    };
+  }
+
   componentWillMount() {
-    // Submission endpoint from env file
+    /* Cache our success values */
+    const theseSuccesses = this.props.location.state.successes;
+    /* IE11 friendly-alternative to 'values */
+    let successValues = Object.keys(theseSuccesses).map(itm => theseSuccesses[itm]);
+
+    /* Format to a regex pattern */
+    successValues = (successValues).map(i => '^' + i + '$').join('|');
+
+    let isRejected = new RegExp(successValues).test('fail');
+    this.setState({ jitOpen: isRejected });
+
+    const checksToDo = new RegExp(successValues).test('check');
+    const theseResponses = this.props.location.state.responses;
+
+    console.log('pre-check reject?:', isRejected);
+
+    /* Only run if any of the users choices require additional logic */
+    if (checksToDo) {
+      const sportCheck = theseResponses['sport-for-change'] === 'No';
+      /* This check represents our 'under 250k' choice */
+      if (theseResponses.income === 'Under £250,000') {
+        isRejected = sportCheck || isRejected;
+      } else
+      if (theseResponses.income === 'Between £250,000 to £10 million' && sportCheck) {
+        this.setState({ removeSportIcon: true });
+      }
+    }
+
+    console.log('post-check reject?:', isRejected);
+
+    this.state.isRejected = isRejected;
+
+    /* Submit the form details, now we've completed all of our logic */
     this.submitInfo();
   }
 
   componentDidMount() {
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   componentDidUpdate() {
-    this.sendFormHeightMessage();
+    this.props.resize();
   }
 
   componentWillUnmount() {
@@ -61,22 +83,19 @@ class OutcomeMessage extends Component {
    * Helper function to determine parent page url the form is embedded into
    */
   getParentUrl() {
-    const url = (window.location !== window.parent.location)
+    return (window.location !== window.parent.location)
       ? document.referrer : document.location.href;
-    return url;
   }
 
-  /**
-   * Send form height message to parent iframe.
-   */
-  sendFormHeightMessage() {
-    const formHeight = document.getElementById('grants-form') !== null
-      ? document.getElementById('grants-form').clientHeight
-      : '1000';
+  handleJustInTime(e) {
+    // Stop the hash from messing with React Router
+    e.preventDefault();
 
-    setTimeout(function () {
-      window.parent.postMessage('{"iframe_height":"' + formHeight + '"}', '*');
-    }, 350);
+    // Toggle class so we can update styling slightly
+    document.getElementById(e.target.id).classList.toggle('active');
+
+    // Toggle component state used by renderer
+    this.setState({ jitOpen: !(this.state.jitOpen) });
   }
 
   /**
@@ -85,16 +104,21 @@ class OutcomeMessage extends Component {
   submitInfo() {
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
+    const isSuccessful = !(this.state.isRejected);
     const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
     /* Construct json object only of values required by data contract */
     let postBody = {
-      organisation: allResponses.company_name,
-      success: allResponses.success ? 1 : 0,
+      success: (isSuccessful ? 1 : 0),
       transSourceURL: 'https://www.comicrelief.com/eligibility-checker',
       campaign: 'CR',
       transSource: 'CR_GrantsEligibility',
+      organisation: allResponses.organisation,
+      income: allResponses.income,
+      locationWeFund: allResponses['location-we-fund'],
+      sportForChange: allResponses['sport-for-change'],
+      activityWeDontFund: allResponses['activity-we-dont-fund'],
     };
 
     postBody = JSON.stringify(postBody);
@@ -109,7 +133,14 @@ class OutcomeMessage extends Component {
       }
     };
 
-    xhr.send(postBody);
+    const thisDomain = window.location.href;
+
+    if (thisDomain.indexOf('localhost') >= 0) {
+      console.log('Simulated local submit', postBody);
+    } else if (this.state.submitted === false) {
+      this.setState({ submitted: true });
+      xhr.send(postBody);
+    }
   }
 
   /* Helper function used during submission */
@@ -133,54 +164,148 @@ class OutcomeMessage extends Component {
     return xhr;
   }
 
+  renderJit(renderedSnippets) {
+    return (
+      <div className="form__row form__row--just-in-time-block">
+        <div className="form__fieldset">
+          <a
+            href="#show"
+            aria-expanded="true"
+            className="link toggle-link show-link"
+            aria-label="click to open"
+            id="show"
+            onClick={this.handleJustInTime}
+          >
+            See how you answered:
+          </a>
+          { this.state.jitOpen ?
+            <div className="just-in-time--content">
+              <ul>{renderedSnippets}</ul>
+            </div>
+            : null
+          }
+        </div>
+      </div>
+    );
+  }
+
   /**
    * Render the OutcomeMessage
    * @return {XML}
    */
   render() {
-    /* Convert the current number to suit our zero-indexed array of messages */
-    let currentMessage = this.props.match.params.outcome_number - 1;
+    /* IE11 friendly-alternative to 'values */
+    const allSnippets = this.props.location.state.snippets;
+    const snippetsToShow = Object.keys(allSnippets).map(itm => allSnippets[itm]);
 
-    currentMessage = currentMessage.toString();
+    const failOrSuccess = (this.state.isRejected ? 'fail' : 'success');
+
+    /* Build our list items from the relevant snippets */
+    const renderedSnippets = snippetsToShow.map(thisSnippet => (
+      <li className={thisSnippet + ' ' + Snippets[thisSnippet].value} key={thisSnippet}> {Snippets[thisSnippet].copy} </li>));
 
     return (
-      <div className="outcome-message">
-        {Parser(this.props.messages[currentMessage])}
-        <section className="single-msg single-msg--copy-only bg--white apply-footer">
-          <div className="single-msg__outer-wrapper">
-            <div className="single-msg__copy_wrapper bg--white">
-              <div className="single-msg__copy">
-                <div className="single-msg__title text-align-center">
-                  <h3>You can find more information in</h3>
-                  <h3>
-                    <a className="link link--dark-purple inline" target="_blank" rel="noopener noreferrer" href="https://www.comicrelief.com/funding/applying-for-grants/guidance">
-                    &#39;Guidance on applying&#39;
-                    </a>
-                    .
-                  </h3>
-                </div>
+      <div className={'outcome-wrapper outcome-' + failOrSuccess + ' remove-sport-icon--' + this.state.removeSportIcon}>
+        <header className="bg--blue promo-header promo-header--default promo-header--no-image">
+          <div className="promo-header__content">
+            <div className="promo-header__content-inner promo-header__content-inner--centre">
+              <div className="cr-body">
+                {OutcomeCopy[failOrSuccess].heading.map(thisHeading => (
+                  <ReactMarkdown
+                    key={shortid.generate()}
+                    source={thisHeading}
+                    className="font--white"
+                    renderers={{ link: this.props.markdownLinkRenderer }}
+                  />
+                ))}
               </div>
             </div>
           </div>
-        </section>
+        </header>
+
+        <div className="outcome-message">
+          <section className="single-msg single-msg--copy-only bg--white">
+            <div className="single-msg__outer-wrapper">
+              <div className="single-msg__copy_wrapper bg--white">
+                <div className="single-msg__copy">
+                  <div className="cr-body outcome-subheading text-align-center">
+
+                    {/* Render the subheading */}
+                    {OutcomeCopy[failOrSuccess].subheading.map(thisHeading => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisHeading}
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Render the snippets */}
+                  <div className="cr-body snippets text-align-center">
+                    {this.renderJit(renderedSnippets)}
+                  </div>
+
+                  {/* Render the first copy field */}
+                  <div className="cr-body outcome-copy1 text-align-center">
+                    {OutcomeCopy[failOrSuccess].copy1.map(thisCopy => (
+                      <ReactMarkdown
+                        key={shortid.generate()}
+                        source={thisCopy}
+                        renderers={{ link: this.props.markdownLinkRenderer }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Render the button field if it exists */}
+                  {OutcomeCopy[failOrSuccess].button ?
+                    <div className="cr-body outcome-button text-align-center">
+                      <a
+                        className="btn btn--red"
+                        href={OutcomeCopy[failOrSuccess].button.link}
+                        target="_blank"
+                      >
+                        {OutcomeCopy[failOrSuccess].button.text}
+                      </a>
+                    </div>
+                    : null
+                  }
+
+                  {/* Render the second copy field if it exists */}
+                  {OutcomeCopy[failOrSuccess].copy2 ?
+                    <div className="cr-body outcome-copy2">
+                      {OutcomeCopy[failOrSuccess].copy2.map(thisCopy => (
+                        <ReactMarkdown
+                          key={shortid.generate()}
+                          source={thisCopy}
+                          renderers={{ link: this.props.markdownLinkRenderer }}
+                        />
+                      ))}
+                    </div>
+                    : null
+                  }
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     );
   }
 }
 
 OutcomeMessage.propTypes = {
+  resize: propTypes.func,
+  markdownLinkRenderer: propTypes.func,
   location: ReactRouterPropTypes.location,
-  match: ReactRouterPropTypes.match,
-  messages: propTypes.array,
   history: propTypes.shape({
     push: propTypes.func,
   }),
 };
 
 OutcomeMessage.defaultProps = {
+  resize: propTypes.func,
+  markdownLinkRenderer() { },
   history: { push: null },
-  messages: [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18],
-  match: {},
   location: {},
 };
 

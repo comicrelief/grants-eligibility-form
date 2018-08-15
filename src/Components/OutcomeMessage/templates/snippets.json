@@ -1,0 +1,27 @@
+{
+  "q1-success": {"copy": "You said that you are applying on behalf of an organisation.", "value":"success"},
+
+  "q1-fail": {"copy": "You said that you are applying as an individual. We only accept applications from organisations.", "value":"fail"},
+
+
+  "q2-check": {"copy": "You said that your organisation’s income in its last financial year was under £250,000. We only accept applications from organisations of this size where at least two thirds of funded activities would use sport as a tool for social change.", "value":"check"},
+
+  "q2-success": {"copy": "You said your organisation’s income in its last financial year was between £250,000 and £10 million. Eligible applicant organisations will need an income of this size, unless otherwise stipulated in the funding call.", "value":"success"},
+
+  "q2-fail": {"copy": "You said your organisation’s income in its last financial year was over £10 million. We only fund organisations of your size in exceptional circumstances. One of those exceptions is if you are a grant making organisation capable of acting as an intermediary to get Comic Relief money closer to the grassroots. Please check the criteria in our current funding opportunities to find out if there are open opportunities for organisations of your size.", "value":"fail"},
+
+
+  "q3-success": {"copy": "You said that your organisation works in at least one of the countries where we fund work. Please note that the amount of funding we have available in these countries will vary at different times and across our different programmes areas.", "value":"success"},
+
+  "q3-fail":  {"copy": "You said that your organisation doesn’t work in any of the countries where we fund work.", "value":"fail"},
+
+
+  "q4-success": {"copy": "You said that your organisation uses sport as a tool for social change.", "value":"success"},
+
+  "q4-fail":  {"copy": "You said that your organisation doesn’t use sport as a tool for social change.", "value":"fail"},
+
+
+  "q5-success": {"copy": "You said that you don’t want funding for any of the activities we don’t fund.", "value":"success"},
+
+  "q5-fail":  {"copy": "You said that you want funding for an activity that we don’t usually fund.", "value":"fail"}
+}

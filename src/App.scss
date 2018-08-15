@@ -15,6 +15,7 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/list/_list";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/promo-header/_promo-header";
 @import "../node_modules/@comicrelief/pattern-lab/sass/base/components/progress-indicator/_progress-indicator";
+@import "../node_modules/@comicrelief/pattern-lab/sass/base/components/just-in-time-block/_just-in-time";
 
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/buttons/_buttons";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/typography/_fonts";
@@ -23,23 +24,19 @@
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/links/links";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/background-colours/_background-colours";
 @import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/single-msg/_single-msg";
+@import "../node_modules/@comicrelief/pattern-lab/sass/themes/cr/2017/components/just-in-time-block/_just-in-time-block";
 
-/* Image paths as variables */
-$london-169 : "./images/outcome-images/london-together-169.jpg";
-$london-34 : "./images/outcome-images/london-together-34.jpg";
-$core-169 : "./images/outcome-images/core-strength-169.jpg";
-$core-34 : "./images/outcome-images/core-strength-34.jpg";
-$sss-169 : "./images/outcome-images/safe-secure-settled-169.jpg";
-$sss-34 :  "./images/outcome-images/safe-secure-settled-34.jpg";
-$vawg-34 :  "./images/outcome-images/vawg-34.jpg";
-$vawg-169 :   "./images/outcome-images/vawg-169.jpg";
+$question-num: 8;
 
-/* Pre-load bg images */
-body::after{
-  position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-  content:
-    url($london-169) url($london-34) url($core-169) url($core-34) url($sss-169) url($sss-34) url($vawg-34) url($vawg-169)
-}
+/*2018 CR colours*/
+$colour-red: #e52631;
+$colour-purple: #78368c;
+$colour-orange: #fc7b39;
+$colour-yellow: #ffc700;
+$colour-green: #79ac2b;
+$colour-blue: #2a72b7;
+$colour-magenta: #c6037c;
+$colour-light-blue: #5ec2ea;
 
 html, body {
   background-color: #F0F0F0;
@@ -65,12 +62,12 @@ main {
 
     li {
       position: relative;
-      padding: 0 0 0 30px;
+      padding: 0 0 0 35px;
       list-style: none;
       font-family: inherit;
       font-size: inherit;
       line-height: 25px;
-      
+
       &:before {
         position: absolute;
         top: 0;
@@ -83,6 +80,15 @@ main {
   }
 }
 
+.btn--red {
+  background-color: $colour-red;
+}
+
+.btn--blue {
+  background-color: $colour-blue;
+  color: white;
+}
+
 .buttons {
   margin: 30px 0 0;
 
@@ -92,9 +98,9 @@ main {
       margin-bottom: 0;
     }
     ~ button.btn {
-      @extend .btn--royal-blue;
+      @extend .btn--blue;
       + button.btn {
-       @extend .btn--black-ghost;
+        @extend .btn--black-ghost;
       }
     }
   }
@@ -111,39 +117,6 @@ main {
 
 .text-align-center {
   text-align: center;
-}
-
-.text-input {
-  position: relative;
-  margin: 30px 0;
-
-  label {
-    position: absolute;
-    top: 0;
-    left: -9999px;
-    text-indent: -9999px;
-  }
-
-  input[type="text"] {
-   font-size: 16px; 
-  }
-
-  .btn {
-    border: 0;
-    border-radius: 0;
-    padding: 16px 40px;
-    vertical-align: top;
-  }
-
-  .organisation-name__submit {
-    width: 100%;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    @include breakpoint($screen-md) {
-      width: auto;
-    }
-  }
 }
 
 ul.list li {
@@ -175,18 +148,6 @@ ul.list li {
   }
 }
 
-.apply-footer.single-msg.single-msg--copy-only .single-msg__copy_wrapper {
-  @include span(12);
-
-  @include breakpoint($screen-md) {
-    @include span(12);
-  }
-
-  @include breakpoint($screen-lg) {
-    @include span(12);
-  }
-}
-
 #grants-form {
   .buttons {
     margin-top:30px;
@@ -195,31 +156,16 @@ ul.list li {
     }
   }
 
-  .question-8 .buttons {
-    button.btn {
-      display: block;
-      margin: 10px 0 0;
-      
-      @include breakpoint($screen-md) {
-        margin: 15px auto;
-      }
-    } 
-  }
- 
   .single-msg.outcome  {
     .single-msg__copy_wrapper,
     .single-msg__image {
       margin-left: 0;
-      margin-right: 0; 
+      margin-right: 0;
     }
   }
 
   .bg--grey {
     background-color: #F0F0F0;
-  }
-
-  .no-margin {
-    margin: 0;
   }
 }
 
@@ -239,75 +185,21 @@ ul.list li {
   }
 }
 
-/* Outcome Message images  */
-.outcome-image {
-  background-position: top center;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  height: auto;
-  padding: 28% 0;
- 
-  .single-msg--copy-left & {
-    background-position: top center;
-  }
-
-  @include breakpoint($screen-md) {
-    background-position: top center;
-    background-size: 100% auto;
-    height: auto;
-    padding: 21% 16%;
-    // Represents our 'ineligible' rows
-    .single-msg--copy-left & {
-      background-position: center center;
-      padding: 16% 16%;
-    }
-  }
-}
-
-.outcome-image--london {
-  @extend .outcome-image;
-  background-image: url($london-169);
-  @include breakpoint($screen-md) {
-    background-image: url($london-34);
-  }
-}
-
-.outcome-image--core {
-  @extend .outcome-image;
-  background-image: url($core-169);
-  @include breakpoint($screen-md) {
-    background-image: url($core-34);
-  }
-}
-   
-.outcome-image--sss {
-  @extend .outcome-image;
-  background-image: url($sss-169);
-  @include breakpoint($screen-md) {
-    background-image: url($sss-34);
-  }
-}
-
-.outcome-image--vawg {
-  @extend .outcome-image;
-  background-image: url($vawg-169);
-  @include breakpoint($screen-md) {
-    background-image: url($vawg-34);
-  }
-}
-
 /* Making the button resemble a link */
-button.previous-question {
-  background: none;
-  border: none;
-  padding: 7px 0;
-  cursor: pointer;
-  outline: inherit;
-  font-size: inherit;
-  line-height: 14px;
-  border-bottom: 4px solid rgba(41, 2, 44, 0.5);
-  @extend .inline;
-  @extend .link--dark-purple;
+a, button {
+  &.previous-question {
+    background: none;
+    border: none;
+    padding: 7px 0;
+    cursor: pointer;
+    outline: inherit;
+    font-size: inherit;
+    line-height: 14px;
+    border-bottom: 4px solid rgba(41, 2, 44, 0.5);
+    display: inline-block;
+    @extend .inline;
+    @extend .link--dark-purple;
+  }
 }
 
 ul.progress-indicator {
@@ -315,8 +207,8 @@ ul.progress-indicator {
   margin: 10px 0 60px;
   li {
     padding: 0;
-    width: 14%;
-    
+    width: calc(100% / #{$question-num});
+
     &:before {
       content: none;
     }
@@ -337,15 +229,241 @@ ul.progress-indicator {
     }
 
     &.progress-indicator--todo.no-circle .progress-indicator__step.progress-indicator__circle {
-        background-color: transparent;
-        border: 0;
+      background-color: transparent;
+      border: 0;
     }
-    
+
     &.progress-indicator--done.no-circle .progress-indicator__circle {
       margin-top: 6px;
       border: 0;
       border-radius: 0;
       height: 3px;
+    }
+  }
+
+  padding-bottom: 37px;
+  display: none;
+
+  @include breakpoint($screen-md) {
+    padding-bottom: 50px;
+    display: block;
+  }
+}
+
+.mobile-progress {
+  display: block;
+  @include breakpoint($screen-md) {
+    display: none;
+  }
+}
+.font--white * { color: $colour-white; }
+.font--black * { color: $colour-black; }
+
+.single-msg.single-msg--copy-only .single-msg__copy_wrapper .single-msg__copy .single-msg__body {
+  .question-copy * { margin-bottom: 20px; }
+}
+
+#grants-form .question-2 .buttons button.btn {
+  margin: 15px auto;
+  display: block;
+}
+
+.question-copy ul {
+  padding-left: 0;
+  display: inline-block;
+  margin: auto;
+  li {
+    &:before {
+      left: 0;
+    }
+  }
+}
+
+a.link {
+  font-size: inherit !important;
+}
+
+.cr-body ul {
+  padding-left: 0;
+}
+
+header.promo-header.bg--blue {
+  background-color: $colour-blue;
+}
+
+.previous-question-btn {
+  text-align: center;
+  margin-top: 35px;
+
+  .previous-question {
+    position: relative;
+    margin-left:22px;
+    overflow: visible;
+
+    &:before {
+      position: absolute;
+      top: 5px;
+      left: -22px;
+      content: '\2303';
+      margin-left: 4px;
+      line-height: 19px;
+      font-size: 25px;
+      color: inherit;
+      font-weight: bold;
+      transform: rotate(270deg);
+    }
+  }
+}
+
+/* A more Router-friendly approach to the JIT block */
+.form__row--just-in-time-block {
+  margin-top: 10px;
+  font-size: 18px;
+  .toggle-link.show-link {
+    display: inline !important;
+    &.active:after {
+      transform: rotate(0);
+      bottom: -4px;
+    }
+  }
+  .just-in-time--content {
+    max-height: none;
+  }
+}
+
+
+.outcome-copy2 {
+  @include span(10);
+  @include push(1);
+}
+
+.outcome-copy1 {
+  @include span(12);
+  margin-top: 35px;
+  margin-bottom: 30px;
+}
+
+.outcome-button {
+  clear: both;
+  margin-bottom: 80px;
+
+}
+
+.snippets {
+
+  @include span(12);
+  @include breakpoint($screen-md) {
+    @include span(10);
+    @include push(1);
+  }
+
+  ul {
+    text-align: left;
+    margin-bottom: 0;
+
+    li {
+      margin-bottom: 20px;
+      &:before {
+        left: 0;
+        padding: 0;
+        width: 25px;
+        height: 25px;
+        top: -3px;
+        content: " ";
+        background-position: 0 0;
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .fail:before {
+    background-image: url("./images/outcome-images/icon-cross.png");
+  }
+
+  .success:before {
+    background-image: url("./images/outcome-images/icon-tick.png");
+  }
+
+  /*Switch depending on the overall outcome to reflect logic*/
+  .outcome-success & {
+    .check:before {
+      background-image: url("./images/outcome-images/icon-tick.png");
+    }
+  }
+
+  .outcome-fail & {
+    .check:before {
+      background-image: url("./images/outcome-images/icon-cross.png");
+    }
+  }
+
+  /* Super niche style */
+  .remove-sport-icon--true & {
+    .q4-fail:before {
+      background-image: url("./images/outcome-images/icon-tick.png");
+    }
+  }
+}
+
+.outcome-copy {
+  margin-top: 140px;
+}
+
+.single-msg.single-msg--copy-only {
+  .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul {
+    margin-bottom: 0;
+    text-align: left;
+    li {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+  }
+
+  &.question-3 {
+    .single-msg__copy_wrapper .single-msg__copy .single-msg__body .question-copy ul li {
+      font-size: 18px;
+      padding: 0 0 0 20px;
+      @include breakpoint($screen-md) {
+        font-size: 24px;
+        padding: 0 0 0 35px;
+      }
+    }
+    .question-copy--1,
+    .question-copy--2 {
+      width: 50%;
+      margin-bottom: 30px;
+      float: left;
+      text-align: left;
+    }
+
+    .question-copy--1 {
+      margin-left: 0;
+    }
+    .question-copy--2 {
+      margin-right: 0;
+    }
+    .question-copy--3 {
+      margin-top: 30px;
+    }
+    .buttons {
+      clear: both;
+    }
+
+    @include breakpoint($screen-md) {
+      .question-copy--1,
+      .question-copy--2 {
+        width: 30%;
+      }
+      .question-copy--1 {
+        margin-left: 20%;
+      }
+      .question-copy--2 {
+        margin-right: 20%;
+      }
     }
   }
 }
