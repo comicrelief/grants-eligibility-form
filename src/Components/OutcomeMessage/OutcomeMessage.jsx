@@ -105,7 +105,7 @@ class OutcomeMessage extends Component {
     /* Cache question responses passed from Question component via Router */
     const allResponses = this.props.location.state.responses;
     const isSuccessful = !(this.state.isRejected);
-    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + '/grants-eligibility/submit';
+    const endpointUrl = process.env.REACT_APP_ENDPOINT_URL + 'grants-eligibility/submit';
     const xhr = this.createCORSRequest('POST', endpointUrl);
 
     /* Construct json object only of values required by data contract */
